@@ -3,6 +3,52 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+
     </style>
 
+    <style name="Theme.Burpple" parent="@style/Theme.Base">
+        <item name="actionBarTheme">@style/Theme.ActionBar</item>
+        <!--<item name="actionMenuTextColor">@color/white</item>-->
+        <!--<item name="actionDropDownStyle">@style/Widget.Burpple.Spinner</item>-->
+        <!--<item name="android:windowBackground">@color/window_bg</item>-->
+        <!--<item name="ptrHeaderStyle">@style/Widget.Custom.PtrHeader</item>-->
+    </style>
+
+    <style name="Theme.Base" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:editTextStyle">@style/EditText</item>
+
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+    </style>
+
+    <style name="Theme.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="EditText" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/edit_text_red</item>
+    </style>
+
+    <style name="Widget.Burpple.ActionBar" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@drawable/ab_background</item>
+        <item name="android:displayOptions">showHome|homeAsUp</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:paddingLeft">@dimen/action_bar_default_padding_material</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_back</item>
+
+        <!-- Support library compatibility -->
+        <item name="titleTextAppearance">@style/TextAppearance.Burpple.Title</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.Burpple.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <dimen name="action_bar_default_padding_material">4dp</dimen>
 </resources>
