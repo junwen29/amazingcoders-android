@@ -4,11 +4,22 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.TextView;
+
+import amazingcoders.amazingcoders_android.R;
+import amazingcoders.amazingcoders_android.models.Deal;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by junwen29 on 9/17/2015.
  */
 public class DealCard extends CardView {
+    @InjectView(R.id.title)
+    TextView mTitle;
+
+    Deal mDeal;
+
     public DealCard(Context context) {
         super(context);
         init();
@@ -25,7 +36,18 @@ public class DealCard extends CardView {
     }
 
     private void init(){
-        LayoutInflater.from(getContext()).inflate(R.layout.widget_cell_view_venue_explore, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.deal_card, this, true);
+        ButterKnife.inject(this);
+    }
 
+    public void update(Deal deal){
+        mDeal = deal;
+        update();
+    }
+
+    private void update() {
+        if (mDeal == null) return;
+
+        mTitle.setText(mDeal.getTitle());
     }
 }

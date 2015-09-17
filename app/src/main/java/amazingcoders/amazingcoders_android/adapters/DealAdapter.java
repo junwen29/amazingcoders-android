@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 import amazingcoders.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import amazingcoders.amazingcoders_android.models.Deal;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import amazingcoders.amazingcoders_android.views.DealCard;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -27,34 +26,26 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
 
     @Override
     public void onBindRowViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        Deal d = getItem(position);
+        ((ViewHolder) holder).update(d);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return null;
+        return new ViewHolder(new DealCard(mContext));
     }
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.card_venue)
-        ExploreVenueCard venueCard;
-        @InjectView(R.id.button_wish)
-        WishButton wishButton;
+        DealCard mDealCard;
 
         public ViewHolder(View v) {
             super(v);
-            ButterKnife.inject(this, v);
+            mDealCard = (DealCard)v;
         }
 
-        private void updateWish(Venue v){
-            wishButton.setVenue(v);
-        }
-
-        private void initHolder(Venue venue){
-            venueCard.update(venue);
-            updateWish(venue);
-
+        public void update(Deal deal){
+            mDealCard.update(deal);
         }
     }
 }
