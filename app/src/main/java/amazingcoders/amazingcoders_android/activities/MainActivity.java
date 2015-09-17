@@ -6,12 +6,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.ListView;
 
 import amazingcoders.amazingcoders_android.fragments.NavigationDrawerFragment;
 import amazingcoders.amazingcoders_android.R;
@@ -113,6 +116,10 @@ public class MainActivity extends AppCompatActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private RecyclerView mRecyclerView;
+        private RecyclerView.LayoutManager mLayoutManager;
+
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -132,6 +139,18 @@ public class MainActivity extends AppCompatActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            switch (savedInstanceState.getInt(ARG_SECTION_NUMBER)){
+                case 1:
+                    mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
+                    mRecyclerView.setHasFixedSize(true);
+                    mLayoutManager = new LinearLayoutManager(this.getActivity());
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+
+                    break;
+                default:
+            }
+
             return rootView;
         }
 
