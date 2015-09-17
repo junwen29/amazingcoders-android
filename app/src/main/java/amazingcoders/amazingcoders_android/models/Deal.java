@@ -3,23 +3,33 @@ package amazingcoders.amazingcoders_android.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by junwen29 on 9/15/2015.
  */
 public class Deal implements Parcelable{
+
+    @SerializedName("id")
     public final long id;
+    @SerializedName("title")
     private String title;
+    @SerializedName("redeemable")
     private Boolean redeemable;
+    @SerializedName("type")
     private String type;
+    @SerializedName("description")
     private String description;
+    @SerializedName("location")
     private String location;
+    @SerializedName("terms")
     private String terms;
+    @SerializedName("num_of_redeems")
     private int num_of_redeems;
 
     public Deal() {
         this.id = 0;
     }
-
 
     protected Deal(Parcel in) {
         id = in.readLong();
@@ -58,5 +68,33 @@ public class Deal implements Parcelable{
         dest.writeString(location);
         dest.writeString(terms);
         dest.writeInt(num_of_redeems);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Boolean getRedeemable() {
+        return redeemable;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getTerms() {
+        return terms;
+    }
+
+    public int getNum_of_redeems() {
+        return num_of_redeems;
     }
 }
