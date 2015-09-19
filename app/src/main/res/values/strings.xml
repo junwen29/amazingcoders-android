@@ -22,6 +22,27 @@
 
     <!--activity title    -->
     <string name="title_activity_deals_feed">DealsFeedActivity</string>
+    <string name="title_activity_front_page">FrontPageActivity</string>
+
+    <string name="create_account">Create Account</string>
+    <string name="login_email">Login with Email</string>
+    <string name="login_google">Login with Google</string>
+    <string name="login_facebook">Login with Facebook</string>
+    <string name="dialog_no_network">Network Error</string>
+    <string name="dialog_check_network">Please check your network settings</string>
+    <string name="no">No</string>
+    <string name="dialog_logout">Logout</string>
+    <string name="dialog_confirmation">Are you sure?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="progress_loading">Brewing...</string>
+    <string name="copy_frontpage_1">Discover the perfect place to eat.</string>
+    <string name="copy_frontpage_2">Journal your moments.</string>
+    <string name="copy_frontpage_3">Recommend the best.</string>
+    <string name="copy_frontpage_1_sub">Dinner dates, cheap eats, cafes and more.</string>
+    <string name="copy_frontpage_2_sub">Organize your food recommendations into personal collections</string>
+    <string name="copy_frontpage_3_sub">Snap a photo, tag a location, and share your experience.</string>
+    <string name="desc_image_view">Image</string>
 
 
 </resources>
