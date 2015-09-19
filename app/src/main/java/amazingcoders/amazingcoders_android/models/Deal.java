@@ -16,7 +16,7 @@ public class Deal implements Parcelable{
     private String title;
     @SerializedName("redeemable")
     private Boolean redeemable;
-    @SerializedName("type")
+    @SerializedName("type_of_deal")
     private String type;
     @SerializedName("description")
     private String description;
