@@ -17,6 +17,8 @@ import butterknife.InjectView;
 public class DealCard extends CardView {
     @InjectView(R.id.title)
     TextView mTitle;
+    @InjectView(R.id.type)
+    TextView mType;
 
     Deal mDeal;
 
@@ -49,5 +51,6 @@ public class DealCard extends CardView {
         if (mDeal == null) return;
 
         mTitle.setText(mDeal.getTitle());
+        mType.setText(mDeal.getType());
     }
 }

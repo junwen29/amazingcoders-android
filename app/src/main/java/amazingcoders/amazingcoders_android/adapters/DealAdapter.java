@@ -2,14 +2,18 @@ package amazingcoders.amazingcoders_android.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import amazingcoders.amazingcoders_android.R;
 import amazingcoders.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import amazingcoders.amazingcoders_android.models.Deal;
 import amazingcoders.amazingcoders_android.views.DealCard;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -32,16 +36,19 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new ViewHolder(new DealCard(mContext));
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_item_deal,viewGroup,false);
+
+        return new ViewHolder(view);
     }
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.card_deal)
         DealCard mDealCard;
 
         public ViewHolder(View v) {
             super(v);
-            mDealCard = (DealCard)v;
+            ButterKnife.inject(this,v);
         }
 
         public void update(Deal deal){
