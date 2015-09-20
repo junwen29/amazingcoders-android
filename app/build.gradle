@@ -16,6 +16,21 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+            proguardFiles 'proguard-project.txt'
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            buildConfigField "boolean", "LIVE", "false"
+        }
+
+        staging {
+            applicationIdSuffix ".staging"
+            versionNameSuffix "-STAGING"
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
     }
 }
 
