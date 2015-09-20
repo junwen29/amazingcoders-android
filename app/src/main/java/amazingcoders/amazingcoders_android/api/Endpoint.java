@@ -15,6 +15,10 @@ public class Endpoint {
     public static final String P1_SERVER_URL = SERVER_URL + "api/p1/";
 
     public static final String SIGNUP = P1_SERVER_URL + "accounts/sign_up";
+    public static final String LOGIN = P1_SERVER_URL + "accounts/sign_in";
+    public static final String LOGOUT = P1_SERVER_URL + "accounts/sign_out";
+
+//    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
 
     public static final String DEALS = P1_SERVER_URL + "deals";
 }
