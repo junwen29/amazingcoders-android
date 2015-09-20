@@ -23,7 +23,7 @@
     <string name="error_signup_empty_first_name">First name is required</string>
     <string name="error_signup_empty_last_name">Last name is required</string>
     <string name="error_signup_empty_username">Username is required</string>
-    <string name="error_signup_invalid_password">Password minimum 6 characters</string>
+    <string name="error_signup_invalid_password">Password minimum 8 characters</string>
     <string name="error_empty_login">Please enter your email and password.</string>
     <string name="error_login">Failed to login. Check your email or password.</string>
     <string name="error_duplicate_mail">Email has been taken</string>

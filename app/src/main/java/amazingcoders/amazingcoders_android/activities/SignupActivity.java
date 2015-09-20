@@ -24,6 +24,7 @@ import amazingcoders.amazingcoders_android.R;
 import amazingcoders.amazingcoders_android.activities.base.BaseActivity;
 import amazingcoders.amazingcoders_android.api.Listener;
 import amazingcoders.amazingcoders_android.api.VolleyErrorHelper;
+import amazingcoders.amazingcoders_android.api.requests.SignupRequest;
 import amazingcoders.amazingcoders_android.dialogs.ProgressDialogFactory;
 import amazingcoders.amazingcoders_android.helpers.Global;
 import amazingcoders.amazingcoders_android.models.Owner;
@@ -36,9 +37,9 @@ import butterknife.OnClick;
  */
 public class SignupActivity extends BaseActivity{
 
-    public static final String SIGNUP_EMAIL = "com.burpple.app.SIGNUP_EMAIL";
-    public static final String SIGNUP_FACEBOOK = "com.burpple.app.SIGNUP_FACEBOOK";
-    public static final String SIGNUP_GOOGLE = "com.burpple.app.SIGNUP_GOOGLE";
+    public static final String SIGNUP_EMAIL = "amazingcoders.app.SIGNUP_EMAIL";
+    public static final String SIGNUP_FACEBOOK = "amazingcoders.app.SIGNUP_FACEBOOK";
+    public static final String SIGNUP_GOOGLE = "amazingcoders.app.SIGNUP_GOOGLE";
 
     @InjectView(R.id.input_first_name)
     EditText mFirstNameField;
@@ -56,9 +57,7 @@ public class SignupActivity extends BaseActivity{
     TextView mTerms;
 
     private String mAction;
-
-//    private Owner mOwner;
-//    private LocationFixer mLocationFixer;
+    private Owner mOwner;
     private String mToken;
 
     @Override
@@ -74,7 +73,7 @@ public class SignupActivity extends BaseActivity{
         mAction = getIntent().getAction();
         switch (mAction) {
             case SIGNUP_EMAIL:
-//                mOwner = new Owner();
+                mOwner = new Owner();
                 break;
             case SIGNUP_FACEBOOK:
             case SIGNUP_GOOGLE:
@@ -169,6 +168,19 @@ public class SignupActivity extends BaseActivity{
                 }
             }
         };
+
+        showProgressDialog();
+        switch (mAction) {
+            case SIGNUP_EMAIL:
+                getBurppleApi().enqueue(SignupRequest.email(mOwner, listener), this);
+                break;
+//            case SIGNUP_FACEBOOK:
+//                getBurppleApi().enqueue(SignupRequest.facebook(mOwner, mToken, listener), this);
+//                break;
+//            case SIGNUP_GOOGLE:
+//                getBurppleApi().enqueue(SignupRequest.google(mOwner, mToken, listener), this);
+//                break;
+        }
     }
 
     private boolean validateAndStoreFields() {
@@ -194,17 +206,17 @@ public class SignupActivity extends BaseActivity{
         String password;
         if (mAction.equals(SIGNUP_EMAIL)) {
             password = mPasswordField.getText().toString().trim();
-            if (password.length() < 6) {
+            if (password.length() < 8) {
                 showErrorMessage(R.string.error_signup_invalid_password);
                 return false;
             }
-//            mOwner.setPassword(password);
+            mOwner.setPassword(password);
         }
 
-//        mOwner.setFirstName(firstName);
-//        mOwner.setLastName(lastName);
-//        mOwner.setUsername(username);
-//        mOwner.setEmail(email);
+        mOwner.setFirstName(firstName);
+        mOwner.setLastName(lastName);
+        mOwner.setUsername(username);
+        mOwner.setEmail(email);
 
         return true;
     }
