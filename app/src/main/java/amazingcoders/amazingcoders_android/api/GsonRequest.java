@@ -1,5 +1,6 @@
 package amazingcoders.amazingcoders_android.api;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -10,6 +11,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -38,6 +40,21 @@ public class GsonRequest<T> extends Request <T> {
         mListener = listener;
         mParams = params;
         mHeaders = headers;
+    }
+
+    @Override
+    public Map<String, String> getParams() throws AuthFailureError {
+        return (mParams == null) ? super.getParams() : mParams;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> headers = (mHeaders == null) ? new HashMap<String, String>() : mHeaders;
+        // Default headers
+        headers.put("TIMEZONE", String.valueOf(BurppleApi.offsetFromUtc()));
+        headers.put("Accept-Language", BurppleApi.acceptLanguage());
+        headers.put("User-Agent", BurppleApi.userAgent());
+        return headers;
     }
 
     @Override

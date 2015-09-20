@@ -39,6 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         dismissProgressDialog();
+        mApi.cancel(this);
     }
 
     @Override

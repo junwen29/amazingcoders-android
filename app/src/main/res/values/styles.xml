@@ -1,20 +1,6 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-
-    </style>
-
-    <style name="Theme.Burpple" parent="@style/Theme.Base">
+    <style name="Theme.Burpple" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarTheme">@style/Theme.ActionBar</item>
-        <!--<item name="actionMenuTextColor">@color/white</item>-->
-        <!--<item name="actionDropDownStyle">@style/Widget.Burpple.Spinner</item>-->
-        <!--<item name="android:windowBackground">@color/window_bg</item>-->
-        <!--<item name="ptrHeaderStyle">@style/Widget.Custom.PtrHeader</item>-->
-    </style>
-
-    <style name="Theme.Base" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:editTextStyle">@style/EditText</item>
@@ -22,6 +8,17 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+    </style>
+
+    <!-- No action bar -->
+    <style name="Theme.Burpple.NoActionBar" parent="@style/Theme.Burpple">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
+    <style name="Theme.Burpple.NoActionBar.Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="Theme.ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
@@ -44,6 +41,8 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
+
+    <!--Text Appearance-->
     <style name="TextAppearance.Burpple.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
@@ -51,4 +50,71 @@
     </style>
 
     <dimen name="action_bar_default_padding_material">4dp</dimen>
+    <dimen name="button_big_height">42dp</dimen>
+
+    <!--Button styles-->
+    <style name="Button">
+        <item name="android:background">@drawable/btn_default</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/font</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Button.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Button.Facebook">
+        <item name="android:background">@drawable/btn_fb</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:minHeight">@dimen/button_big_height</item>
+    </style>
+
+    <style name="Button.Google">
+        <item name="android:background">@drawable/btn_google</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:minHeight">@dimen/button_big_height</item>
+    </style>
+
+    <style name="Button.Green">
+        <item name="android:background">@drawable/btn_green</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Button.Green.Big">
+        <item name="android:minHeight">@dimen/button_big_height</item>
+    </style>
+
+    <!--Image styles-->
+    <style name="Image">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:cropToPadding">true</item>
+        <item name="android:contentDescription">@string/desc_image_view</item>
+    </style>
+
+    <!--Text styles-->
+    <style name="Text">
+        <item name="android:textSize">@dimen/font</item>
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
+    <style name="Text.Overlay">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/dark_gray</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:shadowDy">0</item>
+    </style>
+
+    <style name="Text.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Ash">
+        <item name="android:textColor">@color/med_gray</item>
+    </style>
+
 </resources>
