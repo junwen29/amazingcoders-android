@@ -13,6 +13,9 @@
     <dimen name="btn_frontpage_margin">20dp</dimen>
     <dimen name="font_frontpage_title">28sp</dimen>
     <dimen name="font_frontpage_subtitle">16sp</dimen>
+    <dimen name="form_margin">20dp</dimen>
+    <dimen name="cardview_corner_radius_default">2dp</dimen>
+    <dimen name="font_input">16sp</dimen>
 
 
 </resources>

@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 
 import amazingcoders.amazingcoders_android.R;
 import amazingcoders.amazingcoders_android.activities.DealsFeedActivity;
+import amazingcoders.amazingcoders_android.activities.FrontPageActivity;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -77,6 +78,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                 case R.id.navigation_item_4:
                 case R.id.navigation_sub_item_1:
                 case R.id.navigation_sub_item_2:
+                    startActivity(new Intent(this, FrontPageActivity.class));
                     break;
                 case R.id.navigation_item_5:
                     startActivity(new Intent(this, DealsFeedActivity.class));

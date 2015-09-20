@@ -19,6 +19,16 @@
     <!--error messages-->
     <string name="error_network">No connection. Please Check your network settings.</string>
     <string name="error_default">Something went wrong. Please try again</string>
+    <string name="error_signup_empty_email">Email is required</string>
+    <string name="error_signup_empty_first_name">First name is required</string>
+    <string name="error_signup_empty_last_name">Last name is required</string>
+    <string name="error_signup_empty_username">Username is required</string>
+    <string name="error_signup_invalid_password">Password minimum 6 characters</string>
+    <string name="error_empty_login">Please enter your email and password.</string>
+    <string name="error_login">Failed to login. Check your email or password.</string>
+    <string name="error_duplicate_mail">Email has been taken</string>
+    <string name="error_signup">Failed to create account. Email or username has already been used.</string>
+    <string name="error_maintenance">We are having server maintenance. Contact feedback@burpple.com for information.</string>
 
     <!--activity title    -->
     <string name="title_activity_deals_feed">DealsFeedActivity</string>
@@ -43,6 +53,16 @@
     <string name="copy_frontpage_2_sub">Organize your food recommendations into personal collections</string>
     <string name="copy_frontpage_3_sub">Snap a photo, tag a location, and share your experience.</string>
     <string name="desc_image_view">Image</string>
+    <string name="form_signup_first_name">First name</string>
+    <string name="hint_first_name">first name</string>
+    <string name="form_signup_last_name">Last name</string>
+    <string name="hint_last_name">last name</string>
+    <string name="form_signup_username">Username</string>
+    <string name="hint_username">minimum 6 characters</string>
+    <string name="form_signup_email">Email</string>
+    <string name="hint_email">example@email.com</string>
+    <string name="form_signup_password">Password</string>
+    <string name="hint_password">minimum 6 characters</string>
 
 
 </resources>

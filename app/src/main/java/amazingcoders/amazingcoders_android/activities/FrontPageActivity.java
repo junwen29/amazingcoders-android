@@ -1,6 +1,7 @@
 package amazingcoders.amazingcoders_android.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,7 @@ import amazingcoders.amazingcoders_android.helpers.PreferencesStore;
 import amazingcoders.amazingcoders_android.helpers.images.PicassoRequest;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class FrontPageActivity extends BaseActivity {
 
@@ -115,6 +117,20 @@ public class FrontPageActivity extends BaseActivity {
         else {
             return SessionState.LOGGED_IN;
         }
+    }
+
+
+    @OnClick(R.id.button_login)
+    public void onLoginClick() {
+//        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
+    @OnClick(R.id.button_signup)
+    public void onSignupClick() {
+        startActivityForResult(
+                new Intent(this, SignupActivity.class).setAction(SignupActivity.SIGNUP_EMAIL),
+                REQ_SIGNUP);
     }
 
     private static class ImagePagerAdapter extends PagerAdapter {
