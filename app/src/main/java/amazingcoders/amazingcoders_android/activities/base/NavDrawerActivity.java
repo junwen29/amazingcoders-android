@@ -1,5 +1,6 @@
 package amazingcoders.amazingcoders_android.activities.base;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,8 @@ import android.widget.FrameLayout;
 import amazingcoders.amazingcoders_android.R;
 import amazingcoders.amazingcoders_android.activities.DealsFeedActivity;
 import amazingcoders.amazingcoders_android.activities.FrontPageActivity;
+import amazingcoders.amazingcoders_android.dialogs.AlertDialogFactory;
+import amazingcoders.amazingcoders_android.helpers.PreferencesStore;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -78,7 +81,11 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                 case R.id.navigation_item_4:
                 case R.id.navigation_sub_item_1:
                 case R.id.navigation_sub_item_2:
-                    startActivity(new Intent(this, FrontPageActivity.class));
+//                    startActivity(new Intent(this, FrontPageActivity.class));
+                    mDrawerLayout.closeDrawers();
+                    break;
+                case R.id.navigation_sub_item_3:
+                    showLogoutPrompt();
                     break;
                 case R.id.navigation_item_5:
                     startActivity(new Intent(this, DealsFeedActivity.class));
@@ -137,4 +144,28 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
      * highlight selected navigation menu item
      */
     public abstract void setActiveDrawerItem();
+
+    private void showLogoutPrompt() {
+        AlertDialogFactory.logout(this, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                logout();
+            }
+        }).show();
+    }
+
+    private void logout() {
+
+        PreferencesStore store = new PreferencesStore(getApplicationContext());
+        store.clearAuthToken();
+//        startService(UpdateServerService.deviceToken(getActivity(), false, store.getGCMRegistrationId()));
+
+        // NOTE reset user data in MainActivity only since auth token still needed here
+        store.setNotNewbie();
+
+        Intent i = new Intent(this, FrontPageActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finishAffinity();
+    }
 }

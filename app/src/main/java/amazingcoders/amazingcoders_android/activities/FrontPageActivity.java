@@ -31,13 +31,13 @@ public class FrontPageActivity extends BaseActivity {
 
     private static final int REQ_SIGNUP = 4001;
     private static final int REQ_VERIFY_ACCOUNT = 4002;
-    private static final int REQ_FACEBOOK = 4003;
-    private static final int REQ_GOOGLE = 4004;
+//    private static final int REQ_FACEBOOK = 4003;
+//    private static final int REQ_GOOGLE = 4004;
 
     public enum SessionState {
         LOGGED_OUT,
         LOGGED_IN,
-        LOGGED_IN_USER_LOCATION_NEEDED
+//        LOGGED_IN_USER_LOCATION_NEEDED
     }
 
     private static final int REQ_RESOLVE_GOOGLE = 3001;
@@ -106,7 +106,8 @@ public class FrontPageActivity extends BaseActivity {
     }
 
     private void goToMain() {
-
+        startActivity(new Intent(this, DealsFeedActivity.class));
+        finish();
     }
 
     private SessionState getSessionState() {
@@ -119,10 +120,9 @@ public class FrontPageActivity extends BaseActivity {
         }
     }
 
-
     @OnClick(R.id.button_login)
     public void onLoginClick() {
-//        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
@@ -131,6 +131,18 @@ public class FrontPageActivity extends BaseActivity {
         startActivityForResult(
                 new Intent(this, SignupActivity.class).setAction(SignupActivity.SIGNUP_EMAIL),
                 REQ_SIGNUP);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQ_SIGNUP) {
+            if (resultCode == RESULT_OK) {
+                startActivity(new Intent(this, DealsFeedActivity.class));
+                finish();
+            }
+        }
     }
 
     private static class ImagePagerAdapter extends PagerAdapter {

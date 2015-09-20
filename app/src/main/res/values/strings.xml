@@ -62,7 +62,13 @@
     <string name="form_signup_email">Email</string>
     <string name="hint_email">example@email.com</string>
     <string name="form_signup_password">Password</string>
-    <string name="hint_password">minimum 6 characters</string>
+    <string name="hint_password">minimum 8 characters</string>
+    <string name="form_email">Email</string>
+    <string name="form_password">Password</string>
+    <string name="login">Login</string>
+    <string name="form_forgot_password">Forgot your password?</string>
+    <string name="progress_auth">Signing in</string>
+    <string name="logout">Log out</string>
 
 
 </resources>

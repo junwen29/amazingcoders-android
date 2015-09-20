@@ -117,8 +117,6 @@ public class SignupActivity extends BaseActivity{
             public void onResponse(Owner owner) {
                 dismissProgressDialog();
                 Global.with(SignupActivity.this).updateOwner(owner);
-                Intent intent = new Intent(SignupActivity.this, DealsFeedActivity.class);
-                startActivity(intent);
                 setResult(RESULT_OK);
                 finish();
             }
