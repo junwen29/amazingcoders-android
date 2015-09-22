@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import amazingcoders.amazingcoders_android.R;
 import amazingcoders.amazingcoders_android.activities.DealsFeedActivity;
 import amazingcoders.amazingcoders_android.activities.FrontPageActivity;
+import amazingcoders.amazingcoders_android.activities.VenuesFeedActivity;
 import amazingcoders.amazingcoders_android.dialogs.AlertDialogFactory;
 import amazingcoders.amazingcoders_android.helpers.PreferencesStore;
 
@@ -76,7 +77,10 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
             switch (id) {
 
                 case R.id.navigation_item_1:
+                    break;
                 case R.id.navigation_item_2:
+                    startActivity(new Intent(this, VenuesFeedActivity.class));
+                    break;
                 case R.id.navigation_item_3:
                 case R.id.navigation_item_4:
                 case R.id.navigation_sub_item_1:

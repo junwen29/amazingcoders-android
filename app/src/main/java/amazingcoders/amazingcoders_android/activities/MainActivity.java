@@ -6,7 +6,6 @@ import android.os.Handler;
 
 import amazingcoders.amazingcoders_android.R;
 import amazingcoders.amazingcoders_android.activities.base.BaseActivity;
-import amazingcoders.amazingcoders_android.activities.base.NavDrawerActivity;
 
 public class MainActivity extends BaseActivity {
 
