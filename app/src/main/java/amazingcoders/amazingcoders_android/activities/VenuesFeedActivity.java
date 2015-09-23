@@ -47,8 +47,8 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
     @Override
     public void setActiveDrawerItem() {
         //set selected menu
-        mNavigationView.getMenu().getItem(5).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_6;
+        mNavigationView.getMenu().getItem(2).setChecked(true);
+        mSelectedDrawerItemId = R.id.navigation_item_2;
     }
 
 
