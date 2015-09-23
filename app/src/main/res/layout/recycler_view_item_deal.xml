@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/cardview_default_margin">
 
-    <amazingcoders.amazingcoders_android.views.DealCard
+    <com.amazingcoders_android.views.DealCard
         android:id="@+id/card_deal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
