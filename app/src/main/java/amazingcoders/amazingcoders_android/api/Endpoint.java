@@ -18,7 +18,11 @@ public class Endpoint {
     public static final String LOGIN = P1_SERVER_URL + "accounts/sign_in";
     public static final String LOGOUT = P1_SERVER_URL + "accounts/sign_out";
 
+    //TODO forget password page request
 //    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
+
+    public static final String NOTIFICATION = P1_SERVER_URL + "notifications?auth_token=%s&offset=%s&limit=%s";
+    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
 
     public static final String DEALS = P1_SERVER_URL + "deals";
     public static final String VENUES = P1_SERVER_URL + "venues";

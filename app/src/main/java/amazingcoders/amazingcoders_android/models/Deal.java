@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by junwen29 on 9/15/2015.
  */
-public class Deal implements Parcelable{
+public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
 
     @SerializedName("id")
     public final long id;
@@ -27,8 +27,8 @@ public class Deal implements Parcelable{
     @SerializedName("num_of_redeems")
     private int num_of_redeems;
 
-    public Deal() {
-        this.id = 0;
+    public Deal(long id) {
+        this.id = id;
     }
 
     protected Deal(Parcel in) {
@@ -96,5 +96,19 @@ public class Deal implements Parcelable{
 
     public int getNum_of_redeems() {
         return num_of_redeems;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String streamImageUrl() {
+        return null;
+    }
+
+    @Override
+    public Parcelable streamIntentExtra() {
+        return null;
     }
 }
