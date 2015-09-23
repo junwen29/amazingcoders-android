@@ -21,13 +21,14 @@ import amazingcoders.amazingcoders_android.models.Venue;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener {
+public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener{
 
     @InjectView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
     RecyclerView.LayoutManager mLayoutManager;
     VenueAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
     public void setActiveDrawerItem() {
         //set selected menu
         mNavigationView.getMenu().getItem(5).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_6;
+        //mSelectedDrawerItemId = R.id.navigation_item_6;
     }
 
 
@@ -65,6 +66,7 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -101,4 +103,5 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
         };
         getBurppleApi().enqueue(VenueRequest.allVenues(listener));
     }
+
 }

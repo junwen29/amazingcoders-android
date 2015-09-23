@@ -11,14 +11,15 @@ import amazingcoders.amazingcoders_android.models.Venue;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+
 /**
  * Created by Yesha on 9/21/2015.
  */
 public class VenueCard extends CardView {
     @InjectView(R.id.name)
     TextView mName;
-    //@InjectView(R.id.merchant_id)
-    //TextView mMerchant_id;
+    //@InjectView(R.id.ID)
+    //TextView mID;
 
     Venue mVenue;
 
@@ -51,6 +52,11 @@ public class VenueCard extends CardView {
         if (mVenue == null) return;
 
         mName.setText(mVenue.getName());
-        //mMerchant_id.setText(mVenue.getMerchant_ID().toString());
+        //mID.setText(mVenue.getId().toString());
     }
+
+    public Long getVenueID() {
+        return this.mVenue.getId();
+    }
+
 }
