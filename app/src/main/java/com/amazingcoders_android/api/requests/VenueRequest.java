@@ -25,7 +25,7 @@ public class VenueRequest {
     }
 
     public static GsonRequest<Venue> load(Long venueId, Listener<Venue> listener) {
-        String url = Endpoint.VENUE + venueId.toString();
+        String url = String.format(Endpoint.VENUE, venueId);
         return new GsonRequest<>(Request.Method.GET, url, Venue.class, listener);
     }
 }

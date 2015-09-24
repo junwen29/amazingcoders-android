@@ -2,28 +2,29 @@ package com.amazingcoders_android.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.amazingcoders_android.R;
+import com.amazingcoders_android.api.BurppleApi;
+import com.amazingcoders_android.api.Listener;
+import com.amazingcoders_android.api.requests.DealRequest;
+import com.amazingcoders_android.models.Deal;
 import com.android.volley.VolleyError;
 
-import amazingcoders.amazingcoders_android.R;
-import amazingcoders.amazingcoders_android.api.BurppleApi;
-import amazingcoders.amazingcoders_android.api.Listener;
-import amazingcoders.amazingcoders_android.api.requests.DealRequest;
-import amazingcoders.amazingcoders_android.models.Deal;
 
 public class DealPageActivity extends AppCompatActivity {
 
-    Long id;
+//    Deal mDeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_page);
-        this.id = getIntent().getLongExtra("id", new Long(0));
-        loadDeals();
+        Long dealId = getIntent().getLongExtra("deal_id",0);
+        loadDeal(dealId);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class DealPageActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loadDeals(){
+    public void loadDeal(Long id){
         Listener<Deal> listener = new Listener<Deal>() {
             @Override
             public void onResponse(Deal deal)  {
@@ -70,7 +71,7 @@ public class DealPageActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+//                Log.d("Load Deal Error", volleyError.getMessage());
             }
         };
         BurppleApi.getInstance(this).enqueue(DealRequest.load(id, listener));

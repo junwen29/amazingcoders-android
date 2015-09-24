@@ -59,7 +59,7 @@
         </activity>
         <activity
             android:name=".activities.DealPageActivity"
-            android:label="@string/title_activity_deal_page">
+            android:label="DealPageActivity">
         </activity>
         <!--services-->
         <service android:name=".services.UpdateServerService" />

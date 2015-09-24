@@ -20,11 +20,11 @@ public class Deal implements Parcelable{
     private String description;
     @SerializedName("location")
     private String location;
-    @SerializedName("terms")
+    @SerializedName("t_c")
     private String terms;
     @SerializedName("num_of_redeems")
     private int num_of_redeems;
-    @SerializedName("start_date")
+    @SerializedName("start_dsate")
     private String start;
     @SerializedName("expiry_date")
     private String expiry;
@@ -101,6 +101,18 @@ public class Deal implements Parcelable{
 
     public int getNum_of_redeems() {
         return num_of_redeems;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
 

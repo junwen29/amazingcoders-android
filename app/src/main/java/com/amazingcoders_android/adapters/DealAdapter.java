@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.activities.DealPageActivity;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.views.DealCard;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
-w;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -65,9 +64,9 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
         @Override
         public void onClick(View v) {
             Long deal_id = mDealCard.getDealId();
-            Intent i = new Intent(this.context, DealPageActivity.class);
-            i.putExtra("id", deal_id);
-            this.context.startActivity(i);
+            Intent i = new Intent(context, DealPageActivity.class);
+            i.putExtra("deal_id", deal_id);
+            context.startActivity(i);
         }
 
     }
