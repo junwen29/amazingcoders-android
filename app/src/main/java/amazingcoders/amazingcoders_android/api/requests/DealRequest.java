@@ -9,6 +9,8 @@ import java.util.Collection;
 import amazingcoders.amazingcoders_android.api.CollectionListener;
 import amazingcoders.amazingcoders_android.api.Endpoint;
 import amazingcoders.amazingcoders_android.api.GsonCollectionRequest;
+import amazingcoders.amazingcoders_android.api.GsonRequest;
+import amazingcoders.amazingcoders_android.api.Listener;
 import amazingcoders.amazingcoders_android.models.Deal;
 
 /**
@@ -20,6 +22,11 @@ public class DealRequest {
         String url = Endpoint.DEALS;
         Type type = new TypeToken<Collection<Deal>>(){}.getType();
         return new GsonCollectionRequest<>(Method.GET, url, type, listener);
+    }
+
+    public static GsonRequest<Deal> load(long dealId, Listener<Deal> listener) {
+        String url = String.format(Endpoint.SHOW_DEAL, dealId);
+        return new GsonRequest<Deal>(Method.GET, url, Deal.class, listener);
     }
 }
 

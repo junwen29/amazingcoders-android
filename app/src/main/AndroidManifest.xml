@@ -41,6 +41,11 @@
             android:name=".activities.VenuesFeedActivity"
             android:label="@string/title_activity_venues_feed" >
         </activity>
+        <activity
+            android:name=".activities.DealPageActivity"
+            android:label="@string/title_activity_deal_page"
+            android:parentActivityName=".activities.DealsFeedActivity" >
+        </activity>
     </application>
 
 </manifest>

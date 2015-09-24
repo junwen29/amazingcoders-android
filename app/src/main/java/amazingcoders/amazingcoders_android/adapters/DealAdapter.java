@@ -1,14 +1,17 @@
 package amazingcoders.amazingcoders_android.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import amazingcoders.amazingcoders_android.R;
+import amazingcoders.amazingcoders_android.activities.DealPageActivity;
 import amazingcoders.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import amazingcoders.amazingcoders_android.models.Deal;
 import amazingcoders.amazingcoders_android.views.DealCard;
@@ -19,6 +22,7 @@ import butterknife.InjectView;
  * Created by junwen29 on 9/17/2015.
  */
 public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
+    private Context context;
 
     public DealAdapter(Context context, ArrayList<Deal> items) {
         super(context, items);
@@ -26,6 +30,7 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
 
     public DealAdapter(Context context, int numHeaders) {
         super(context, numHeaders);
+        this.context = context;
     }
 
     @Override
@@ -38,21 +43,33 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         final View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_item_deal,viewGroup,false);
 
-        return new ViewHolder(view);
+        return new ViewHolder(view, this.context);
     }
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.card_deal)
         DealCard mDealCard;
+        Context context;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, Context ctx) {
             super(v);
             ButterKnife.inject(this,v);
+            context = ctx;
+            v.setOnClickListener(this);
         }
 
         public void update(Deal deal){
             mDealCard.update(deal);
         }
+
+        @Override
+        public void onClick(View v) {
+            Long deal_id = mDealCard.getDealId();
+            Intent i = new Intent(this.context, DealPageActivity.class);
+            i.putExtra("id", deal_id);
+            this.context.startActivity(i);
+        }
+
     }
 }

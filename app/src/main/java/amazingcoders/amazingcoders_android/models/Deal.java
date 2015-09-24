@@ -4,11 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.types.DateType;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by junwen29 on 9/15/2015.
  */
-public class Deal implements Parcelable{
+public class Deal implements Parcelable {
 
     @SerializedName("id")
     public final long id;
@@ -22,10 +27,17 @@ public class Deal implements Parcelable{
     private String description;
     @SerializedName("location")
     private String location;
-    @SerializedName("terms")
+    @SerializedName("t_c")
     private String terms;
     @SerializedName("num_of_redeems")
     private int num_of_redeems;
+    @SerializedName("start_date")
+    private String start;
+    @SerializedName("expiry_date")
+    private String expiry;
+
+//    public  static  final  SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YY");
+
 
     public Deal() {
         this.id = 0;
@@ -39,6 +51,8 @@ public class Deal implements Parcelable{
         location = in.readString();
         terms = in.readString();
         num_of_redeems = in.readInt();
+        start = in.readString();
+        expiry = in.readString();
     }
 
     public static final Creator<Deal> CREATOR = new Creator<Deal>() {
@@ -68,6 +82,8 @@ public class Deal implements Parcelable{
         dest.writeString(location);
         dest.writeString(terms);
         dest.writeInt(num_of_redeems);
+        dest.writeString(start);
+        dest.writeString(expiry);
     }
 
     public String getTitle() {
@@ -94,7 +110,22 @@ public class Deal implements Parcelable{
         return terms;
     }
 
-    public int getNum_of_redeems() {
-        return num_of_redeems;
+    public int getNum_of_redeems() {return num_of_redeems;}
+
+//    public Date getStartDate() throws ParseException {
+//        return start_date = sdf.parse(start);
+//
+//    }
+//
+//    public Date getExpiryDate() throws ParseException {
+//        return expiry_date = sdf.parse(expiry);
+//    }
+//
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public String getStart() {
+        return start;
     }
 }
