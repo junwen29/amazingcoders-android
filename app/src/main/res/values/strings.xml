@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">amazingcoders-android</string>
+    <string name="app_name">aMazingCoders</string>
 
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -71,6 +71,7 @@
     <string name="progress_auth">Signing in</string>
     <string name="logout">Log out</string>
     <string name="title_activity_venues_feed">VenuesFeedActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_deal">DealActivity</string>
+    <string name="push_summary">Show all notifications</string>
 
 </resources>
