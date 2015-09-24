@@ -4,11 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.types.DateType;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by junwen29 on 9/15/2015.
@@ -19,8 +14,6 @@ public class Deal implements Parcelable {
     public final long id;
     @SerializedName("title")
     private String title;
-    @SerializedName("redeemable")
-    private Boolean redeemable;
     @SerializedName("type_of_deal")
     private String type;
     @SerializedName("description")
@@ -76,7 +69,6 @@ public class Deal implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(title);
-        dest.writeByte((byte) (redeemable ? 0x01 : 0x00));
         dest.writeString(type);
         dest.writeString(description);
         dest.writeString(location);
@@ -88,10 +80,6 @@ public class Deal implements Parcelable {
 
     public String getTitle() {
         return title;
-    }
-
-    public Boolean getRedeemable() {
-        return redeemable;
     }
 
     public String getType() {

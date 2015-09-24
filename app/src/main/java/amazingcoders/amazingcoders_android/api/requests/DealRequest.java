@@ -24,8 +24,8 @@ public class DealRequest {
         return new GsonCollectionRequest<>(Method.GET, url, type, listener);
     }
 
-    public static GsonRequest<Deal> load(long dealId, Listener<Deal> listener) {
-        String url = String.format(Endpoint.SHOW_DEAL, dealId);
+    public static GsonRequest<Deal> load(Long dealId, Listener<Deal> listener) {
+        String url = Endpoint.SHOW_DEAL+dealId.toString();
         return new GsonRequest<Deal>(Method.GET, url, Deal.class, listener);
     }
 }
