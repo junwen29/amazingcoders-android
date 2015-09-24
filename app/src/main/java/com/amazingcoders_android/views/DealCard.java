@@ -53,4 +53,8 @@ public class DealCard extends CardView {
         mTitle.setText(mDeal.getTitle());
         mType.setText(mDeal.getType());
     }
+
+    public Long getDealId (){
+        return this.mDeal.id;
+    }
 }

@@ -11,7 +11,7 @@ public class Endpoint {
     public static final String SERVER_URL = BuildConfig.BUILD_TYPE.equals("debug") ? "http://192.168.0.100:3000/" : "https://amazingcodersrails.herokuapp.com/";
 //    public static final String SERVER_URL = "http://127.0.0.1:3000/";
 //    public static final String SERVER_URL = "https://amazingcodersrails.herokuapp.com/";
-   //public static final String SERVER_URL = "http://192.168.0.101:3000/";
+    //public static final String SERVER_URL = "http://192.168.0.101:3000/";
     public static final String P1_SERVER_URL = SERVER_URL + "api/p1/";
 
     // Device
@@ -24,11 +24,13 @@ public class Endpoint {
 
     //TODO forget password page request
 //    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
-
-    public static final String NOTIFICATION = P1_SERVER_URL + "notifications?auth_token=%s&offset=%s&limit=%s";
-    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
+    
+    // TODO notifications
+//    public static final String NOTIFICATION = P1_SERVER_URL + "notifications?auth_token=%s&offset=%s&limit=%s";
+//    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
 
     public static final String DEALS = P1_SERVER_URL + "deals";
     public static final String VENUES = P1_SERVER_URL + "venues";
+    public static final String SHOW_DEAL = P1_SERVER_URL + "deals/";
     public static final String VENUE = P1_SERVER_URL + "venue_show/";
 }

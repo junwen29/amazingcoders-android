@@ -58,13 +58,13 @@
             android:label="VenuePageActivity">
         </activity>
         <activity
-            android:name="com.amazingcoders_android.activities.DealActivity"
-            android:label="@string/title_activity_deal" >
+            android:name=".activities.DealPageActivity"
+            android:label="@string/title_activity_deal_page">
         </activity>
-
         <!--services-->
         <service android:name=".services.UpdateServerService" />
 
+        
     </application>
 
 </manifest>

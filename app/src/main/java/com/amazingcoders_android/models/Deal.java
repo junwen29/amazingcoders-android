@@ -8,14 +8,12 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by junwen29 on 9/15/2015.
  */
-public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
+public class Deal implements Parcelable{
 
     @SerializedName("id")
     public final long id;
     @SerializedName("title")
     private String title;
-    @SerializedName("redeemable")
-    private Boolean redeemable;
     @SerializedName("type_of_deal")
     private String type;
     @SerializedName("description")
@@ -26,9 +24,17 @@ public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
     private String terms;
     @SerializedName("num_of_redeems")
     private int num_of_redeems;
+    @SerializedName("start_date")
+    private String start;
+    @SerializedName("expiry_date")
+    private String expiry;
 
     public Deal(long id) {
         this.id = id;
+    }
+
+    public Deal() {
+        this.id = 0;
     }
 
     protected Deal(Parcel in) {
@@ -39,6 +45,8 @@ public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
         location = in.readString();
         terms = in.readString();
         num_of_redeems = in.readInt();
+        start = in.readString();
+        expiry = in.readString();
     }
 
     public static final Creator<Deal> CREATOR = new Creator<Deal>() {
@@ -62,20 +70,17 @@ public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(title);
-//        dest.writeByte((byte) (redeemable ? 0x01 : 0x00));
         dest.writeString(type);
         dest.writeString(description);
-//        dest.writeString(location);
-//        dest.writeString(terms);
-//        dest.writeInt(num_of_redeems);
+        dest.writeString(location);
+        dest.writeString(terms);
+        dest.writeInt(num_of_redeems);
+        dest.writeString(start);
+        dest.writeString(expiry);
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public Boolean getRedeemable() {
-        return redeemable;
     }
 
     public String getType() {
@@ -97,18 +102,5 @@ public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
     public int getNum_of_redeems() {
         return num_of_redeems;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String streamImageUrl() {
-        return null;
-    }
-
-    @Override
-    public Parcelable streamIntentExtra() {
-        return null;
-    }
 }
+

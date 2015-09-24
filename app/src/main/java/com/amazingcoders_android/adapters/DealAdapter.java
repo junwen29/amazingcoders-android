@@ -1,19 +1,23 @@
 package com.amazingcoders_android.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.views.DealCard;
+
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+w;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -38,21 +42,33 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         final View view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_item_deal,viewGroup,false);
 
-        return new ViewHolder(view);
+        return new ViewHolder(view, mContext);
     }
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.card_deal)
         DealCard mDealCard;
+        Context context;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, Context ctx) {
             super(v);
             ButterKnife.inject(this,v);
+            context = ctx;
+            v.setOnClickListener(this);
         }
 
         public void update(Deal deal){
             mDealCard.update(deal);
         }
+
+        @Override
+        public void onClick(View v) {
+            Long deal_id = mDealCard.getDealId();
+            Intent i = new Intent(this.context, DealPageActivity.class);
+            i.putExtra("id", deal_id);
+            this.context.startActivity(i);
+        }
+
     }
 }
