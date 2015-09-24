@@ -34,10 +34,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DealsFeedActivity"
-            android:label="@string/title_activity_deals_feed"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".activities.FrontPageActivity"
             android:label="@string/title_activity_front_page"
             android:screenOrientation="portrait"
@@ -66,7 +62,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".activities.TabActivity"
+            android:name=".activities.DealsFeedActivity"
             android:label="Deals Feed"
             android:screenOrientation="portrait">
         </activity>
