@@ -35,7 +35,8 @@
         </activity>
         <activity
             android:name=".activities.DealsFeedActivity"
-            android:label="@string/title_activity_deals_feed" />
+            android:label="@string/title_activity_deals_feed"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.FrontPageActivity"
             android:label="@string/title_activity_front_page"
@@ -51,15 +52,18 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.VenuesFeedActivity"
-            android:label="@string/title_activity_venues_feed" >
+            android:label="@string/title_activity_venues_feed"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.VenuePageActivity"
-            android:label="VenuePageActivity">
+            android:label="VenuePageActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activities.DealPageActivity"
-            android:label="DealPageActivity">
+            android:label="DealPageActivity"
+            android:screenOrientation="portrait">
         </activity>
         <!--services-->
         <service android:name=".services.UpdateServerService" />
