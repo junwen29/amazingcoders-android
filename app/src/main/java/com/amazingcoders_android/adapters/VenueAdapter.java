@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.activities.VenuePageActivity;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.VenueCard;

@@ -6,13 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.amazingcoders_android.R;
+import com.amazingcoders_android.api.BurppleApi;
+import com.amazingcoders_android.api.Listener;
+import com.amazingcoders_android.api.requests.VenueRequest;
+import com.amazingcoders_android.models.Venue;
 import com.android.volley.VolleyError;
-
-import amazingcoders.amazingcoders_android.R;
-import amazingcoders.amazingcoders_android.api.BurppleApi;
-import amazingcoders.amazingcoders_android.api.Listener;
-import amazingcoders.amazingcoders_android.api.requests.VenueRequest;
-import amazingcoders.amazingcoders_android.models.Venue;
 
 public class VenuePageActivity extends Activity {
     Long id;
