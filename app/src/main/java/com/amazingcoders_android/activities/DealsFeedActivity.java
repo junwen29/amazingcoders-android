@@ -108,6 +108,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements ArrayAutoLoa
             @Override
             public void onResponse(Collection<Deal> deals) {
                 mSwipeLayout.setRefreshing(false);
+                mAdapter.clear();
                 mAdapter.addAll(deals);
                 mAdapter.notifyDataSetChanged();
             }

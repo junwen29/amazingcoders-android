@@ -1,8 +1,10 @@
 package com.amazingcoders_android.activities;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +23,10 @@ import com.amazingcoders_android.models.Venue;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener {
+public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener, SwipeRefreshLayout.OnRefreshListener {
 
+    @InjectView(R.id.swipe_container)
+    SwipeRefreshLayout mSwipeLayout;
     @InjectView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
@@ -79,6 +83,8 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
         mRecyclerView.setLayoutManager(mLayoutManager = new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setAutoLoadListener(this);
+
+        initSwipeRefreshLayout();
     }
 
     @Override
@@ -90,15 +96,40 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
         CollectionListener<Venue> listener = new CollectionListener<Venue>() {
             @Override
             public void onResponse(Collection<Venue> venues) {
+                mSwipeLayout.setRefreshing(false);
+                mAdapter.clear();
                 mAdapter.addAll(venues);
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                mSwipeLayout.setRefreshing(false);
                 showErrorMessage();
             }
         };
+        mSwipeLayout.setRefreshing(true);
         getBurppleApi().enqueue(VenueRequest.allVenues(listener));
+    }
+
+    private void initSwipeRefreshLayout(){
+        int offset = 256;
+        //calculate the action bar size and determine the end
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            offset = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+            offset = offset * 3 / 2;
+        }
+        mSwipeLayout.setProgressViewOffset(true, 0, offset);
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light,
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light);
+    }
+
+    @Override
+    public void onRefresh() {
+        loadVenues();
     }
 }
