@@ -65,6 +65,14 @@
             android:label="DealPageActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activities.TabActivity"
+            android:label="Deals Feed"
+            android:screenOrientation="portrait">
+        </activity>
+
+
+
         <!--services-->
         <service android:name=".services.UpdateServerService" />
 
