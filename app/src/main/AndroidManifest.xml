@@ -24,7 +24,7 @@
         </receiver>
 
         <activity
-            android:name="com.amazingcoders_android.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.Burpple.NoActionBar.Fullscreen" >
             <intent-filter>
@@ -34,24 +34,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.amazingcoders_android.activities.DealsFeedActivity"
+            android:name=".activities.DealsFeedActivity"
             android:label="@string/title_activity_deals_feed" />
         <activity
-            android:name="com.amazingcoders_android.activities.FrontPageActivity"
+            android:name=".activities.FrontPageActivity"
             android:label="@string/title_activity_front_page"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Burpple.NoActionBar.Fullscreen" />
         <activity
-            android:name="com.amazingcoders_android.activities.SignupActivity"
+            android:name=".activities.SignupActivity"
             android:label="Create Account"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.amazingcoders_android.activities.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.amazingcoders_android.activities.VenuesFeedActivity"
+            android:name=".activities.VenuesFeedActivity"
             android:label="@string/title_activity_venues_feed" >
+        </activity>
+        <activity
+            android:name=".activities.VenuePageActivity"
+            android:label="VenuePageActivity">
         </activity>
         <activity
             android:name="com.amazingcoders_android.activities.DealActivity"
