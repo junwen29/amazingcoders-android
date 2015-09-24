@@ -12,7 +12,7 @@ public class Venue implements Parcelable {
     @SerializedName("id")
     public final Long id;
     @SerializedName("name")
-    public String NAME;
+    public String name;
     //@SerializedName("merchant_id")
     //public Integer merchant_id;
     @SerializedName("street")
@@ -40,7 +40,7 @@ public class Venue implements Parcelable {
 
     protected Venue(Parcel in) {
         this.id = in.readLong();
-        this.NAME = in.readString();
+        this.name = in.readString();
         //System.out.println("object name is" + this.NAME);
         //merchant_id = in.readInt();
         street = in.readString();
@@ -74,7 +74,7 @@ public class Venue implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
-        dest.writeString(NAME);
+        dest.writeString(name);
         //dest.writeLong(merchant_id);
         dest.writeString(street);
         //   dest.writeString(address);
@@ -92,7 +92,7 @@ public class Venue implements Parcelable {
     }
 
     public String getName() {
-        return this.NAME;
+        return this.name;
     }
 
     /*

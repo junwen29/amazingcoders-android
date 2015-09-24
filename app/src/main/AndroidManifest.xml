@@ -43,11 +43,7 @@
         </activity>
         <activity
             android:name=".activities.VenuePageActivity"
-            android:label="@string/title_activity_venue_page"
-            android:parentActivityName=".activities.VenuesFeedActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="amazingcoders.amazingcoders_android.activities.VenuesFeedActivity" />
+            android:label="VenuePageActivity">
         </activity>
     </application>
 
