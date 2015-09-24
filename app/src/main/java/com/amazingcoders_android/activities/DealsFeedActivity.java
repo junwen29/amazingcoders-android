@@ -1,12 +1,15 @@
 package com.amazingcoders_android.activities;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.amazingcoders_android.helpers.AmazingHelper;
 import com.android.volley.VolleyError;
 
 import java.util.Collection;
@@ -21,8 +24,9 @@ import com.amazingcoders_android.models.Deal;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class DealsFeedActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener {
-
+public class DealsFeedActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener, SwipeRefreshLayout.OnRefreshListener {
+    @InjectView(R.id.swipe_container)
+    SwipeRefreshLayout mSwipeLayout;
     @InjectView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
@@ -79,26 +83,52 @@ public class DealsFeedActivity extends NavDrawerActivity implements ArrayAutoLoa
         mRecyclerView.setLayoutManager(mLayoutManager = new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setAutoLoadListener(this);
+
+        initSwipeRefreshLayout();
+    }
+
+    private void initSwipeRefreshLayout(){
+        int offset = 256;
+        //calculate the action bar size and determine the end
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            offset = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+            offset = offset * 3 / 2;
+        }
+        mSwipeLayout.setProgressViewOffset(true, 0, offset);
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light,
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light);
     }
 
     private void loadDeals(){
         CollectionListener<Deal> listener = new CollectionListener<Deal>() {
             @Override
             public void onResponse(Collection<Deal> deals) {
+                mSwipeLayout.setRefreshing(false);
                 mAdapter.addAll(deals);
                 mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                mSwipeLayout.setRefreshing(false);
                 showErrorMessage();
             }
         };
+        mSwipeLayout.setRefreshing(true);
         getBurppleApi().enqueue(DealRequest.allDeals(listener));
     }
 
     @Override
     public void onLoad() {
+        loadDeals();
+    }
+
+    @Override
+    public void onRefresh() {
         loadDeals();
     }
 }
