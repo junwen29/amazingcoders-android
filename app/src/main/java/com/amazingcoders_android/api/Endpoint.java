@@ -14,6 +14,10 @@ public class Endpoint {
     //public static final String SERVER_URL = "http://192.168.0.101:3000/";
     public static final String P1_SERVER_URL = SERVER_URL + "api/p1/";
 
+    // Device
+    public static final String REGISTER_DEVICE = P1_SERVER_URL + "devices";
+    public static final String UNREGISTER_DEVICE = P1_SERVER_URL + "devices?auth_token=%s&device_token=%s&device_type=android";
+
     public static final String SIGNUP = P1_SERVER_URL + "accounts/sign_up";
     public static final String LOGIN = P1_SERVER_URL + "accounts/sign_in";
     public static final String LOGOUT = P1_SERVER_URL + "accounts/sign_out";

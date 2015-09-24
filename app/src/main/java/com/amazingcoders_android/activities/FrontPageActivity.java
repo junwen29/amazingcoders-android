@@ -2,9 +2,11 @@ package com.amazingcoders_android.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 import com.amazingcoders_android.R;
@@ -22,6 +25,9 @@ import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.dialogs.ProgressDialogFactory;
 import com.amazingcoders_android.helpers.PreferencesStore;
 import com.amazingcoders_android.helpers.images.PicassoRequest;
+import com.amazingcoders_android.services.UpdateServerService;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -41,6 +47,11 @@ public class FrontPageActivity extends BaseActivity {
 
     private static final int REQ_RESOLVE_GOOGLE = 3001;
     private static final String GOOGLE_SCOPE = "oauth2:https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email";
+
+    // GCM
+    private GoogleCloudMessaging mGCM;
+    private String mRegId;
+    private static final String GCM_SENDER_ID = "409592313883"; //Google API Project Number
 
     @InjectView(R.id.pager)
     ViewPager mPager;
@@ -139,6 +150,7 @@ public class FrontPageActivity extends BaseActivity {
         if (requestCode == REQ_SIGNUP) {
             if (resultCode == RESULT_OK) {
                 startActivity(new Intent(this, DealsFeedActivity.class));
+                registerGCM();
                 finish();
             }
         }
@@ -205,5 +217,52 @@ public class FrontPageActivity extends BaseActivity {
         public void startScroll(int startX, int startY, int dx, int dy, int duration) {
             super.startScroll(startX, startY, dx, dy, 500);
         }
+    }
+
+    private void registerGCM(){
+        mGCM = GoogleCloudMessaging.getInstance(this);
+        mRegId = getGCMRegId();
+        if (mRegId.isEmpty()){
+            registerGCMInBackground();
+        }
+    }
+
+    private void registerGCMInBackground() {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                Context context = getApplicationContext();
+                try{
+                    if (mGCM == null){
+                        mGCM = GoogleCloudMessaging.getInstance(context);
+                    }
+                    mRegId = mGCM.register(GCM_SENDER_ID);
+                    msg = "Device registered, registration ID= "+ mRegId;
+
+                    startService(UpdateServerService.deviceToken(context, true, mRegId));
+                    // Persist the regID - no need to register again.
+                    PreferencesStore store = new PreferencesStore(context);
+                    store.storeRegistrationId(context, mRegId);
+
+                    Log.i("GCM", msg);
+                } catch (IOException e) {
+                    msg = "Error: " + e.getMessage();
+                    e.printStackTrace();
+                }
+
+                return msg;
+            }
+        }.execute(null, null, null);
+    }
+
+    private String getGCMRegId(){
+        PreferencesStore ps = new PreferencesStore(getApplicationContext());
+        String registrationId = ps.getGCMRegistrationId();
+        if (registrationId.isEmpty()){
+            Log.d("getGCMRegID", "GCM Registration ID not found.");
+            return "";
+        }
+        return registrationId;
     }
 }

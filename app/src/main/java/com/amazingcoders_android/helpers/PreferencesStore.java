@@ -118,7 +118,7 @@ public class PreferencesStore {
         mEditor.commit();
     }
 
-        public void storeAccountInfo(Owner owner) {
+    public void storeAccountInfo(Owner owner) {
         setBatchEdit(true);
         if (!TextUtils.isEmpty(owner.getAuthToken())) setAuthToken(owner.getAuthToken());
         setUserId(owner.id);
@@ -152,17 +152,17 @@ public class PreferencesStore {
         return mSharedPreferences.getInt(GCM_REG_APP_VERSION, Integer.MIN_VALUE);
     }
 
-//    /**
-//     * Stores the registration ID and app versionCode in the application's
-//     * {@code SharedPreferences}.
-//     *
-//     * @param context application's context.
-//     * @param regId registration ID
-//     */
-//    public void storeRegistrationId(Context context, String regId) {
+        /**
+     * Stores the registration ID and app versionCode in the application's
+     * {@code SharedPreferences}.
+     *
+     * @param context application's context.
+     * @param regId registration ID
+     */
+    public void storeRegistrationId(Context context, String regId) {
 //        int appVersion = Helper.getAppVersion(context);
-//        mEditor.putString(GCM_REG_ID, regId);
+        mEditor.putString(GCM_REG_ID, regId);
 //        mEditor.putInt(GCM_REG_APP_VERSION, appVersion);
-//        mEditor.commit();
-//    }
+        mEditor.commit();
     }
+}

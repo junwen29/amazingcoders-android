@@ -62,12 +62,12 @@ public class Deal implements Parcelable, ActivityStream.ActivityStreamable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(title);
-        dest.writeByte((byte) (redeemable ? 0x01 : 0x00));
+//        dest.writeByte((byte) (redeemable ? 0x01 : 0x00));
         dest.writeString(type);
         dest.writeString(description);
-        dest.writeString(location);
-        dest.writeString(terms);
-        dest.writeInt(num_of_redeems);
+//        dest.writeString(location);
+//        dest.writeString(terms);
+//        dest.writeInt(num_of_redeems);
     }
 
     public String getTitle() {
