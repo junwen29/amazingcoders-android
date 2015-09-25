@@ -1,11 +1,14 @@
 package com.amazingcoders_android.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
@@ -16,28 +19,37 @@ import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
+import com.amazingcoders_android.views.DealCard;
 import com.android.volley.VolleyError;
 
 import java.util.Collection;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class VenuePageActivity extends Activity {
     Long id;
 
-    DealAdapter mAdapter;
-    RecyclerView mRecyclerView;
+//    DealAdapter mAdapter;
+//    RecyclerView mRecyclerView;
+
+    @InjectView(R.id.container)
+    LinearLayout mContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_page);
         this.id = getIntent().getLongExtra("id", new Long(0));
+
+        ButterKnife.inject(this);
         //Log.w("", "This.id = " + this.id.toString());
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(llm);
-        mAdapter = new DealAdapter(getApplicationContext(), 0);
-        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+//        LinearLayoutManager llm = new LinearLayoutManager(this);
+//        llm.setOrientation(LinearLayoutManager.VERTICAL);
+//        mRecyclerView.setLayoutManager(llm);
+//        mAdapter = new DealAdapter(getApplicationContext(), 0);
+//        mRecyclerView.setAdapter(mAdapter);
         loadVenue();
         loadVenueDeals();
     }
@@ -95,8 +107,22 @@ public class VenuePageActivity extends Activity {
         CollectionListener<Deal> listener = new CollectionListener<Deal>() {
             @Override
             public void onResponse(Collection<Deal> deals) {
-                mAdapter.addAll(deals);
-                mAdapter.notifyDataSetChanged();
+//                mAdapter.addAll(deals);
+//                mAdapter.notifyDataSetChanged();
+
+                for (final Deal deal : deals){
+                    DealCard dealCard = new DealCard(VenuePageActivity.this);
+                    dealCard.update(deal);
+                    dealCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
+                            intent.putExtra("deal_id", deal.id);
+                            startActivity(intent);
+                        }
+                    });
+                    mContainer.addView(dealCard);
+                }
             }
 
             @Override
