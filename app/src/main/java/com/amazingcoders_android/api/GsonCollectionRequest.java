@@ -27,6 +27,11 @@ public class GsonCollectionRequest<T> extends Request<Collection<T>> {
         this(method, url, null, null, type, listener);
     }
 
+    public GsonCollectionRequest(int method, String url, Map<String,String> params, Type type,
+                                 CollectionListener<T> listener){
+        this(method,url,params, null, type, listener);
+    }
+
     public GsonCollectionRequest(int method, String url, Map<String, String> params, Map<String, String> headers,
                                  Type type, CollectionListener<T> listener) {
         super(method, url, listener);
