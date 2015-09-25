@@ -93,6 +93,7 @@ public abstract class ArrayAutoLoadAdapter<T> extends RecyclerView.Adapter<Recyc
 
     public void add(int index, T item) {
         mItems.add(index, item);
+        notifyItemInserted(index);
     }
 
     public void addAll(Collection<? extends T> items) {
@@ -113,6 +114,18 @@ public abstract class ArrayAutoLoadAdapter<T> extends RecyclerView.Adapter<Recyc
 
     public void remove(T item) {
         mItems.remove(item);
+    }
+
+    public T remove (int index) {
+        T item = mItems.remove(index);
+        notifyItemRemoved(index);
+        return item;
+    }
+
+    public void move(int fromPosition, int toPosition) {
+        final T item = mItems.remove(fromPosition);
+        mItems.add(toPosition, item);
+        notifyItemMoved(fromPosition, toPosition);
     }
 
 //    public void removeAll(Collection<? extends T> items) {
@@ -142,5 +155,39 @@ public abstract class ArrayAutoLoadAdapter<T> extends RecyclerView.Adapter<Recyc
 
     public int getNumHeaders() {
         return numHeaders;
+    }
+
+    public void animateTo(List<T> items) {
+        applyAndAnimateRemovals(items);
+        applyAndAnimateAdditions(items);
+        applyAndAnimateMovedItems(items);
+    }
+
+    protected void applyAndAnimateRemovals(List<T> items) {
+        for (int i = mItems.size() - 1; i >= 0; i--) {
+            final T item = mItems.get(i);
+            if (!items.contains(item)) {
+                remove(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<T> items) {
+        for (int i = 0, count = items.size(); i < count; i++) {
+            final T item = items.get(i);
+            if (!items.contains(item)) {
+                add(i, item);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<T> items) {
+        for (int toPosition = items.size() - 1; toPosition >= 0; toPosition--) {
+            final T item = items.get(toPosition);
+            final int fromPosition = items.indexOf(item);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                move(fromPosition, toPosition);
+            }
+        }
     }
 }

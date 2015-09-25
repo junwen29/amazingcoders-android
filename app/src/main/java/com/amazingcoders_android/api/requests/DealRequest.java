@@ -17,15 +17,30 @@ import java.util.Collection;
  */
 public class DealRequest {
 
-    public static GsonCollectionRequest<Deal> allDeals(CollectionListener<Deal> listener){
+    public static GsonRequest<Deal> load(Long dealId, Listener<Deal> listener) {
+        String url = String.format(Endpoint.DEAL, dealId);
+        return new GsonRequest<>(Method.GET, url, Deal.class, listener);
+    }
+
+    public static GsonCollectionRequest<Deal> activeDeals(CollectionListener<Deal> listener){
+        Type type = new TypeToken<Collection<Deal>>(){}.getType();
         String url = Endpoint.DEALS;
+        return new GsonCollectionRequest<>(Method.GET, url, type, listener);
+    }
+
+    public static GsonCollectionRequest<Deal> activeDeals(String url, CollectionListener<Deal> listener){
         Type type = new TypeToken<Collection<Deal>>(){}.getType();
         return new GsonCollectionRequest<>(Method.GET, url, type, listener);
     }
 
-    public static GsonRequest<Deal> load(Long dealId, Listener<Deal> listener) {
-        String url = String.format(Endpoint.DEAL, dealId);
-        return new GsonRequest<>(Method.GET, url, Deal.class, listener);
+    /**
+     * @param listener to return active freebies deals
+     * @param type type of deal to filter
+     * @return Request for active freebie deals
+     */
+    public static GsonCollectionRequest<Deal> activeDealsByType(String type, CollectionListener<Deal> listener){
+        String url = String.format(Endpoint.DEALS_TYPE,type);
+        return activeDeals(url, listener);
     }
 }
 

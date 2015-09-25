@@ -25,8 +25,4 @@ public class MainActivity extends BaseActivity {
         };
         handler.postDelayed(runnable, 1000);
     }
-
-    private void registerGCM(){
-
-    }
 }

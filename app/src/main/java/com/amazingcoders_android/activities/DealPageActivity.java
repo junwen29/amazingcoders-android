@@ -2,7 +2,6 @@ package com.amazingcoders_android.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -55,18 +54,18 @@ public class DealPageActivity extends AppCompatActivity {
             public void onResponse(Deal deal)  {
                 TextView title = (TextView) findViewById(R.id.dealTitle);
                 title.setText(deal.getTitle());
-                TextView type = (TextView) findViewById(R.id.type);
-                type.setText(deal.getType());
+                //TextView type = (TextView) findViewById(R.id.type);
+                //type.setText(deal.getType());
                 TextView description = (TextView) findViewById(R.id.description);
-                description.setText(deal.getDescription());
+                description.setText("Description: " + deal.getDescription());
                 TextView location = (TextView) findViewById(R.id.location);
-                location.setText(deal.getLocation());
+                location.setText("Location: " + deal.getLocation());
                 TextView start_date = (TextView) findViewById(R.id.start_date);
-                start_date.setText(deal.getStart());
+                start_date.setText("Start Date: " + deal.getStart());
                 TextView end_date = (TextView) findViewById(R.id.end_date);
-                end_date.setText(deal.getExpiry());
+                end_date.setText("Expiry Date: " + deal.getExpiry());
                 TextView terms = (TextView) findViewById(R.id.terms);
-                terms.setText(deal.getTerms());
+                terms.setText("Term and Conditions: " + deal.getTerms());
             }
 
             @Override
