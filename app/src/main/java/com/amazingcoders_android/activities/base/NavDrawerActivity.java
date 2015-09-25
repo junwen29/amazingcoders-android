@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.amazingcoders_android.R;
-import com.amazingcoders_android.activities.DealsFeedActivity;
 import com.amazingcoders_android.activities.FrontPageActivity;
+import com.amazingcoders_android.activities.DealsFeedActivity;
 import com.amazingcoders_android.activities.VenuesFeedActivity;
 import com.amazingcoders_android.dialogs.AlertDialogFactory;
 import com.amazingcoders_android.helpers.PreferencesStore;
@@ -30,6 +30,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 
     protected ActionBarDrawerToggle mDrawerToggle;
     protected int mSelectedDrawerItemId = -1;
+    protected boolean mShouldInitDrawerToggle = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,8 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 
         initDrawer();
         setupSupportActionBar();
-        initDrawerToggle(mToolbar);
+        if (mShouldInitDrawerToggle)
+            initDrawerToggle(mToolbar);
     }
 
     private void initDrawer() {
@@ -82,10 +84,10 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                     startActivity(new Intent(this, VenuesFeedActivity.class));
                     break;
                 case R.id.navigation_item_3:
+                    break;
                 case R.id.navigation_item_4:
                 case R.id.navigation_sub_item_1:
                 case R.id.navigation_sub_item_2:
-//                    startActivity(new Intent(this, FrontPageActivity.class));
                     mDrawerLayout.closeDrawers();
                     break;
                 case R.id.navigation_sub_item_3:

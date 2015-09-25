@@ -6,52 +6,43 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Title"
+        android:gravity="center"
+        android:textColor="@color/burpple_red"
+        style="@style/TextAppearance.AppCompat.Headline"
         android:id="@+id/dealTitle" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Type"
-        android:id="@+id/type" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Description"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/description" />
 
+<!--    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/type" />-->
+
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Location"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/location" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Start Date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/start_date" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="End Date"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/end_date" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Terms and Condition"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/terms" />
 
 </LinearLayout>
