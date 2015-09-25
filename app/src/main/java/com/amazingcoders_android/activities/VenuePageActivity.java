@@ -2,19 +2,29 @@ package com.amazingcoders_android.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.adapters.DealAdapter;
 import com.amazingcoders_android.api.BurppleApi;
+import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
+import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.android.volley.VolleyError;
 
+import java.util.Collection;
+
 public class VenuePageActivity extends Activity {
     Long id;
+
+    DealAdapter mAdapter;
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +32,14 @@ public class VenuePageActivity extends Activity {
         setContentView(R.layout.activity_venue_page);
         this.id = getIntent().getLongExtra("id", new Long(0));
         //Log.w("", "This.id = " + this.id.toString());
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
+        mAdapter = new DealAdapter(getApplicationContext(), 0);
+        mRecyclerView.setAdapter(mAdapter);
         loadVenue();
+        loadVenueDeals();
     }
 
     @Override
@@ -72,5 +89,21 @@ public class VenuePageActivity extends Activity {
             }
         };
         BurppleApi.getInstance(this).enqueue(VenueRequest.load(id, listener));
+    }
+
+    public void loadVenueDeals() {
+        CollectionListener<Deal> listener = new CollectionListener<Deal>() {
+            @Override
+            public void onResponse(Collection<Deal> deals) {
+                mAdapter.addAll(deals);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        };
+        BurppleApi.getInstance(this).enqueue(VenueRequest.loadDeals(id, listener));
     }
 }

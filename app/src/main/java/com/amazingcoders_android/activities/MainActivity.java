@@ -19,7 +19,7 @@ public class MainActivity extends BaseActivity {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this,FrontPageActivity.class));
+                startActivity(new Intent(MainActivity.this,VenuesFeedActivity.class));
                 finish();
             }
         };
