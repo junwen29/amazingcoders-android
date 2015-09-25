@@ -1,5 +1,6 @@
 package com.amazingcoders_android.api.requests;
 
+import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Endpoint;
 import com.amazingcoders_android.api.GsonCollectionRequest;
@@ -19,13 +20,13 @@ import java.util.Collection;
 public class VenueRequest {
 
     public static GsonCollectionRequest<Venue> allVenues(CollectionListener<Venue> listener){
-        String url = Endpoint.VENUES;
+        String url = String.format(Endpoint.VENUES, BurppleApi.getAuthToken());
         Type type = new TypeToken<Collection<Venue>>(){}.getType();
         return new GsonCollectionRequest<>(Request.Method.GET, url, type, listener);
     }
 
     public static GsonRequest<Venue> load(Long venueId, Listener<Venue> listener) {
-        String url = String.format(Endpoint.VENUE, venueId);
+        String url = String.format(Endpoint.VENUE, venueId, BurppleApi.getAuthToken());
         return new GsonRequest<>(Request.Method.GET, url, Venue.class, listener);
     }
 

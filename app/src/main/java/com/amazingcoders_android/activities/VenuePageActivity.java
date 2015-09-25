@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,8 +17,12 @@ import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
+import com.amazingcoders_android.views.WishButton;
 import com.amazingcoders_android.views.DealCard;
 import com.android.volley.VolleyError;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import java.util.Collection;
 
@@ -25,7 +30,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class VenuePageActivity extends Activity {
-    Long id;
+
+    @InjectView(R.id.btn_wish)
+    WishButton mWishButton;
+
+    private Venue mVenue;
+    private Long mVenueId;
+
 
     @InjectView(R.id.container)
     LinearLayout mContainer;
@@ -34,28 +45,24 @@ public class VenuePageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_page);
-        this.id = getIntent().getLongExtra("id", new Long(0));
-
         ButterKnife.inject(this);
+
+        mVenueId = getIntent().getLongExtra("id", (long) 0);
+        //Log.w("", "This.id = " + this.id.toString());
         loadVenue();
         loadVenueDeals();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_venue_page, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -67,6 +74,10 @@ public class VenuePageActivity extends Activity {
         Listener<Venue> listener = new Listener<Venue>() {
             @Override
             public void onResponse(Venue venue) {
+                mVenue = venue;
+                mWishButton.setVenue(mVenue);
+                mWishButton.setVisibility(View.VISIBLE);
+
                 TextView name = (TextView) findViewById(R.id.nameTV);
                 name.setText(venue.getName());
                 TextView street = (TextView) findViewById(R.id.streetTV);
@@ -87,7 +98,7 @@ public class VenuePageActivity extends Activity {
             public void onErrorResponse(VolleyError volleyError) {
             }
         };
-        BurppleApi.getInstance(this).enqueue(VenueRequest.load(id, listener));
+        BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
     }
 
     public void loadVenueDeals() {
@@ -115,6 +126,6 @@ public class VenuePageActivity extends Activity {
 
             }
         };
-        BurppleApi.getInstance(this).enqueue(VenueRequest.loadDeals(id, listener));
+        BurppleApi.getInstance(this).enqueue(VenueRequest.loadDeals(mVenueId, listener));
     }
 }
