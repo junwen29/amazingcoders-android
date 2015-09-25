@@ -45,7 +45,7 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_all_active_deals, container, false);
+        View v = inflater.inflate(R.layout.fragment_deal, container, false);
         ButterKnife.inject(this, v);
 
         mRecyclerView.setLayoutManager(mLayoutManager = new LinearLayoutManager(getContext()));
