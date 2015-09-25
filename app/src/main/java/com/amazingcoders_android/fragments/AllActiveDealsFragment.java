@@ -13,7 +13,6 @@ import java.util.Collection;
  */
 public class AllActiveDealsFragment extends DealFragment{
 
-
     @Override
     public void loadDeals() {
         CollectionListener<Deal> listener = new CollectionListener<Deal>() {

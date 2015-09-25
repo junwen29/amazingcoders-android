@@ -54,8 +54,11 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
         initSwipeRefreshLayout();
         loadDeals();
 
+
         return  v;
     }
+
+
 
     private void initSwipeRefreshLayout(){
         mSwipeLayout.setOnRefreshListener(this);
@@ -107,4 +110,11 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
 
     public abstract void loadDeals();
 
+    public DealAdapter getAdapter() {
+        return mAdapter;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
 }

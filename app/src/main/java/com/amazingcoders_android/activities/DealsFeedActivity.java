@@ -6,15 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
+import com.amazingcoders_android.adapters.DealAdapter;
 import com.amazingcoders_android.fragments.AllActiveDealsFragment;
 import com.amazingcoders_android.fragments.DiscountsDealsFragment;
 import com.amazingcoders_android.fragments.FreebiesDealsFragment;
 import com.amazingcoders_android.fragments.PopularDealsFragment;
+import com.amazingcoders_android.fragments.base.DealFragment;
+import com.amazingcoders_android.models.Deal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +29,7 @@ import butterknife.InjectView;
 /**
  * Created by junwen29 on 9/25/2015.
  */
-public class DealsFeedActivity extends NavDrawerActivity{
+public class DealsFeedActivity extends NavDrawerActivity implements SearchView.OnQueryTextListener {
 
     @InjectView(R.id.toolbar)
     public Toolbar toolbar;
@@ -44,6 +48,11 @@ public class DealsFeedActivity extends NavDrawerActivity{
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+
+        // setup menu and search view
+        toolbar.inflateMenu(R.menu.deals_feed);
+        final SearchView searchView = (SearchView) toolbar.getMenu().findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
@@ -66,6 +75,42 @@ public class DealsFeedActivity extends NavDrawerActivity{
         adapter.addFragment(new FreebiesDealsFragment(), "Freebies");
         adapter.addFragment(new PopularDealsFragment(), "Popular");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        int currentFragmentIndex = viewPager.getCurrentItem();
+        Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + currentFragmentIndex);
+        if (page instanceof DealFragment){
+            DealFragment fragment = (DealFragment) page;
+            DealAdapter adapter = fragment.getAdapter();
+            List<Deal> deals = adapter.getAllItems();
+            final List<Deal> filteredDealList = filter(deals,newText);
+            adapter.animateTo(filteredDealList);
+            adapter.notifyDataSetChanged();
+            fragment.getRecyclerView().scrollToPosition(0);
+        }
+
+        return true;
+    }
+
+    private List<Deal> filter(List<Deal> deals, String query) {
+        query = query.toLowerCase();
+
+        final List<Deal> filteredDealList = new ArrayList<>();
+        for (Deal deal : deals) {
+            final String name = deal.getTitle().toLowerCase();
+            if (name.contains(query)) {
+                filteredDealList.add(deal);
+            }
+        }
+
+        return filteredDealList;
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
