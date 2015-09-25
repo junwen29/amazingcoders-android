@@ -3,8 +3,6 @@ package com.amazingcoders_android.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
-import com.amazingcoders_android.adapters.DealAdapter;
 import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
@@ -30,9 +27,6 @@ import butterknife.InjectView;
 public class VenuePageActivity extends Activity {
     Long id;
 
-//    DealAdapter mAdapter;
-//    RecyclerView mRecyclerView;
-
     @InjectView(R.id.container)
     LinearLayout mContainer;
 
@@ -43,13 +37,6 @@ public class VenuePageActivity extends Activity {
         this.id = getIntent().getLongExtra("id", new Long(0));
 
         ButterKnife.inject(this);
-        //Log.w("", "This.id = " + this.id.toString());
-//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-//        LinearLayoutManager llm = new LinearLayoutManager(this);
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-//        mRecyclerView.setLayoutManager(llm);
-//        mAdapter = new DealAdapter(getApplicationContext(), 0);
-//        mRecyclerView.setAdapter(mAdapter);
         loadVenue();
         loadVenueDeals();
     }
@@ -83,17 +70,17 @@ public class VenuePageActivity extends Activity {
                 TextView name = (TextView) findViewById(R.id.nameTV);
                 name.setText(venue.getName());
                 TextView street = (TextView) findViewById(R.id.streetTV);
-                street.setText("Street: " + venue.getStreet());
+                street.setText("Address: " + venue.getStreet());
                 TextView zipcode = (TextView) findViewById(R.id.zipcodeTV);
-                zipcode.setText("Zipcode: " + venue.getZipcode());
+                zipcode.setText("Postal Code: " + venue.getZipcode());
                 TextView bio = (TextView) findViewById(R.id.bioTV);
-                bio.setText("Bio: " + venue.getBio());
+                bio.setText("Description: " + venue.getBio());
                 TextView neighbourhood = (TextView) findViewById(R.id.neighbourhoodTV);
                 neighbourhood.setText("Neighbourhood: " + venue.getNeighbourhood());
                 TextView phone = (TextView) findViewById(R.id.phoneTV);
-                phone.setText("Phone: " + venue.getPhone());
-                TextView contact = (TextView) findViewById(R.id.contact_numberTV);
-                contact.setText("Contact Number: " + venue.getContact_number());
+                phone.setText("Contact Number: " + venue.getPhone());
+                //TextView contact = (TextView) findViewById(R.id.contact_numberTV);
+                //contact.setText("Contact Number: " + venue.getContact_number());
             }
 
             @Override
@@ -107,8 +94,6 @@ public class VenuePageActivity extends Activity {
         CollectionListener<Deal> listener = new CollectionListener<Deal>() {
             @Override
             public void onResponse(Collection<Deal> deals) {
-//                mAdapter.addAll(deals);
-//                mAdapter.notifyDataSetChanged();
 
                 for (final Deal deal : deals){
                     DealCard dealCard = new DealCard(VenuePageActivity.this);
