@@ -1,5 +1,6 @@
 package com.amazingcoders_android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -79,7 +80,11 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+
+        Intent intent = new Intent(this,SearchDealActivity.class);
+        intent.putExtra("query", query);
+        startActivity(intent);
+        return true;
     }
 
     @Override

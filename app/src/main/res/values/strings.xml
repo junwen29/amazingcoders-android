@@ -74,5 +74,8 @@
     <string name="title_activity_deal">DealActivity</string>
     <string name="push_summary">Show all notifications</string>
     <string name="menu_action_search">Search</string>
+    <string name="title_activity_search_deal">SearchDealActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

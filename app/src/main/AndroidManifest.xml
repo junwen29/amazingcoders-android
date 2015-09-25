@@ -6,18 +6,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!--Google Cloud Messaging-->
+    <!-- Google Cloud Messaging -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Burpple" >
-
-        <receiver android:name=".receivers.PushReceiver">
+        <receiver android:name=".receivers.PushReceiver" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
@@ -49,30 +47,35 @@
         <activity
             android:name=".activities.VenuesFeedActivity"
             android:label="@string/title_activity_venues_feed"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.VenuePageActivity"
             android:label="VenuePageActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.DealPageActivity"
             android:label="DealPageActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.DealsFeedActivity"
             android:label="Deals Feed"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
 
-
-
-        <!--services-->
+        <!-- services -->
         <service android:name=".services.UpdateServerService" />
 
-        
+        <activity
+            android:name=".activities.SearchDealActivity"
+            android:label="@string/title_activity_search_deal"
+            android:parentActivityName=".activities.DealsFeedActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.amazingcoders_android.activities.DealsFeedActivity" />
+        </activity>
     </application>
 
 </manifest>
