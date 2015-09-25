@@ -1,23 +1,39 @@
 package com.amazingcoders_android.fragments;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.amazingcoders_android.api.CollectionListener;
+import com.amazingcoders_android.api.requests.DealRequest;
+import com.amazingcoders_android.fragments.base.DealFragment;
+import com.amazingcoders_android.models.Deal;
+import com.android.volley.VolleyError;
 
-import com.amazingcoders_android.R;
+import java.util.Collection;
 
 /**
  * Created by junwen29 on 9/25/2015.
  */
-public class FreebiesDealsFragment extends Fragment {
+public class FreebiesDealsFragment extends DealFragment {
 
     public FreebiesDealsFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_freebies_deals, container, false);
+    public void loadDeals() {
+        CollectionListener<Deal> listener = new CollectionListener<Deal>() {
+            @Override
+            public void onResponse(Collection<Deal> deals) {
+                mSwipeLayout.setRefreshing(false);
+                mAdapter.clear();
+                mAdapter.addAll(deals);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                mSwipeLayout.setRefreshing(false);
+                showErrorMessage();
+            }
+        };
+        mSwipeLayout.setRefreshing(true);
+        getBurppleApi().enqueue(DealRequest.activeDealsByType("freebies", listener));
     }
 }

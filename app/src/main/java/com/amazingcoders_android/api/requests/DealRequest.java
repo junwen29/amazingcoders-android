@@ -11,8 +11,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by junwen29 on 9/15/2015.
@@ -24,30 +22,25 @@ public class DealRequest {
         return new GsonRequest<>(Method.GET, url, Deal.class, listener);
     }
 
-    public static GsonCollectionRequest<Deal> activeDeals(Map<String, String> params, CollectionListener<Deal> listener){
-        String url = Endpoint.DEALS;
+    public static GsonCollectionRequest<Deal> activeDeals(CollectionListener<Deal> listener){
         Type type = new TypeToken<Collection<Deal>>(){}.getType();
-        return new GsonCollectionRequest<>(Method.GET, url, params, type, listener);
+        String url = Endpoint.DEALS;
+        return new GsonCollectionRequest<>(Method.GET, url, type, listener);
+    }
+
+    public static GsonCollectionRequest<Deal> activeDeals(String url, CollectionListener<Deal> listener){
+        Type type = new TypeToken<Collection<Deal>>(){}.getType();
+        return new GsonCollectionRequest<>(Method.GET, url, type, listener);
     }
 
     /**
      * @param listener to return active freebies deals
+     * @param type type of deal to filter
      * @return Request for active freebie deals
      */
-    public static GsonCollectionRequest<Deal> activeFreebiesDeals(CollectionListener<Deal> listener){
-        Map<String, String> params = new HashMap<>();
-        params.put("type", "freebies");
-        return activeDeals(params, listener);
-    }
-
-    /**
-     * @param listener to return active discount deals
-     * @return Request for active discount deals
-     */
-    public static GsonCollectionRequest<Deal> activeDiscountDeals(CollectionListener<Deal> listener){
-        Map<String, String> params = new HashMap<>();
-        params.put("type", "discount");
-        return activeDeals(params, listener);
+    public static GsonCollectionRequest<Deal> activeDealsByType(String type, CollectionListener<Deal> listener){
+        String url = String.format(Endpoint.DEALS_TYPE,type);
+        return activeDeals(url, listener);
     }
 }
 

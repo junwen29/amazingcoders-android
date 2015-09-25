@@ -32,7 +32,6 @@ public class AllActiveDealsFragment extends DealFragment{
             }
         };
         mSwipeLayout.setRefreshing(true);
-        getBurppleApi().enqueue(DealRequest.activeDeals(null, listener));
-
+        getBurppleApi().enqueue(DealRequest.activeDeals(listener));
     }
 }
