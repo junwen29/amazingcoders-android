@@ -14,6 +14,18 @@ import com.android.volley.VolleyError;
  */
 public abstract class BaseFragment extends Fragment {
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((BaseActivity) getActivity()).getBurppleApi().cancel(this);
+        ((BaseActivity) getActivity()).dismissProgressDialog();
+    }
+
     public void showErrorMessage(VolleyError error) {
         error.printStackTrace();
         if (error instanceof NoConnectionError) {
