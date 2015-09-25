@@ -3,12 +3,13 @@ package com.amazingcoders_android.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.amazingcoders_android.sync.Synchronizable;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Yesha on 9/21/2015.
  */
-public class Venue implements Parcelable {
+public class Venue implements Parcelable, Synchronizable {
     @SerializedName("id")
     public final Long id;
     @SerializedName("name")
@@ -33,6 +34,9 @@ public class Venue implements Parcelable {
     public String phone;
     @SerializedName("contact_number")
     public String contact_number;
+    @SerializedName("is_wishlist")
+    private boolean isWishlisted;
+
 
     public Venue() {
         this.id = new Long(0);
@@ -52,6 +56,7 @@ public class Venue implements Parcelable {
         neighbourhood = in.readString();
         phone = in.readString();
         contact_number = in.readString();
+        isWishlisted = in.readByte() != 0x00;
     }
 
     public static final Creator<Venue> CREATOR = new Creator<Venue>() {
@@ -85,6 +90,7 @@ public class Venue implements Parcelable {
         dest.writeString(neighbourhood);
         dest.writeString(phone);
         dest.writeString(contact_number);
+        dest.writeByte((byte) (isWishlisted ? 0x01 : 0x00));
     }
 
     public Long getId() {
@@ -138,4 +144,16 @@ public class Venue implements Parcelable {
         return this.contact_number;
     }
 
+    public boolean isWishlisted() {
+        return isWishlisted;
+    }
+
+    public void setWishlisted(boolean wishlisted) {
+        this.isWishlisted = wishlisted;
+    }
+
+    @Override
+    public long id() {
+        return id;
+    }
 }

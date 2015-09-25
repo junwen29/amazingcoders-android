@@ -37,4 +37,8 @@ public class Endpoint {
     public static final String DEALS = P1_SERVER_URL + "deals";
     public static final String DEALS_TYPE = P1_SERVER_URL + "deals?type=%s";
     public static final String DEAL = P1_SERVER_URL + "deals/%s";
+
+    // Wish
+    public static final String WISH = P1_SERVER_URL + "venues/%s/wishes";
+    public static final String UNWISH = P1_SERVER_URL + "venues/%s/wishes?auth_token=%s";
 }
