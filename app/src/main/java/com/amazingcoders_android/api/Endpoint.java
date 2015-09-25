@@ -30,8 +30,8 @@ public class Endpoint {
 //    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
 
     // Venues
-    public static final String VENUES = P1_SERVER_URL + "venues";
-    public static final String VENUE = P1_SERVER_URL + "venues/%s";
+    public static final String VENUES = P1_SERVER_URL + "venues?auth_token=%s";
+    public static final String VENUE = P1_SERVER_URL + "venues/%s?auth_token=%s";
 
     // Deals
     public static final String DEALS = P1_SERVER_URL + "deals";

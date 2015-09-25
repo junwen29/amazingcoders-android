@@ -39,7 +39,7 @@ public class Venue implements Parcelable, Synchronizable {
 
 
     public Venue() {
-        this.id = new Long(0);
+        this.id = (long) 0;
     }
 
     protected Venue(Parcel in) {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
@@ -11,16 +12,28 @@ import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.models.Venue;
+import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class VenuePageActivity extends Activity {
-    Long id;
+
+    @InjectView(R.id.btn_wish)
+    WishButton mWishButton;
+
+    private Venue mVenue;
+    private Long mVenueId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_page);
-        this.id = getIntent().getLongExtra("id", new Long(0));
+        ButterKnife.inject(this);
+
+        mVenueId = getIntent().getLongExtra("id", (long) 0);
         //Log.w("", "This.id = " + this.id.toString());
         loadVenue();
     }
@@ -51,6 +64,10 @@ public class VenuePageActivity extends Activity {
         Listener<Venue> listener = new Listener<Venue>() {
             @Override
             public void onResponse(Venue venue) {
+                mVenue = venue;
+                mWishButton.setVenue(mVenue);
+                mWishButton.setVisibility(View.VISIBLE);
+
                 TextView name = (TextView) findViewById(R.id.nameTV);
                 name.setText(venue.getName());
                 TextView street = (TextView) findViewById(R.id.streetTV);
@@ -71,6 +88,6 @@ public class VenuePageActivity extends Activity {
             public void onErrorResponse(VolleyError volleyError) {
             }
         };
-        BurppleApi.getInstance(this).enqueue(VenueRequest.load(id, listener));
+        BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
     }
 }
