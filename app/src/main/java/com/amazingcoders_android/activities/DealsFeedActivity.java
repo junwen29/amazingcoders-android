@@ -55,7 +55,7 @@ public class DealsFeedActivity extends NavDrawerActivity{
     @Override
     public void setActiveDrawerItem() {
         //set selected menu
-        mNavigationView.getMenu().getItem(5).setChecked(true);
+        mNavigationView.getMenu().getItem(4).setChecked(true);
         mSelectedDrawerItemId = R.id.navigation_item_5;
     }
 
