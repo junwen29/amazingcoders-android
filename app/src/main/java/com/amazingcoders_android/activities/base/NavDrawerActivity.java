@@ -30,6 +30,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 
     protected ActionBarDrawerToggle mDrawerToggle;
     protected int mSelectedDrawerItemId = -1;
+    protected boolean mShouldInitDrawerToggle = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,8 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 
         initDrawer();
         setupSupportActionBar();
-        initDrawerToggle(mToolbar);
+        if (mShouldInitDrawerToggle)
+            initDrawerToggle(mToolbar);
     }
 
     private void initDrawer() {
