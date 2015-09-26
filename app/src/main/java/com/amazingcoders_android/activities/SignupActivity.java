@@ -68,7 +68,7 @@ public class SignupActivity extends BaseActivity{
         setSupportActionBar(mAppBar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setProgressDialog(ProgressDialogFactory.create(this, R.string.progress_loading));
+        setProgressDialog(ProgressDialogFactory.create(this, R.string.registering_account));
 
         mAction = getIntent().getAction();
         switch (mAction) {
