@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,12 +16,9 @@ import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
-import com.amazingcoders_android.views.WishButton;
 import com.amazingcoders_android.views.DealCard;
+import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 import java.util.Collection;
 
@@ -90,6 +86,8 @@ public class VenuePageActivity extends Activity {
                 phone.setText("Contact Number: " + venue.getPhone());
                 //TextView contact = (TextView) findViewById(R.id.contact_numberTV);
                 //contact.setText("Contact Number: " + venue.getContact_number());
+                TextView dealsOfferedTV = (TextView) findViewById(R.id.dealsOffered);
+                dealsOfferedTV.setText("Deals Offered:");
             }
 
             @Override

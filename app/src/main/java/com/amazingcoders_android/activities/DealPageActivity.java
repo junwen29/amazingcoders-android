@@ -89,6 +89,8 @@ public class DealPageActivity extends AppCompatActivity {
                 end_date.setText("Expiry Date: " + deal.getExpiry());
                 TextView terms = (TextView) findViewById(R.id.terms);
                 terms.setText("Term and Conditions: " + deal.getTerms());
+                TextView offeredAtTV = (TextView) findViewById(R.id.offeredAt);
+                offeredAtTV.setText("Offered at:");
             }
 
             @Override
@@ -111,7 +113,7 @@ public class DealPageActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(DealPageActivity.this, VenuePageActivity.class);
-                            intent.putExtra("venue_id", venue.id);
+                            intent.putExtra("id", venue.id);
                             startActivity(intent);
                         }
                     });
