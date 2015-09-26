@@ -6,6 +6,10 @@ import android.os.Parcelable;
 import com.amazingcoders_android.sync.Synchronizable;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by junwen29 on 9/15/2015.
  */
@@ -101,11 +105,27 @@ public class Deal implements Parcelable, Synchronizable {
     }
 
     public String getStart() {
-        return start;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = formatter.parse(start);
+            formatter.applyPattern("dd MMM yyyy");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter.format(date);
     }
 
     public String getExpiry() {
-        return expiry;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = formatter.parse(expiry);
+            formatter.applyPattern("dd MMM yyyy");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter.format(date);
     }
 
     public void setTitle(String title) {
