@@ -66,7 +66,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     @Override
     public void setActiveDrawerItem() {
         //set selected menu
-        mNavigationView.getMenu().getItem(4).setChecked(true);
+        mNavigationView.getMenu().getItem(1).setChecked(true);
         mSelectedDrawerItemId = R.id.navigation_item_5;
     }
 

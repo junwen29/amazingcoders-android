@@ -78,18 +78,18 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         else {
             switch (id) {
 
-                case R.id.navigation_item_1:
-                    break;
+//                case R.id.navigation_item_1:
+//                    break;
                 case R.id.navigation_item_2:
                     startActivity(new Intent(this, VenuesFeedActivity.class));
                     break;
-                case R.id.navigation_item_3:
-                    break;
-                case R.id.navigation_item_4:
-                case R.id.navigation_sub_item_1:
-                case R.id.navigation_sub_item_2:
-                    mDrawerLayout.closeDrawers();
-                    break;
+//                case R.id.navigation_item_3:
+//                    break;
+//                case R.id.navigation_item_4:
+//                case R.id.navigation_sub_item_1:
+//                case R.id.navigation_sub_item_2:
+//                    mDrawerLayout.closeDrawers();
+//                    break;
                 case R.id.navigation_sub_item_3:
                     showLogoutPrompt();
                     break;

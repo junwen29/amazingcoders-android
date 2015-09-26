@@ -67,7 +67,8 @@
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="@dimen/btn_frontpage_margin"
         android:layout_marginRight="@dimen/btn_frontpage_margin"
-        android:text="@string/login_google"/>
+        android:text="@string/login_google"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/button_facebook"
@@ -79,6 +80,7 @@
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="@dimen/btn_frontpage_margin"
         android:layout_marginRight="@dimen/btn_frontpage_margin"
-        android:text="@string/login_facebook"/>
+        android:text="@string/login_facebook"
+        android:visibility="gone"/>
 
 </RelativeLayout>
