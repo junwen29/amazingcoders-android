@@ -9,14 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import com.amazingcoders_android.R;
-import com.amazingcoders_android.activities.DealActivity;
+import com.amazingcoders_android.activities.DealPageActivity;
 import com.amazingcoders_android.activities.MainActivity;
 import com.amazingcoders_android.helpers.NotificationStore;
 import com.amazingcoders_android.models.Deal;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Created by junwen29 on 9/22/2015.
@@ -65,25 +65,32 @@ public class PushReceiver extends BroadcastReceiver {
         }
 
         String eventLabel = null;
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+
         if (itemType == null) {
             itemType = "";
         }
         //enter deal activity directly
         else if (itemType.equals("deal")) {
-            int dealId = Integer.valueOf(extras.getString("item_id","0"));
+            Long dealId = Long.parseLong(extras.getString("item_id","0"));
             if (dealId != 0) {
-                Deal deal = new Deal(dealId);
-                deal.setTitle(extras.getString("item_title"));
-                notificationIntent = new Intent(context, DealActivity.class);
-                notificationIntent.putExtra("deal", deal).putExtra("featured", true);
+//                Deal deal = new Deal(dealId);
+//                deal.setTitle(extras.getString("item_title"));
+                notificationIntent = new Intent(context, DealPageActivity.class);
+                // TODO track deal is pushed by food merchant
+                notificationIntent
+                        .putExtra("deal_id", dealId)
+                        .putExtra("featured", true);
                 eventLabel = latest;
             }
         }
+
 
         if (notificationIntent == null) {
             notificationIntent = new Intent(context, MainActivity.class);
             notificationIntent.putExtra("new_notification", true);
             eventLabel = "item_type: " + itemType;
+//            stackBuilder.addParentStack(MainActivity.class);
         }
         notificationIntent.putExtra(FROM_NOTIFICATION_EXTRA, true)
                 .putExtra(MESSAGE_EXTRA, eventLabel);
