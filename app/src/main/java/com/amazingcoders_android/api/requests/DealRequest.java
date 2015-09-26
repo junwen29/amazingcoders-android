@@ -7,6 +7,8 @@ import com.amazingcoders_android.api.GsonCollectionRequest;
 import com.amazingcoders_android.api.GsonRequest;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.models.Deal;
+import com.amazingcoders_android.models.Venue;
+import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.google.gson.reflect.TypeToken;
 
@@ -42,6 +44,12 @@ public class DealRequest {
     public static GsonCollectionRequest<Deal> activeDealsByType(String type, CollectionListener<Deal> listener){
         String url = String.format(Endpoint.DEALS_TYPE,type,BurppleApi.getAuthToken());
         return activeDeals(url, listener);
+    }
+
+    public static GsonCollectionRequest<Venue> loadVenues(Long dealId, CollectionListener<Venue> listener) {
+        String url = String.format(Endpoint.VENUES_FOR_DEAL, dealId, BurppleApi.getAuthToken());
+        Type type = new TypeToken<Collection<Venue>>(){}.getType();
+        return new GsonCollectionRequest<>(Request.Method.GET, url, type, listener);
     }
 }
 

@@ -32,6 +32,7 @@ public class Endpoint {
     // Venues
     public static final String VENUES = P1_SERVER_URL + "venues?auth_token=%s";
     public static final String VENUE = P1_SERVER_URL + "venues/%s?auth_token=%s";
+    public static final String VENUES_FOR_DEAL = P1_SERVER_URL + "deals/venues/%s?auth_token=%s";
 
     // Deals
     public static final String DEALS = P1_SERVER_URL + "deals?auth_token=s";

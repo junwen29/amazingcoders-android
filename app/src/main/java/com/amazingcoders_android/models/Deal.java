@@ -6,6 +6,10 @@ import android.os.Parcelable;
 import com.amazingcoders_android.sync.Synchronizable;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by junwen29 on 9/15/2015.
  */
@@ -19,13 +23,11 @@ public class Deal implements Parcelable, Synchronizable {
     private String type;
     @SerializedName("description")
     private String description;
-    @SerializedName("location")
-    private String location;
     @SerializedName("t_c")
     private String terms;
     @SerializedName("num_of_redeems")
     private int num_of_redeems;
-    @SerializedName("start_dsate")
+    @SerializedName("start_date")
     private String start;
     @SerializedName("expiry_date")
     private String expiry;
@@ -45,7 +47,6 @@ public class Deal implements Parcelable, Synchronizable {
         title = in.readString();
         type = in.readString();
         description = in.readString();
-        location = in.readString();
         terms = in.readString();
         num_of_redeems = in.readInt();
         start = in.readString();
@@ -76,7 +77,6 @@ public class Deal implements Parcelable, Synchronizable {
         dest.writeString(title);
         dest.writeString(type);
         dest.writeString(description);
-        dest.writeString(location);
         dest.writeString(terms);
         dest.writeInt(num_of_redeems);
         dest.writeString(start);
@@ -96,10 +96,6 @@ public class Deal implements Parcelable, Synchronizable {
         return description;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
     public String getTerms() {
         return terms;
     }
@@ -109,11 +105,27 @@ public class Deal implements Parcelable, Synchronizable {
     }
 
     public String getStart() {
-        return start;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = formatter.parse(start);
+            formatter.applyPattern("dd MMM yyyy");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter.format(date);
     }
 
     public String getExpiry() {
-        return expiry;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = formatter.parse(expiry);
+            formatter.applyPattern("dd MMM yyyy");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter.format(date);
     }
 
     public void setTitle(String title) {
