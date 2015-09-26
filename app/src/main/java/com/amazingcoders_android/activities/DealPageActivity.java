@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
@@ -11,17 +12,26 @@ import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.DealRequest;
 import com.amazingcoders_android.models.Deal;
+import com.amazingcoders_android.views.BookmarkButton;
 import com.android.volley.VolleyError;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class DealPageActivity extends AppCompatActivity {
 
-//    Deal mDeal;
+    @InjectView(R.id.btn_bookmark)
+    BookmarkButton mBookmarkButton;
+
+    private Deal mDeal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_page);
+        ButterKnife.inject(this);
+
         Long dealId = getIntent().getLongExtra("deal_id",0);
         loadDeal(dealId);
     }
@@ -52,6 +62,10 @@ public class DealPageActivity extends AppCompatActivity {
         Listener<Deal> listener = new Listener<Deal>() {
             @Override
             public void onResponse(Deal deal)  {
+                mDeal = deal;
+                mBookmarkButton.setDeal(mDeal);
+                mBookmarkButton.setVisibility(View.VISIBLE);
+
                 TextView title = (TextView) findViewById(R.id.dealTitle);
                 title.setText(deal.getTitle());
                 //TextView type = (TextView) findViewById(R.id.type);

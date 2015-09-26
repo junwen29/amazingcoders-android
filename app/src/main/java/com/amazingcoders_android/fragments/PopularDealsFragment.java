@@ -13,6 +13,8 @@ import java.util.Collection;
  */
 public class PopularDealsFragment extends DealFragment {
 
+    public static final String TYPE = "popular";
+
     public PopularDealsFragment() {
     }
 
@@ -34,6 +36,6 @@ public class PopularDealsFragment extends DealFragment {
             }
         };
         mSwipeLayout.setRefreshing(true);
-        getBurppleApi().enqueue(DealRequest.activeDealsByType("popular", listener));
+        getBurppleApi().enqueue(DealRequest.activeDealsByType(TYPE, listener));
     }
 }

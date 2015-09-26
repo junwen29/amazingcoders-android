@@ -15,6 +15,7 @@ import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
 import com.amazingcoders_android.adapters.DealAdapter;
 import com.amazingcoders_android.fragments.AllActiveDealsFragment;
+import com.amazingcoders_android.fragments.BookmarkDealsFragment;
 import com.amazingcoders_android.fragments.DiscountsDealsFragment;
 import com.amazingcoders_android.fragments.FreebiesDealsFragment;
 import com.amazingcoders_android.fragments.PopularDealsFragment;
@@ -75,6 +76,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         adapter.addFragment(new DiscountsDealsFragment(), "Discounts");
         adapter.addFragment(new FreebiesDealsFragment(), "Freebies");
         adapter.addFragment(new PopularDealsFragment(), "Popular");
+        adapter.addFragment(new BookmarkDealsFragment(), "Bookmarks");
         viewPager.setAdapter(adapter);
     }
 

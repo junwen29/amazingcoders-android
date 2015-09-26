@@ -33,13 +33,11 @@ public class VenuePageActivity extends Activity {
 
     @InjectView(R.id.btn_wish)
     WishButton mWishButton;
+    @InjectView(R.id.container)
+    LinearLayout mContainer;
 
     private Venue mVenue;
     private Long mVenueId;
-
-
-    @InjectView(R.id.container)
-    LinearLayout mContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

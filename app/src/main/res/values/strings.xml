@@ -79,5 +79,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="wish_add">Add to Wishlist</string>
     <string name="wish_remove">In Your Wishlist</string>
+    <string name="bookmark_add">Add to Bookmarks</string>
+    <string name="bookmark_remove">In Your Bookmarks</string>
 
 </resources>

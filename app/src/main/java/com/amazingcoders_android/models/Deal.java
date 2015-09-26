@@ -3,12 +3,13 @@ package com.amazingcoders_android.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.amazingcoders_android.sync.Synchronizable;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by junwen29 on 9/15/2015.
  */
-public class Deal implements Parcelable{
+public class Deal implements Parcelable, Synchronizable {
 
     @SerializedName("id")
     public final long id;
@@ -28,6 +29,8 @@ public class Deal implements Parcelable{
     private String start;
     @SerializedName("expiry_date")
     private String expiry;
+    @SerializedName("is_bookmarked")
+    private boolean isBookmarked;
 
     public Deal(long id) {
         this.id = id;
@@ -47,6 +50,7 @@ public class Deal implements Parcelable{
         num_of_redeems = in.readInt();
         start = in.readString();
         expiry = in.readString();
+        isBookmarked = in.readByte() != 0x00;
     }
 
     public static final Creator<Deal> CREATOR = new Creator<Deal>() {
@@ -77,6 +81,7 @@ public class Deal implements Parcelable{
         dest.writeInt(num_of_redeems);
         dest.writeString(start);
         dest.writeString(expiry);
+        dest.writeByte((byte) (isBookmarked? 0x01 : 0x00));
     }
 
     public String getTitle() {
@@ -113,6 +118,19 @@ public class Deal implements Parcelable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        this.isBookmarked = bookmarked;
+    }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    @Override
+    public long id() {
+        return id;
     }
 }
 
