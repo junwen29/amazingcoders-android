@@ -31,7 +31,7 @@ public class VenueRequest {
     }
 
     public static GsonCollectionRequest<Deal>loadDeals(Long venueId, CollectionListener<Deal> listener) {
-        String url = String.format(Endpoint.DEALS_FOR_VENUE, venueId);
+        String url = String.format(Endpoint.DEALS_FOR_VENUE, venueId, BurppleApi.getAuthToken());
         Type type = new TypeToken<Collection<Deal>>(){}.getType();
         return new GsonCollectionRequest<>(Request.Method.GET, url, type, listener);
     }
