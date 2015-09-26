@@ -8,12 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.WakefulBroadcastReceiver;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.DealPageActivity;
 import com.amazingcoders_android.activities.MainActivity;
 import com.amazingcoders_android.helpers.NotificationStore;
-import com.amazingcoders_android.models.Deal;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Created by junwen29 on 9/22/2015.
  */
-public class PushReceiver extends BroadcastReceiver {
+public class PushReceiver extends WakefulBroadcastReceiver {
 
     public static final String FROM_NOTIFICATION_EXTRA = "from_notification";
     public static final String MESSAGE_EXTRA = "message";
@@ -49,7 +49,7 @@ public class PushReceiver extends BroadcastReceiver {
 
         // Only store 4 previous messages TODO weird implementation here as it only ignores the first message if unread messages is more than 4
         for (int i = unreadMessages.length > 4 ? 1 : 0; i < unreadMessages.length; i++) {
-            inboxStyle.addLine(unreadMessages[i]);
+//            inboxStyle.addLine(unreadMessages[i]); TODO remove as there is no other notification types yet
             stored.add(unreadMessages[i]);
         }
         String latest = intent.getStringExtra("message");
@@ -72,7 +72,7 @@ public class PushReceiver extends BroadcastReceiver {
         }
         //enter deal activity directly
         else if (itemType.equals("deal")) {
-            Long dealId = Long.parseLong(extras.getString("item_id","0"));
+            Long dealId = Long.parseLong(extras.getString("item_id", "0"));
             if (dealId != 0) {
 //                Deal deal = new Deal(dealId);
 //                deal.setTitle(extras.getString("item_title"));
@@ -101,11 +101,18 @@ public class PushReceiver extends BroadcastReceiver {
         // configure the notification builder
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle(context.getString(R.string.app_name))
+                .setContentTitle(extras != null ? extras.getString("item_name") : context.getResources().getString(R.string.app_name))
                 .setNumber(unreadCount)
                 .setContentText(latest)
                 .setContentIntent(pendingIntent)
                 .setStyle(inboxStyle);
+
+        //long[] vibration = {0, 50, 100, 50};
+//        if (latest != null && latest.contains("comment")) {
+        builder.setDefaults(Notification.DEFAULT_ALL);
+//        } else {
+//            builder.setVibrate(null);
+//        }
 
         // build the notification
         Notification notification = builder.build();
