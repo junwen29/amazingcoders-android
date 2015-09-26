@@ -9,13 +9,13 @@ import com.android.volley.VolleyError;
 import java.util.Collection;
 
 /**
- * Created by junwen29 on 9/25/2015.
+ * Created by junwen29 on 9/26/2015.
  */
-public class FreebiesDealsFragment extends DealFragment {
+public class BookmarkDealsFragment extends DealFragment {
 
-    public static final String TYPE = "freebies";
+    public static final String TYPE = "bookmark";
 
-    public FreebiesDealsFragment() {
+    public BookmarkDealsFragment() {
     }
 
     @Override

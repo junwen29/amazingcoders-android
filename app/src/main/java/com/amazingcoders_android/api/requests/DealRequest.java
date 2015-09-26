@@ -1,5 +1,6 @@
 package com.amazingcoders_android.api.requests;
 
+import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Endpoint;
 import com.amazingcoders_android.api.GsonCollectionRequest;
@@ -18,13 +19,13 @@ import java.util.Collection;
 public class DealRequest {
 
     public static GsonRequest<Deal> load(Long dealId, Listener<Deal> listener) {
-        String url = String.format(Endpoint.DEAL, dealId);
+        String url = String.format(Endpoint.DEAL, dealId, BurppleApi.getAuthToken());
         return new GsonRequest<>(Method.GET, url, Deal.class, listener);
     }
 
     public static GsonCollectionRequest<Deal> activeDeals(CollectionListener<Deal> listener){
         Type type = new TypeToken<Collection<Deal>>(){}.getType();
-        String url = Endpoint.DEALS;
+        String url = String.format(Endpoint.DEALS, BurppleApi.getAuthToken());
         return new GsonCollectionRequest<>(Method.GET, url, type, listener);
     }
 
@@ -39,7 +40,7 @@ public class DealRequest {
      * @return Request for active freebie deals
      */
     public static GsonCollectionRequest<Deal> activeDealsByType(String type, CollectionListener<Deal> listener){
-        String url = String.format(Endpoint.DEALS_TYPE,type);
+        String url = String.format(Endpoint.DEALS_TYPE,type,BurppleApi.getAuthToken());
         return activeDeals(url, listener);
     }
 }

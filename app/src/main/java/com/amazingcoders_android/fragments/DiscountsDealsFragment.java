@@ -12,6 +12,9 @@ import java.util.Collection;
  * Created by junwen29 on 9/25/2015.
  */
 public class DiscountsDealsFragment extends DealFragment {
+
+    public static final String TYPE = "discount";
+
     public DiscountsDealsFragment() {
     }
 
@@ -33,6 +36,6 @@ public class DiscountsDealsFragment extends DealFragment {
             }
         };
         mSwipeLayout.setRefreshing(true);
-        getBurppleApi().enqueue(DealRequest.activeDealsByType("discount",listener));
+        getBurppleApi().enqueue(DealRequest.activeDealsByType(TYPE,listener));
     }
 }
