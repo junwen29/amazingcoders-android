@@ -9,10 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.volley.VolleyError;
-
-import java.util.Collection;
-
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
 import com.amazingcoders_android.adapters.VenueAdapter;
@@ -20,6 +16,10 @@ import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.models.Venue;
+import com.android.volley.VolleyError;
+
+import java.util.Collection;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -51,7 +51,7 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
     @Override
     public void setActiveDrawerItem() {
         //set selected menu
-        mNavigationView.getMenu().getItem(2).setChecked(true);
+        mNavigationView.getMenu().getItem(1).setChecked(true);
         mSelectedDrawerItemId = R.id.navigation_item_2;
     }
 
