@@ -18,7 +18,8 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:gravity="center"
                 android:id="@+id/nameTV"
                 android:textColor="@color/burpple_red"
@@ -26,32 +27,52 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:id="@+id/bioTV"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:id="@+id/neighbourhoodTV"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:id="@+id/streetTV"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:id="@+id/zipcodeTV"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:id="@+id/phoneTV"/>
+
+            <com.amazingcoders_android.views.WishButton
+                android:id="@+id/btn_wish"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/btn_green"
+                android:textColor="@color/white"
+                android:textOff="@string/wish_add"
+                android:textOn="@string/wish_remove"
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
                 android:gravity="center"
                 android:text="Deals offered:"
                 android:textColor="@color/burpple_red"
@@ -59,20 +80,7 @@
 
         </LinearLayout>
 
-        <com.amazingcoders_android.views.WishButton
-            android:id="@+id/btn_wish"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/btn_green"
-            android:textColor="@color/white"
-            android:textOff="@string/wish_add"
-            android:textOn="@string/wish_remove"
-            android:textStyle="bold"
-            android:visibility="gone"/>
-        
+
     </RelativeLayout>
 
 </ScrollView>
