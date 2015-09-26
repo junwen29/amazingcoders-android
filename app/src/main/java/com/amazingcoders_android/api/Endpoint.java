@@ -1,8 +1,6 @@
 package com.amazingcoders_android.api;
 
 
-import com.amazingcoders_android.BuildConfig;
-
 /**
  * Created by junwen29 on 9/15/2015.
  */
@@ -32,6 +30,7 @@ public class Endpoint {
     // Venues
     public static final String VENUES = P1_SERVER_URL + "venues?auth_token=%s";
     public static final String VENUE = P1_SERVER_URL + "venues/%s?auth_token=%s";
+    public static final String VENUES_FOR_DEAL = P1_SERVER_URL + "deals/venues/%s?auth_token=%s";
 
     // Deals
     public static final String DEALS = P1_SERVER_URL + "deals?auth_token=s";

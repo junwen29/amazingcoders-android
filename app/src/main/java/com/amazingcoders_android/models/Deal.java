@@ -19,8 +19,6 @@ public class Deal implements Parcelable, Synchronizable {
     private String type;
     @SerializedName("description")
     private String description;
-    @SerializedName("location")
-    private String location;
     @SerializedName("t_c")
     private String terms;
     @SerializedName("num_of_redeems")
@@ -45,7 +43,6 @@ public class Deal implements Parcelable, Synchronizable {
         title = in.readString();
         type = in.readString();
         description = in.readString();
-        location = in.readString();
         terms = in.readString();
         num_of_redeems = in.readInt();
         start = in.readString();
@@ -76,7 +73,6 @@ public class Deal implements Parcelable, Synchronizable {
         dest.writeString(title);
         dest.writeString(type);
         dest.writeString(description);
-        dest.writeString(location);
         dest.writeString(terms);
         dest.writeInt(num_of_redeems);
         dest.writeString(start);
@@ -94,10 +90,6 @@ public class Deal implements Parcelable, Synchronizable {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getLocation() {
-        return location;
     }
 
     public String getTerms() {

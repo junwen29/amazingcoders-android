@@ -1,19 +1,26 @@
 package com.amazingcoders_android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.api.BurppleApi;
+import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.DealRequest;
 import com.amazingcoders_android.models.Deal;
+import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.BookmarkButton;
+import com.amazingcoders_android.views.VenueCard;
 import com.android.volley.VolleyError;
+
+import java.util.Collection;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -23,8 +30,11 @@ public class DealPageActivity extends AppCompatActivity {
 
     @InjectView(R.id.btn_bookmark)
     BookmarkButton mBookmarkButton;
+    @InjectView(R.id.container)
+    LinearLayout mContainer;
 
     private Deal mDeal;
+    private Long dealId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +42,9 @@ public class DealPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deal_page);
         ButterKnife.inject(this);
 
-
-
-        Long dealId = getIntent().getLongExtra("deal_id",0);
+        dealId = getIntent().getLongExtra("deal_id",0);
         loadDeal(dealId);
+        loadDealVenues();
     }
 
     @Override
@@ -74,8 +83,6 @@ public class DealPageActivity extends AppCompatActivity {
                 //type.setText(deal.getType());
                 TextView description = (TextView) findViewById(R.id.description);
                 description.setText("Description: " + deal.getDescription());
-                TextView location = (TextView) findViewById(R.id.location);
-                location.setText("Location: " + deal.getLocation());
                 TextView start_date = (TextView) findViewById(R.id.start_date);
                 start_date.setText("Start Date: " + deal.getStart());
                 TextView end_date = (TextView) findViewById(R.id.end_date);
@@ -90,5 +97,33 @@ public class DealPageActivity extends AppCompatActivity {
             }
         };
         BurppleApi.getInstance(this).enqueue(DealRequest.load(id, listener));
+    }
+
+    public void loadDealVenues() {
+        CollectionListener<Venue> listener = new CollectionListener<Venue>() {
+            @Override
+            public void onResponse(Collection<Venue> venues) {
+
+                for (final Venue venue : venues){
+                    VenueCard venueCard = new VenueCard(DealPageActivity.this);
+                    venueCard.update(venue);
+                    venueCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(DealPageActivity.this, VenuePageActivity.class);
+                            intent.putExtra("venue_id", venue.id);
+                            startActivity(intent);
+                        }
+                    });
+                    mContainer.addView(venueCard);
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        };
+        BurppleApi.getInstance(this).enqueue(DealRequest.loadVenues(dealId, listener));
     }
 }
