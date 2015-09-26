@@ -49,7 +49,7 @@ public class PushReceiver extends WakefulBroadcastReceiver {
 
         // Only store 4 previous messages TODO weird implementation here as it only ignores the first message if unread messages is more than 4
         for (int i = unreadMessages.length > 4 ? 1 : 0; i < unreadMessages.length; i++) {
-            inboxStyle.addLine(unreadMessages[i]);
+//            inboxStyle.addLine(unreadMessages[i]); TODO remove as there is no other notification types yet
             stored.add(unreadMessages[i]);
         }
         String latest = intent.getStringExtra("message");
@@ -101,7 +101,7 @@ public class PushReceiver extends WakefulBroadcastReceiver {
         // configure the notification builder
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.notification_icon)
-                .setContentTitle(context.getString(R.string.app_name))
+                .setContentTitle(extras != null ? extras.getString("item_name") : context.getResources().getString(R.string.app_name))
                 .setNumber(unreadCount)
                 .setContentText(latest)
                 .setContentIntent(pendingIntent)
