@@ -23,7 +23,7 @@ public class Deal implements Parcelable, Synchronizable {
     private String terms;
     @SerializedName("num_of_redeems")
     private int num_of_redeems;
-    @SerializedName("start_dsate")
+    @SerializedName("start_date")
     private String start;
     @SerializedName("expiry_date")
     private String expiry;
