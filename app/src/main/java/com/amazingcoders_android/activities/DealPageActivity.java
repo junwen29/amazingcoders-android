@@ -32,6 +32,8 @@ public class DealPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deal_page);
         ButterKnife.inject(this);
 
+
+
         Long dealId = getIntent().getLongExtra("deal_id",0);
         loadDeal(dealId);
     }
