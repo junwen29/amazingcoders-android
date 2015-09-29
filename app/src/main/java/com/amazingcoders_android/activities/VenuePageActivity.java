@@ -1,8 +1,9 @@
 package com.amazingcoders_android.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
@@ -25,12 +27,15 @@ import java.util.Collection;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class VenuePageActivity extends Activity {
+public class VenuePageActivity extends BaseActivity {
 
     @InjectView(R.id.btn_wish)
     WishButton mWishButton;
     @InjectView(R.id.container)
     LinearLayout mContainer;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
+
 
     private Venue mVenue;
     private Long mVenueId;
@@ -40,6 +45,13 @@ public class VenuePageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_venue_page);
         ButterKnife.inject(this);
+
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         mVenueId = getIntent().getLongExtra("id", (long) 0);
         //Log.w("", "This.id = " + this.id.toString());

@@ -2,7 +2,8 @@ package com.amazingcoders_android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
@@ -26,12 +28,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class DealPageActivity extends AppCompatActivity {
+public class DealPageActivity extends BaseActivity {
 
     @InjectView(R.id.btn_bookmark)
     BookmarkButton mBookmarkButton;
     @InjectView(R.id.container)
     LinearLayout mContainer;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private Deal mDeal;
     private Long dealId;
@@ -41,6 +45,13 @@ public class DealPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deal_page);
         ButterKnife.inject(this);
+
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         dealId = getIntent().getLongExtra("deal_id",0);
         loadDeal(dealId);

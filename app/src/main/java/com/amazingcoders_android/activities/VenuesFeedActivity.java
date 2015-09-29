@@ -2,6 +2,7 @@ package com.amazingcoders_android.activities;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -36,6 +37,7 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         View v = getLayoutInflater().inflate(R.layout.activity_venues_feed, mContainer, true);
         ButterKnife.inject(this, v);
 
@@ -46,6 +48,11 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
     @Override
     public void setupSupportActionBar() {
         setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
     }
 
     @Override
