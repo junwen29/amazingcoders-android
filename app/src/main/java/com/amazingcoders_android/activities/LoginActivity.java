@@ -91,7 +91,7 @@ public class LoginActivity extends BaseActivity {
                 if (ps.isNewbie()){
                     ps.setNotNewbie();
                 }
-                startActivity(new Intent(LoginActivity.this, DealsFeedActivity.class));
+                startActivity(new Intent(LoginActivity.this, VenuesFeedActivity.class));
                 finish();
             }
 

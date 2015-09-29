@@ -116,7 +116,7 @@ public class FrontPageActivity extends BaseActivity {
     }
 
     private void goToMain() {
-        startActivity(new Intent(this, DealsFeedActivity.class));
+        startActivity(new Intent(this, VenuesFeedActivity.class));
         finish();
     }
 
@@ -149,7 +149,7 @@ public class FrontPageActivity extends BaseActivity {
 
         if (requestCode == REQ_SIGNUP) {
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(this, DealsFeedActivity.class));
+                startActivity(new Intent(this, VenuesFeedActivity.class));
                 registerGCM();
                 finish();
             }
