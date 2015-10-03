@@ -43,7 +43,7 @@ public class PushReceiver extends WakefulBroadcastReceiver {
 
         // Set inbox style
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        inboxStyle.setSummaryText(context.getString(R.string.push_summary));
+//        inboxStyle.setSummaryText(context.getString(R.string.push_summary));
         Set<String> stored = new LinkedHashSet<>();
 
         // Only store 4 previous messages TODO weird implementation here as it only ignores the first message if unread messages is more than 4
