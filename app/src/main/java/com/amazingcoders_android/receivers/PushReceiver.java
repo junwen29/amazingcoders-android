@@ -3,7 +3,6 @@ package com.amazingcoders_android.receivers;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -102,7 +101,7 @@ public class PushReceiver extends WakefulBroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(extras != null ? extras.getString("item_name") : context.getResources().getString(R.string.app_name))
-                .setNumber(unreadCount)
+//                .setNumber(unreadCount)
                 .setContentText(latest)
                 .setContentIntent(pendingIntent)
                 .setStyle(inboxStyle);
