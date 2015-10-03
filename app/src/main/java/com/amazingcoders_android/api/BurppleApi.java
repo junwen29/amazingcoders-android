@@ -99,9 +99,7 @@ public class BurppleApi {
      * @param context
      */
     public void initAuthToken(Context context) {
-        if (TextUtils.isEmpty(mAuthToken)) {
-            mAuthToken = new PreferencesStore(context).getAuthToken();
-        }
+        mAuthToken = new PreferencesStore(context.getApplicationContext()).getAuthToken();
     }
 
     public void initUserAgent(Context context) {

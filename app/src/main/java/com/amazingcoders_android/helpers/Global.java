@@ -76,5 +76,6 @@ public class Global {
     public void reset() {
         mOwner = null;
         mOwnerId = 0;
+        sInstance = null;
     }
 }
