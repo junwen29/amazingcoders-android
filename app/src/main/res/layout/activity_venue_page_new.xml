@@ -60,24 +60,46 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Venue Details"
+                android:layout_margin="4dp"
+                style="@style/Text.Ash.Bold"/>
+
             <com.amazingcoders_android.views.VenueDetailsCard
                 android:id="@+id/card_venue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/CardView"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/container"
+                style="@style/CardView">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Deal(s)"
+                    android:paddingBottom="4dp"
+                    style="@style/Text.Ash.Bold"/>
+
+            </LinearLayout>
+
             <com.amazingcoders_android.views.WishButton
                 android:id="@+id/btn_wish"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:background="@drawable/btn_green"
                 android:textColor="@color/white"
                 android:textOff="@string/wish_add"
                 android:textOn="@string/wish_remove"
                 android:textStyle="bold"
+                style="@style/CardView"
                 android:visibility="gone"/>
 
         </LinearLayout>
