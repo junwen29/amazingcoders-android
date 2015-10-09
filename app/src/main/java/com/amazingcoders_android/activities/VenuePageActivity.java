@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
@@ -50,7 +49,7 @@ public class VenuePageActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_venue_page);
-        setContentView(R.layout.activity_venue_page_new);
+        setContentView(R.layout.activity_venue_page);
         ButterKnife.inject(this);
 
         setSupportActionBar(mToolbar);
