@@ -38,6 +38,7 @@ public class FrontPageActivity extends BaseActivity {
     private static final int REQ_VERIFY_ACCOUNT = 4002;
 //    private static final int REQ_FACEBOOK = 4003;
 //    private static final int REQ_GOOGLE = 4004;
+    private static final int REQ_LOGIN = 4005;
 
     public enum SessionState {
         LOGGED_OUT,
@@ -132,8 +133,7 @@ public class FrontPageActivity extends BaseActivity {
 
     @OnClick(R.id.button_login)
     public void onLoginClick() {
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+        startActivityForResult(new Intent(this, LoginActivity.class), REQ_LOGIN);
     }
 
     @OnClick(R.id.button_signup)
@@ -147,12 +147,21 @@ public class FrontPageActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQ_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-                startActivity(new Intent(this, VenuesFeedActivity.class));
-                registerGCM();
-                finish();
+        if (resultCode == RESULT_OK) {
+            switch (requestCode){
+                case REQ_SIGNUP:
+                    startActivity(new Intent(this, VenuesFeedActivity.class));
+                    finish();
+                    break;
+                case REQ_LOGIN:
+                    startActivity(new Intent(this, VenuesFeedActivity.class));
+                    finish();
+                    break;
+                default:
+                    //do nothing
             }
+            //register GCM no matter login or signup
+            registerGCM();
         }
     }
 

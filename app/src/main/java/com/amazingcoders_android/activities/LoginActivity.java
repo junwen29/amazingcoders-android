@@ -87,11 +87,11 @@ public class LoginActivity extends BaseActivity {
             public void onResponse(Owner owner) {
                 dismissProgressDialog();
                 Global.with(LoginActivity.this).updateOwner(owner);
-                PreferencesStore ps = new PreferencesStore(getBaseContext());
+                PreferencesStore ps = new PreferencesStore(LoginActivity.this.getApplicationContext()); //use application context
                 if (ps.isNewbie()){
                     ps.setNotNewbie();
                 }
-                startActivity(new Intent(LoginActivity.this, VenuesFeedActivity.class));
+                setResult(RESULT_OK);
                 finish();
             }
 

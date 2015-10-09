@@ -116,6 +116,7 @@ public class SignupActivity extends BaseActivity{
             @Override
             public void onResponse(Owner owner) {
                 dismissProgressDialog();
+                Global.with(SignupActivity.this).reset(); //reset application context to new owner setting
                 Global.with(SignupActivity.this).updateOwner(owner);
                 setResult(RESULT_OK);
                 finish();

@@ -17,6 +17,7 @@ import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.DealsFeedActivity;
 import com.amazingcoders_android.activities.VenuesFeedActivity;
 import com.amazingcoders_android.dialogs.AlertDialogFactory;
+import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.helpers.PreferencesStore;
 
 /**
@@ -77,10 +78,9 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
             return false;
         else {
             switch (id) {
-
 //                case R.id.navigation_item_1:
 //                    break;
-                case R.id.navigation_item_2:
+                case R.id.navigation_item_2: // Venues Feed
                     startActivity(new Intent(this, VenuesFeedActivity.class));
                     break;
 //                case R.id.navigation_item_3:
@@ -90,7 +90,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 //                case R.id.navigation_sub_item_2:
 //                    mDrawerLayout.closeDrawers();
 //                    break;
-                case R.id.navigation_sub_item_3:
+                case R.id.navigation_sub_item_3: // Logout
                     showLogoutPrompt();
                     break;
                 case R.id.navigation_item_5:
@@ -161,9 +161,11 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
     }
 
     private void logout() {
-
-        PreferencesStore store = new PreferencesStore(getApplicationContext());
+        // use application context for logging out
+        PreferencesStore store = new PreferencesStore(this.getApplicationContext());
         store.clearAuthToken();
+        store.clear();
+        Global.with(this).reset();
 //        startService(UpdateServerService.deviceToken(getActivity(), false, store.getGCMRegistrationId()));
 
         // NOTE reset user data in MainActivity only since auth token still needed here
