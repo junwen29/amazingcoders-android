@@ -54,7 +54,6 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
         initSwipeRefreshLayout();
         loadDeals();
 
-
         return  v;
     }
 

@@ -82,5 +82,6 @@
     <string name="bookmark_remove">Remove from Bookmarks</string>
     <string name="registering_account">Registering account...</string>
     <string name="venue_avatar">Venue Avatar</string>
+    <string name="deal_avatar">Deal Avatar</string>
 
 </resources>
