@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/img_avatar_venue_placeholder"
+        android:src="@drawable/ic_deal_white_placeholder"
+        android:background="@color/light_gray"
         style="@style/Image.Avatar"
         android:contentDescription="@string/deal_avatar" />
 
