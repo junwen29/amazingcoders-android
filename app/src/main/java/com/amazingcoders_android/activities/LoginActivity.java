@@ -81,6 +81,10 @@ public class LoginActivity extends BaseActivity {
             showErrorMessage(R.string.error_empty_login);
             return;
         }
+        else if(password.length() < 6){
+            showErrorMessage("Password is minimum 6 characters");
+            return;
+        }
 
         Listener<Owner> listener = new Listener<Owner>() {
             @Override
