@@ -93,14 +93,13 @@
                 android:id="@+id/btn_bookmark"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:background="@drawable/btn_green"
                 android:textColor="@color/white"
                 android:textOff="@string/bookmark_add"
                 android:textOn="@string/bookmark_remove"
                 android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="gone"
+                style="@style/CardView"/>
 
         </LinearLayout>
 
