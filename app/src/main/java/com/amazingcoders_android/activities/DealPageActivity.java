@@ -49,7 +49,7 @@ public class DealPageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deal_page_new);
+        setContentView(R.layout.activity_deal_page);
         ButterKnife.inject(this);
 
         setSupportActionBar(mToolbar);
