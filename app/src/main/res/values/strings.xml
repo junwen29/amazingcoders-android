@@ -86,5 +86,8 @@
     <string name="venue_bio">Venue Description</string>
     <string name="venue_location">Venue Location</string>
     <string name="venue_phone">Venue Phone</string>
+    <string name="deal_desc">Deal Description</string>
+    <string name="deal_terms">Deal Terms</string>
+    <string name="deal_period">Deal Period</string>
 
 </resources>

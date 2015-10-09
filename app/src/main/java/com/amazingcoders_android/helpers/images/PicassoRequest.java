@@ -94,7 +94,7 @@ public class PicassoRequest {
      * <em>Note:</em> Target must be ImageView.
      */
     public static RequestCreator getVenueImage(Context context, String path) {
-        return get(context, path, R.drawable.img_venue_placeholder);
+        return get(context, path, R.drawable.img_deal_placeholder);
     }
 
     /**
