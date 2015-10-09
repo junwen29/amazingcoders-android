@@ -83,5 +83,8 @@
     <string name="registering_account">Registering account...</string>
     <string name="venue_avatar">Venue Avatar</string>
     <string name="deal_avatar">Deal Avatar</string>
+    <string name="venue_bio">Venue Description</string>
+    <string name="venue_location">Venue Location</string>
+    <string name="venue_phone">Venue Phone</string>
 
 </resources>

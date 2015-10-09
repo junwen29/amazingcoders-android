@@ -124,6 +124,10 @@
         <item name="android:textColor">@color/med_gray</item>
     </style>
 
+    <style name="Text.Ash.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Text.Card">
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>

@@ -2,6 +2,7 @@ package com.amazingcoders_android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
+import com.amazingcoders_android.views.VenueDetailsCard;
 import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
 
@@ -31,11 +33,14 @@ public class VenuePageActivity extends BaseActivity {
 
     @InjectView(R.id.btn_wish)
     WishButton mWishButton;
-    @InjectView(R.id.container)
-    LinearLayout mContainer;
+//    @InjectView(R.id.container)
+//    LinearLayout mContainer;
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-
+    @InjectView(R.id.card_venue)
+    VenueDetailsCard mVenueCard;
+    @InjectView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private Venue mVenue;
     private Long mVenueId;
@@ -43,7 +48,8 @@ public class VenuePageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_venue_page);
+//        setContentView(R.layout.activity_venue_page);
+        setContentView(R.layout.activity_venue_page_new);
         ButterKnife.inject(this);
 
         setSupportActionBar(mToolbar);
@@ -56,7 +62,7 @@ public class VenuePageActivity extends BaseActivity {
         mVenueId = getIntent().getLongExtra("id", (long) 0);
         //Log.w("", "This.id = " + this.id.toString());
         loadVenue();
-        loadVenueDeals();
+//        loadVenueDeals();
     }
 
     @Override
@@ -83,23 +89,25 @@ public class VenuePageActivity extends BaseActivity {
                 mVenue = venue;
                 mWishButton.setVenue(mVenue);
                 mWishButton.setVisibility(View.VISIBLE);
+                mVenueCard.update(mVenue);
+                mCollapsingToolbarLayout.setTitle(mVenue.getName());
 
-                TextView name = (TextView) findViewById(R.id.nameTV);
-                name.setText(venue.getName());
-                TextView street = (TextView) findViewById(R.id.streetTV);
-                street.setText("Address: " + venue.getStreet());
-                TextView zipcode = (TextView) findViewById(R.id.zipcodeTV);
-                zipcode.setText("Postal Code: " + venue.getZipcode());
-                TextView bio = (TextView) findViewById(R.id.bioTV);
-                bio.setText("Description: " + venue.getBio());
-                TextView neighbourhood = (TextView) findViewById(R.id.neighbourhoodTV);
-                neighbourhood.setText("Neighbourhood: " + venue.getNeighbourhood());
-                TextView phone = (TextView) findViewById(R.id.phoneTV);
-                phone.setText("Contact Number: " + venue.getPhone());
-                //TextView contact = (TextView) findViewById(R.id.contact_numberTV);
-                //contact.setText("Contact Number: " + venue.getContact_number());
-                TextView dealsOfferedTV = (TextView) findViewById(R.id.dealsOffered);
-                dealsOfferedTV.setText("Deals Offered:");
+//                TextView name = (TextView) findViewById(R.id.nameTV);
+//                name.setText(venue.getName());
+//                TextView street = (TextView) findViewById(R.id.streetTV);
+//                street.setText("Address: " + venue.getStreet());
+//                TextView zipcode = (TextView) findViewById(R.id.zipcodeTV);
+//                zipcode.setText("Postal Code: " + venue.getZipcode());
+//                TextView bio = (TextView) findViewById(R.id.bioTV);
+//                bio.setText("Description: " + venue.getBio());
+//                TextView neighbourhood = (TextView) findViewById(R.id.neighbourhoodTV);
+//                neighbourhood.setText("Neighbourhood: " + venue.getNeighbourhood());
+//                TextView phone = (TextView) findViewById(R.id.phoneTV);
+//                phone.setText("Contact Number: " + venue.getPhone());
+//                //TextView contact = (TextView) findViewById(R.id.contact_numberTV);
+//                //contact.setText("Contact Number: " + venue.getContact_number());
+//                TextView dealsOfferedTV = (TextView) findViewById(R.id.dealsOffered);
+//                dealsOfferedTV.setText("Deals Offered:");
             }
 
             @Override
@@ -109,31 +117,31 @@ public class VenuePageActivity extends BaseActivity {
         BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
     }
 
-    public void loadVenueDeals() {
-        CollectionListener<Deal> listener = new CollectionListener<Deal>() {
-            @Override
-            public void onResponse(Collection<Deal> deals) {
-
-                for (final Deal deal : deals){
-                    DealCard dealCard = new DealCard(VenuePageActivity.this);
-                    dealCard.update(deal);
-                    dealCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
-                            intent.putExtra("deal_id", deal.id);
-                            startActivity(intent);
-                        }
-                    });
-                    mContainer.addView(dealCard);
-                }
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        };
-        BurppleApi.getInstance(this).enqueue(VenueRequest.loadDeals(mVenueId, listener));
-    }
+//    public void loadVenueDeals() {
+//        CollectionListener<Deal> listener = new CollectionListener<Deal>() {
+//            @Override
+//            public void onResponse(Collection<Deal> deals) {
+//
+//                for (final Deal deal : deals){
+//                    DealCard dealCard = new DealCard(VenuePageActivity.this);
+//                    dealCard.update(deal);
+//                    dealCard.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
+//                            intent.putExtra("deal_id", deal.id);
+//                            startActivity(intent);
+//                        }
+//                    });
+//                    mContainer.addView(dealCard);
+//                }
+//            }
+//
+//            @Override
+//            public void onErrorResponse(VolleyError volleyError) {
+//
+//            }
+//        };
+//        BurppleApi.getInstance(this).enqueue(VenueRequest.loadDeals(mVenueId, listener));
+//    }
 }
