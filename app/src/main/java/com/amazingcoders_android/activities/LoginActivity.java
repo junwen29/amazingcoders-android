@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity {
 
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(error);
                 if (statusCode == 0) {
-                    showErrorMessage();
+                    showErrorMessage(R.string.error_login);
                     return;
                 }
 
