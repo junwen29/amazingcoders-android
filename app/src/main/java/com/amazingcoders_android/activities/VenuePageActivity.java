@@ -17,6 +17,7 @@ import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
+import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
@@ -44,6 +45,8 @@ public class VenuePageActivity extends BaseActivity {
 
     private Venue mVenue;
     private Long mVenueId;
+
+    private static final String TAG = "VenuePageActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +122,10 @@ public class VenuePageActivity extends BaseActivity {
                                 Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
                                 intent.putExtra("deal_id", deal.id);
                                 startActivity(intent);
+
+                                //register view count
+                                RegisterDealViewCountTask registerDealViewCountTask = new RegisterDealViewCountTask(VenuePageActivity.this, TAG, deal.id);
+                                registerDealViewCountTask.execute(null,null,null);
                             }
                         });
                         mContainer.addView(dealCard);

@@ -17,6 +17,7 @@ import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.DealRequest;
+import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.BookmarkButton;
@@ -45,6 +46,7 @@ public class DealPageActivity extends BaseActivity {
 
     private Deal mDeal;
     private Long mDealId;
+    private boolean mFeatured;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,15 @@ public class DealPageActivity extends BaseActivity {
         }
 
         mDealId = getIntent().getLongExtra("deal_id",0);
+
+        // register deal view count by merchant push notification
+        mFeatured = getIntent().getBooleanExtra("featured", false);
+        if (mFeatured && mDealId != null){
+            //register view count
+            RegisterDealViewCountTask registerDealViewCountTask = new RegisterDealViewCountTask(this, "merchant_push_notification", mDealId);
+            registerDealViewCountTask.execute(null, null, null);
+        }
+
         loadDeal(mDealId);
         loadDealVenues();
     }

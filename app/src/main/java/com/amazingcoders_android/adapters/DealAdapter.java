@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.DealPageActivity;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
+import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.views.DealCard;
 
@@ -22,6 +23,7 @@ import butterknife.InjectView;
  * Created by junwen29 on 9/17/2015.
  */
 public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
+    private static final String TAG = "DealAdapter";
 
     public DealAdapter(Context context, ArrayList<Deal> items) {
         super(context, items);
@@ -67,6 +69,10 @@ public class DealAdapter extends ArrayAutoLoadAdapter<Deal> {
             Intent i = new Intent(context, DealPageActivity.class);
             i.putExtra("deal_id", deal_id);
             context.startActivity(i);
+
+            //register view count
+            RegisterDealViewCountTask registerDealViewCountTask = new RegisterDealViewCountTask(context, TAG, deal_id);
+            registerDealViewCountTask.execute(null, null, null);
         }
 
     }
