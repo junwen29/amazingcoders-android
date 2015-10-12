@@ -9,11 +9,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
 import com.amazingcoders_android.adapters.DealAdapter;
+import com.amazingcoders_android.async_tasks.RegisterUserQueryTask;
 import com.amazingcoders_android.fragments.AllActiveDealsFragment;
 import com.amazingcoders_android.fragments.BookmarkDealsFragment;
 import com.amazingcoders_android.fragments.DiscountsDealsFragment;
@@ -85,6 +87,10 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
 
         Intent intent = new Intent(this,SearchDealActivity.class);
         intent.putExtra("query", query);
+        if (!TextUtils.isEmpty(query)){
+            RegisterUserQueryTask registerUserQueryTask = new RegisterUserQueryTask(this,"deal", query);
+            registerUserQueryTask.execute(null,null,null);
+        }
         startActivity(intent);
         return true;
     }
