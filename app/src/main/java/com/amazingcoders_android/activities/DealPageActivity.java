@@ -107,20 +107,6 @@ public class DealPageActivity extends BaseActivity {
                 mDealCard.update(mDeal);
                 mCollapsingToolbarLayout.setTitle(mDeal.getTitle());
 
-//                TextView title = (TextView) findViewById(R.id.dealTitle);
-//                title.setText(deal.getTitle());
-//                //TextView type = (TextView) findViewById(R.id.type);
-//                //type.setText(deal.getType());
-//                TextView description = (TextView) findViewById(R.id.description);
-//                description.setText("Description: " + deal.getDescription());
-//                TextView start_date = (TextView) findViewById(R.id.start_date);
-//                start_date.setText("Start Date: " + deal.getStart());
-//                TextView end_date = (TextView) findViewById(R.id.end_date);
-//                end_date.setText("Expiry Date: " + deal.getExpiry());
-//                TextView terms = (TextView) findViewById(R.id.terms);
-//                terms.setText("Term and Conditions: " + deal.getTerms());
-//                TextView offeredAtTV = (TextView) findViewById(R.id.offeredAt);
-//                offeredAtTV.setText("Offered at:");
             }
 
             @Override

@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import com.amazingcoders_android.sync.Synchronizable;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by Yesha on 9/21/2015.
  */
@@ -36,6 +38,8 @@ public class Venue implements Parcelable, Synchronizable {
     public String contact_number;
     @SerializedName("is_wishlist")
     private boolean isWishlisted;
+    @SerializedName("deals")
+    private List<Deal> deals;
 
 
     public Venue() {
@@ -150,6 +154,10 @@ public class Venue implements Parcelable, Synchronizable {
 
     public void setWishlisted(boolean wishlisted) {
         this.isWishlisted = wishlisted;
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
     }
 
     @Override
