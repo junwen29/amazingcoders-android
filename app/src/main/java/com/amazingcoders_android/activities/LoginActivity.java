@@ -1,6 +1,5 @@
 package com.amazingcoders_android.activities;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,9 +11,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.VolleyError;
-
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.Listener;
@@ -24,6 +20,9 @@ import com.amazingcoders_android.dialogs.ProgressDialogFactory;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.helpers.PreferencesStore;
 import com.amazingcoders_android.models.Owner;
+import com.android.volley.NoConnectionError;
+import com.android.volley.VolleyError;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -81,6 +80,10 @@ public class LoginActivity extends BaseActivity {
             showErrorMessage(R.string.error_empty_login);
             return;
         }
+        else if(password.length() < 8){
+            showErrorMessage("Password is minimum 8 characters");
+            return;
+        }
 
         Listener<Owner> listener = new Listener<Owner>() {
             @Override
@@ -107,7 +110,7 @@ public class LoginActivity extends BaseActivity {
 
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(error);
                 if (statusCode == 0) {
-                    showErrorMessage();
+                    showErrorMessage(R.string.error_login);
                     return;
                 }
 

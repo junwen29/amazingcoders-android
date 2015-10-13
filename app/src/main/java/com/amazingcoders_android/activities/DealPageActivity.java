@@ -2,13 +2,14 @@ package com.amazingcoders_android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
@@ -16,9 +17,11 @@ import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.DealRequest;
+import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.BookmarkButton;
+import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueCard;
 import com.android.volley.VolleyError;
 
@@ -36,9 +39,14 @@ public class DealPageActivity extends BaseActivity {
     LinearLayout mContainer;
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
+    @InjectView(R.id.card_deal)
+    DealDetailsCard mDealCard;
+    @InjectView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private Deal mDeal;
-    private Long dealId;
+    private Long mDealId;
+    private boolean mFeatured;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +61,17 @@ public class DealPageActivity extends BaseActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        dealId = getIntent().getLongExtra("deal_id",0);
-        loadDeal(dealId);
+        mDealId = getIntent().getLongExtra("deal_id",0);
+
+        // register deal view count by merchant push notification
+        mFeatured = getIntent().getBooleanExtra("featured", false);
+        if (mFeatured && mDealId != null){
+            //register view count
+            RegisterDealViewCountTask registerDealViewCountTask = new RegisterDealViewCountTask(this, "merchant_push_notification", mDealId);
+            registerDealViewCountTask.execute(null, null, null);
+        }
+
+        loadDeal(mDealId);
         loadDealVenues();
     }
 
@@ -87,21 +104,23 @@ public class DealPageActivity extends BaseActivity {
                 mDeal = deal;
                 mBookmarkButton.setDeal(mDeal);
                 mBookmarkButton.setVisibility(View.VISIBLE);
+                mDealCard.update(mDeal);
+                mCollapsingToolbarLayout.setTitle(mDeal.getTitle());
 
-                TextView title = (TextView) findViewById(R.id.dealTitle);
-                title.setText(deal.getTitle());
-                //TextView type = (TextView) findViewById(R.id.type);
-                //type.setText(deal.getType());
-                TextView description = (TextView) findViewById(R.id.description);
-                description.setText("Description: " + deal.getDescription());
-                TextView start_date = (TextView) findViewById(R.id.start_date);
-                start_date.setText("Start Date: " + deal.getStart());
-                TextView end_date = (TextView) findViewById(R.id.end_date);
-                end_date.setText("Expiry Date: " + deal.getExpiry());
-                TextView terms = (TextView) findViewById(R.id.terms);
-                terms.setText("Term and Conditions: " + deal.getTerms());
-                TextView offeredAtTV = (TextView) findViewById(R.id.offeredAt);
-                offeredAtTV.setText("Offered at:");
+//                TextView title = (TextView) findViewById(R.id.dealTitle);
+//                title.setText(deal.getTitle());
+//                //TextView type = (TextView) findViewById(R.id.type);
+//                //type.setText(deal.getType());
+//                TextView description = (TextView) findViewById(R.id.description);
+//                description.setText("Description: " + deal.getDescription());
+//                TextView start_date = (TextView) findViewById(R.id.start_date);
+//                start_date.setText("Start Date: " + deal.getStart());
+//                TextView end_date = (TextView) findViewById(R.id.end_date);
+//                end_date.setText("Expiry Date: " + deal.getExpiry());
+//                TextView terms = (TextView) findViewById(R.id.terms);
+//                terms.setText("Term and Conditions: " + deal.getTerms());
+//                TextView offeredAtTV = (TextView) findViewById(R.id.offeredAt);
+//                offeredAtTV.setText("Offered at:");
             }
 
             @Override
@@ -118,6 +137,7 @@ public class DealPageActivity extends BaseActivity {
             public void onResponse(Collection<Venue> venues) {
 
                 for (final Venue venue : venues){
+                    int index = 0;
                     VenueCard venueCard = new VenueCard(DealPageActivity.this);
                     venueCard.update(venue);
                     venueCard.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +149,13 @@ public class DealPageActivity extends BaseActivity {
                         }
                     });
                     mContainer.addView(venueCard);
+                    index++;
+                    if (index < venues.size()){
+                        View divider = new View(DealPageActivity.this);
+                        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
+                        divider.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                        mContainer.addView(divider);
+                    }
                 }
             }
 
@@ -137,6 +164,6 @@ public class DealPageActivity extends BaseActivity {
 
             }
         };
-        BurppleApi.getInstance(this).enqueue(DealRequest.loadVenues(dealId, listener));
+        BurppleApi.getInstance(this).enqueue(DealRequest.loadVenues(mDealId, listener));
     }
 }

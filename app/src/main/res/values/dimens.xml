@@ -17,5 +17,8 @@
     <dimen name="cardview_corner_radius_default">2dp</dimen>
     <dimen name="font_input">16sp</dimen>
 
+    <dimen name="action_bar_default_padding_material">4dp</dimen>
+    <dimen name="button_big_height">42dp</dimen>
+    <dimen name="app_bar_layout">256dp</dimen>
 
 </resources>

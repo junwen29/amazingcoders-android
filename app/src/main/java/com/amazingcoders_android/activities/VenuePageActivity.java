@@ -2,13 +2,14 @@ package com.amazingcoders_android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
@@ -16,9 +17,11 @@ import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
+import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
+import com.amazingcoders_android.views.VenueDetailsCard;
 import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
 
@@ -35,14 +38,20 @@ public class VenuePageActivity extends BaseActivity {
     LinearLayout mContainer;
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-
+    @InjectView(R.id.card_venue)
+    VenueDetailsCard mVenueCard;
+    @InjectView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private Venue mVenue;
     private Long mVenueId;
 
+    private static final String TAG = "VenuePageActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_venue_page);
         setContentView(R.layout.activity_venue_page);
         ButterKnife.inject(this);
 
@@ -83,23 +92,9 @@ public class VenuePageActivity extends BaseActivity {
                 mVenue = venue;
                 mWishButton.setVenue(mVenue);
                 mWishButton.setVisibility(View.VISIBLE);
+                mVenueCard.update(mVenue);
+                mCollapsingToolbarLayout.setTitle(mVenue.getName());
 
-                TextView name = (TextView) findViewById(R.id.nameTV);
-                name.setText(venue.getName());
-                TextView street = (TextView) findViewById(R.id.streetTV);
-                street.setText("Address: " + venue.getStreet());
-                TextView zipcode = (TextView) findViewById(R.id.zipcodeTV);
-                zipcode.setText("Postal Code: " + venue.getZipcode());
-                TextView bio = (TextView) findViewById(R.id.bioTV);
-                bio.setText("Description: " + venue.getBio());
-                TextView neighbourhood = (TextView) findViewById(R.id.neighbourhoodTV);
-                neighbourhood.setText("Neighbourhood: " + venue.getNeighbourhood());
-                TextView phone = (TextView) findViewById(R.id.phoneTV);
-                phone.setText("Contact Number: " + venue.getPhone());
-                //TextView contact = (TextView) findViewById(R.id.contact_numberTV);
-                //contact.setText("Contact Number: " + venue.getContact_number());
-                TextView dealsOfferedTV = (TextView) findViewById(R.id.dealsOffered);
-                dealsOfferedTV.setText("Deals Offered:");
             }
 
             @Override
@@ -113,19 +108,35 @@ public class VenuePageActivity extends BaseActivity {
         CollectionListener<Deal> listener = new CollectionListener<Deal>() {
             @Override
             public void onResponse(Collection<Deal> deals) {
+                if (deals.isEmpty())
+                    mContainer.setVisibility(View.GONE);
+                else {
+                    mContainer.setVisibility(View.VISIBLE);
+                    int index = 0;
+                    for (final Deal deal: deals){
+                        DealCard dealCard = new DealCard(VenuePageActivity.this);
+                        dealCard.update(deal);
+                        dealCard.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
+                                intent.putExtra("deal_id", deal.id);
+                                startActivity(intent);
 
-                for (final Deal deal : deals){
-                    DealCard dealCard = new DealCard(VenuePageActivity.this);
-                    dealCard.update(deal);
-                    dealCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
-                            intent.putExtra("deal_id", deal.id);
-                            startActivity(intent);
+                                //register view count
+                                RegisterDealViewCountTask registerDealViewCountTask = new RegisterDealViewCountTask(VenuePageActivity.this, TAG, deal.id);
+                                registerDealViewCountTask.execute(null,null,null);
+                            }
+                        });
+                        mContainer.addView(dealCard);
+                        index++;
+                        if (index < deals.size()){
+                            View divider = new View(VenuePageActivity.this);
+                            divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
+                            divider.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                            mContainer.addView(divider);
                         }
-                    });
-                    mContainer.addView(dealCard);
+                    }
                 }
             }
 

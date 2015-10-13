@@ -8,7 +8,7 @@ import com.amazingcoders_android.BuildConfig;
  */
 public class Endpoint {
     //    public static final String SERVER_URL = "http://10.0.0.2:3000/";
-    public static final String SERVER_URL = BuildConfig.BUILD_TYPE.equals("debug") ? "http://192.168.0.100:3000/" : "https://amazingcodersrails.herokuapp.com/";
+    public static final String SERVER_URL = BuildConfig.BUILD_TYPE.equals("debug") ? "http://192.168.0.105:3000/" : "https://amazingcodersrails.herokuapp.com/";
 //    public static final String SERVER_URL = "http://127.0.0.1:3000/";
 //    public static final String SERVER_URL = "https://amazingcodersrails.herokuapp.com/";
     //public static final String SERVER_URL = "http://192.168.0.101:3000/";
@@ -47,4 +47,9 @@ public class Endpoint {
     // Bookmark
     public static final String BOOKMARK = P1_SERVER_URL + "deals/%s/bookmarks";
     public static final String UNBOOKMARK = P1_SERVER_URL + "deals/%s/bookmarks?auth_token=%s";
+
+    // Analytics
+    public static final String DEAL_VIEWCOUNT = P1_SERVER_URL + "analytics/deal/?auth_token=%s&deal_id=%s&entry=%s";
+    public static final String DEAL_QUERY = P1_SERVER_URL + "analytics/query/?auth_token=%s&query=%s&type=%s";
+
 }

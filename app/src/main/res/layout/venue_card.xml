@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
     android:padding="4dp">
 
-    <TextView
-        android:id="@+id/name"
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_place_white_placeholder"
+        android:background="@color/light_gray"
+        style="@style/Image.Avatar"
+        android:contentDescription="@string/venue_avatar" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/burpple_red"
-        style="@style/TextAppearance.AppCompat.Headline"/>
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/avatar">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Text.Card.Title"/>
+
+        <TextView
+            android:id="@+id/neighbourhood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Text.Card.Subtitle"/>
+
+    </LinearLayout>
 
 
-
-
-</LinearLayout>
+</RelativeLayout>

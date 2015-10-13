@@ -16,6 +16,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.Scroller;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -151,10 +152,12 @@ public class FrontPageActivity extends BaseActivity {
             switch (requestCode){
                 case REQ_SIGNUP:
                     startActivity(new Intent(this, VenuesFeedActivity.class));
+                    Toast.makeText(this, "Sign up success", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case REQ_LOGIN:
                     startActivity(new Intent(this, VenuesFeedActivity.class));
+                    Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 default:

@@ -76,7 +76,6 @@ public class PushReceiver extends WakefulBroadcastReceiver {
 //                Deal deal = new Deal(dealId);
 //                deal.setTitle(extras.getString("item_title"));
                 notificationIntent = new Intent(context, DealPageActivity.class);
-                // TODO track deal is pushed by food merchant
                 notificationIntent
                         .putExtra("deal_id", dealId)
                         .putExtra("featured", true);

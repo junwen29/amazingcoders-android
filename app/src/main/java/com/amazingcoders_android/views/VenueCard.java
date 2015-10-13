@@ -18,8 +18,8 @@ import butterknife.InjectView;
 public class VenueCard extends CardView {
     @InjectView(R.id.name)
     TextView mName;
-    //@InjectView(R.id.ID)
-    //TextView mID;
+    @InjectView(R.id.neighbourhood)
+    TextView mNeighbourhood;
 
     Venue mVenue;
 
@@ -52,7 +52,7 @@ public class VenueCard extends CardView {
         if (mVenue == null) return;
 
         mName.setText(mVenue.getName());
-        //mID.setText(mVenue.getId().toString());
+        mNeighbourhood.setText(mVenue.getNeighbourhood());
     }
 
     public Long getVenueID() {

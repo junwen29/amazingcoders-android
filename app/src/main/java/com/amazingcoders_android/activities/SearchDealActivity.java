@@ -117,7 +117,7 @@ public class SearchDealActivity extends NavDrawerActivity implements ArrayAutoLo
 
                 try {
                     // Set the internal trigger distance using reflection.
-                    Field field = SwipeRefreshLayout.class.getDeclaredField("mDistanceToTriggerSync");
+                    Field field = SwipeRefreshLayout.class.getDeclaredField("mTotalDragDistance");
                     field.setAccessible(true);
                     field.setFloat(mSwipeLayout, mDistanceToTriggerSync);
                 } catch (Exception e) {

@@ -41,7 +41,6 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
-
     <!--Text Appearance-->
     <style name="TextAppearance.Burpple.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
@@ -49,8 +48,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <dimen name="action_bar_default_padding_material">4dp</dimen>
-    <dimen name="button_big_height">42dp</dimen>
+    <!--End of Text Appearance styles-->
 
     <!--Button styles-->
     <style name="Button">
@@ -86,6 +84,7 @@
     <style name="Button.Green.Big">
         <item name="android:minHeight">@dimen/button_big_height</item>
     </style>
+    <!--End of Button styles-->
 
     <!--Image styles-->
     <style name="Image">
@@ -94,6 +93,14 @@
         <item name="android:cropToPadding">true</item>
         <item name="android:contentDescription">@string/desc_image_view</item>
     </style>
+
+    <style name="Image.Avatar">
+        <item name="android:width">72dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <!--End of Image styles-->
 
     <!--Text styles-->
     <style name="Text">
@@ -115,6 +122,29 @@
 
     <style name="Text.Ash">
         <item name="android:textColor">@color/med_gray</item>
+    </style>
+
+    <style name="Text.Ash.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Card">
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Text.Card.Title">
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+
+    <style name="Text.Card.Subtitle">
+        <item name="android:textColor">@color/med_gray</item>
+    </style>
+
+    <!--End of Text styles-->
+
+    <style name="CardView">
+        <item name="android:layout_margin">4dp</item>
     </style>
 
 </resources>
