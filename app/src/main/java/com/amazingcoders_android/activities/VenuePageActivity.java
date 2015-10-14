@@ -21,6 +21,7 @@ import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
+import com.amazingcoders_android.views.DealRedeemCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
@@ -94,13 +95,13 @@ public class VenuePageActivity extends BaseActivity {
                 mVenueCard.update(mVenue);
                 mCollapsingToolbarLayout.setTitle(mVenue.getName());
                 List<Deal> deals = venue.getDeals();
-                if (deals.isEmpty())
+                if (deals == null || deals.isEmpty() )
                     mContainer.setVisibility(View.GONE);
                 else {
                     mContainer.setVisibility(View.VISIBLE);
                     int index = 0;
                     for (final Deal deal: deals){
-                        DealCard dealCard = new DealCard(VenuePageActivity.this);
+                        DealRedeemCard dealCard = new DealRedeemCard(VenuePageActivity.this);
                         dealCard.update(deal);
                         dealCard.setOnClickListener(new View.OnClickListener() {
                             @Override

@@ -16,11 +16,11 @@ import butterknife.InjectView;
  */
 public class DealCard extends CardView {
     @InjectView(R.id.title)
-    TextView mTitle;
+    protected TextView mTitle;
     @InjectView(R.id.type)
-    TextView mType;
+    protected TextView mType;
 
-    Deal mDeal;
+    protected Deal mDeal;
 
     public DealCard(Context context) {
         super(context);
@@ -37,7 +37,7 @@ public class DealCard extends CardView {
         init();
     }
 
-    private void init(){
+    public void init(){
         LayoutInflater.from(getContext()).inflate(R.layout.deal_card, this, true);
         ButterKnife.inject(this);
     }

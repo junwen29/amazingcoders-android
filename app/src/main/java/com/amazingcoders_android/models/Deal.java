@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by junwen29 on 9/15/2015.
@@ -33,6 +34,10 @@ public class Deal implements Parcelable, Synchronizable {
     private String expiry;
     @SerializedName("is_bookmarked")
     private boolean isBookmarked;
+    @SerializedName("redeemable")
+    private boolean redeemable;
+    @SerializedName("venues")
+    private List<Venue> venues;
 
     public Deal(long id) {
         this.id = id;
@@ -104,6 +109,10 @@ public class Deal implements Parcelable, Synchronizable {
         return num_of_redeems;
     }
 
+    public boolean isRedeemable() {
+        return redeemable;
+    }
+
     public String getStart() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -126,6 +135,10 @@ public class Deal implements Parcelable, Synchronizable {
             e.printStackTrace();
         }
         return formatter.format(date);
+    }
+
+    public List<Venue> getVenues() {
+        return venues;
     }
 
     public void setTitle(String title) {

@@ -3,25 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:padding="4dp">
+    android:padding="4dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
-    <ImageView
-        android:id="@+id/avatar"
+    <com.amazingcoders_android.views.RedeemButton
+        android:id="@+id/redeem"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_deal_white_placeholder"
-        android:background="@color/light_gray"
-        style="@style/Image.Avatar"
-        android:contentDescription="@string/deal_avatar" />
+        android:layout_height="match_parent"
+        android:text="@string/redeem_button"
+        android:background="@color/color_accent"
+        android:textColor="@android:color/white"/>
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginRight="16dp"
-        android:layout_toRightOf="@id/avatar">
+        android:layout_toLeftOf="@id/redeem">
 
         <TextView
             android:id="@+id/title"
@@ -36,5 +36,7 @@
             style="@style/Text.Card.Subtitle"/>
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

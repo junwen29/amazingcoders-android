@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.BurppleApi;
-import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.DealRequest;
 import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
@@ -25,7 +24,7 @@ import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueCard;
 import com.android.volley.VolleyError;
 
-import java.util.Collection;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -56,23 +55,22 @@ public class DealPageActivity extends BaseActivity {
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){
+        if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mDealId = getIntent().getLongExtra("deal_id",0);
+        mDealId = getIntent().getLongExtra("deal_id", 0);
 
         // register deal view count by merchant push notification
         mFeatured = getIntent().getBooleanExtra("featured", false);
-        if (mFeatured && mDealId != null){
+        if (mFeatured && mDealId != null) {
             //register view count
             RegisterDealViewCountTask registerDealViewCountTask = new RegisterDealViewCountTask(this, "merchant_push_notification", mDealId);
             registerDealViewCountTask.execute(null, null, null);
         }
 
         loadDeal(mDealId);
-        loadDealVenues();
     }
 
     @Override
@@ -97,32 +95,19 @@ public class DealPageActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loadDeal(Long id){
+    public void loadDeal(Long id) {
         Listener<Deal> listener = new Listener<Deal>() {
             @Override
-            public void onResponse(Deal deal)  {
+            public void onResponse(Deal deal) {
                 mDeal = deal;
                 mBookmarkButton.setDeal(mDeal);
                 mBookmarkButton.setVisibility(View.VISIBLE);
                 mDealCard.update(mDeal);
                 mCollapsingToolbarLayout.setTitle(mDeal.getTitle());
 
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-//                Log.d("Load Deal Error", volleyError.getMessage());
-            }
-        };
-        BurppleApi.getInstance(this).enqueue(DealRequest.load(id, listener));
-    }
-
-    public void loadDealVenues() {
-        CollectionListener<Venue> listener = new CollectionListener<Venue>() {
-            @Override
-            public void onResponse(Collection<Venue> venues) {
-
-                for (final Venue venue : venues){
+                // display deal's venues
+                List<Venue> venues = mDeal.getVenues();
+                for (final Venue venue : venues) {
                     int index = 0;
                     VenueCard venueCard = new VenueCard(DealPageActivity.this);
                     venueCard.update(venue);
@@ -136,9 +121,9 @@ public class DealPageActivity extends BaseActivity {
                     });
                     mContainer.addView(venueCard);
                     index++;
-                    if (index < venues.size()){
+                    if (index < venues.size()) {
                         View divider = new View(DealPageActivity.this);
-                        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1));
+                        divider.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
                         divider.setBackgroundColor(getResources().getColor(R.color.light_gray));
                         mContainer.addView(divider);
                     }
@@ -147,9 +132,10 @@ public class DealPageActivity extends BaseActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
+//                Log.d("Load Deal Error", volleyError.getMessage());
             }
         };
-        BurppleApi.getInstance(this).enqueue(DealRequest.loadVenues(mDealId, listener));
+        BurppleApi.getInstance(this).enqueue(DealRequest.load(id, listener));
     }
 }
+
