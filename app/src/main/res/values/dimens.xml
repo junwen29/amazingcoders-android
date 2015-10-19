@@ -20,5 +20,6 @@
     <dimen name="action_bar_default_padding_material">4dp</dimen>
     <dimen name="button_big_height">42dp</dimen>
     <dimen name="app_bar_layout">256dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

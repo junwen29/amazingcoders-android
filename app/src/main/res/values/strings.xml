@@ -90,5 +90,10 @@
     <string name="deal_terms">Deal Terms</string>
     <string name="deal_period">Deal Period</string>
     <string name="redeem_button">Redeem</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="low_storage_error">QR code dependencies cannot be downloaded due to low device storage</string>
+    <string name="barcode_success">Barcode read successfully</string>
+    <string name="barcode_failure">No barcode captured</string>
+    <string name="barcode_error">Error reading barcode</string>
 
 </resources>

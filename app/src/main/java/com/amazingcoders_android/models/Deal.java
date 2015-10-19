@@ -32,6 +32,8 @@ public class Deal implements Parcelable, Synchronizable {
     private String start;
     @SerializedName("expiry_date")
     private String expiry;
+    @SerializedName("multiple_use")
+    private boolean multipleUse;
     @SerializedName("is_bookmarked")
     private boolean isBookmarked;
     @SerializedName("redeemable")
@@ -57,6 +59,7 @@ public class Deal implements Parcelable, Synchronizable {
         start = in.readString();
         expiry = in.readString();
         isBookmarked = in.readByte() != 0x00;
+        multipleUse = in.readByte() != 0x00;
     }
 
     public static final Creator<Deal> CREATOR = new Creator<Deal>() {
@@ -87,6 +90,7 @@ public class Deal implements Parcelable, Synchronizable {
         dest.writeString(start);
         dest.writeString(expiry);
         dest.writeByte((byte) (isBookmarked? 0x01 : 0x00));
+        dest.writeByte((byte) (multipleUse? 0x01 : 0x00));
     }
 
     public String getTitle() {
@@ -111,6 +115,10 @@ public class Deal implements Parcelable, Synchronizable {
 
     public boolean isRedeemable() {
         return redeemable;
+    }
+
+    public boolean isMultipleUse() {
+        return multipleUse;
     }
 
     public String getStart() {
