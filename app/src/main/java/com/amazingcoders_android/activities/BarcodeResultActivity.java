@@ -4,16 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.Listener;
+import com.amazingcoders_android.api.VolleyErrorHelper;
 import com.amazingcoders_android.api.requests.RedemptionRequest;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
@@ -22,8 +24,7 @@ import com.amazingcoders_android.views.VenueDetailsCard;
 import com.android.volley.VolleyError;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
-
-import org.w3c.dom.Text;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,8 +40,8 @@ public class BarcodeResultActivity extends BaseActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-    @InjectView(R.id.value)
-    TextView mValue;
+//    @InjectView(R.id.value)
+//    TextView mValue;
     @InjectView(R.id.barcode_container)
     LinearLayout mContainer;
     @InjectView(R.id.card_deal)
@@ -49,12 +50,19 @@ public class BarcodeResultActivity extends BaseActivity {
     VenueDetailsCard mVenueCard;
     @InjectView(R.id.redeem_time)
     TextView mRedeemTime;
+    @InjectView(R.id.redeem_title)
+    TextView mRedeemTitle;
+    @InjectView(R.id.redeem_message)
+    TextView mRedeemMessage;
+    @InjectView(R.id.container)
+    LinearLayout mCardContainer;
 
     private String mUserId, mDealId, mVenueId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        disableScreenShot();
         setContentView(R.layout.activity_barcode_result);
 
         ButterKnife.inject(this);
@@ -81,7 +89,7 @@ public class BarcodeResultActivity extends BaseActivity {
                             Snackbar.LENGTH_LONG)
                             .show();
 
-                    mValue.setText(barcode.displayValue);
+//                    mValue.setText(barcode.displayValue);
 
                     Log.d(TAG, "Barcode read: " + barcode.displayValue);
                     constructParms(barcode.displayValue);
@@ -115,14 +123,34 @@ public class BarcodeResultActivity extends BaseActivity {
             @Override
             public void onResponse(Redemption redemption) {
                 //TODO convert date time to user friendly text
-                mRedeemTime.setText(redemption.getCreatedAt());
+                String redeemTime = "You redeemed the deal at: "+ redemption.getCreatedAt();
+                showResult(true, "");
+                mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
             }
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Log.d(TAG, volleyError.getMessage());
+//                Log.d(TAG, volleyError.networkResponse.);
+                String response = VolleyErrorHelper.getResponse(volleyError);
+                int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
+
+                switch (statusCode){
+                    case VolleyErrorHelper.NOT_ACCEPTABLE:
+                        String message = new JsonParser().parse(response)
+                                .getAsJsonObject()
+                                .get("error")
+                                .getAsJsonObject()
+                                .get("message")
+                                .getAsString();
+
+                        showResult(false, message);
+                        break;
+                    default:
+                        showResult(false,"");
+                        break;
+                }
             }
         };
 
@@ -134,5 +162,22 @@ public class BarcodeResultActivity extends BaseActivity {
         Collections.addAll(values, barcode.split("_"));
         mDealId = values.get(0);
         mVenueId =values.get(1);
+    }
+
+    private void showResult(boolean success, String message){
+        if (success){
+            mCardContainer.setVisibility(View.VISIBLE);
+            mRedeemTime.setVisibility(View.VISIBLE);
+            mRedeemTitle.setText("You have successfully redeemed the deal! ^^");
+            mRedeemMessage.setVisibility(View.GONE);
+        }
+        else {
+            mCardContainer.setVisibility(View.GONE);
+            mRedeemTime.setVisibility(View.GONE);
+            mRedeemTitle.setText("Sorry, you failed to redeem the deal.");
+            mRedeemMessage.setVisibility(View.VISIBLE);
+            mRedeemMessage.setText(message);
+        }
+
     }
 }
