@@ -56,6 +56,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
 
         setupFab();
 
