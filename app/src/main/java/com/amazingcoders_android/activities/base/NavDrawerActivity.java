@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.DealsFeedActivity;
+import com.amazingcoders_android.activities.MyRedemptionsActivity;
 import com.amazingcoders_android.activities.VenuesFeedActivity;
 import com.amazingcoders_android.dialogs.AlertDialogFactory;
 import com.amazingcoders_android.helpers.Global;
@@ -90,6 +91,9 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 //                case R.id.navigation_sub_item_2:
 //                    mDrawerLayout.closeDrawers();
 //                    break;
+                case R.id.navigation_sub_item_2:
+                    startActivity(new Intent(this, MyRedemptionsActivity.class));
+                    break;
                 case R.id.navigation_sub_item_3: // Logout
                     showLogoutPrompt();
                     break;

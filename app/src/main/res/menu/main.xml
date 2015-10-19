@@ -30,9 +30,10 @@
             <!--android:id="@+id/navigation_sub_item_1"-->
             <!--android:icon="@drawable/ic_drawer_settings"-->
             <!--android:title="@string/drawer_title_settings"/>-->
-        <!--<item-->
-            <!--android:id="@+id/navigation_sub_item_2"-->
-            <!--android:title="@string/drawer_title_cities"/>-->
+        <item
+            android:id="@+id/navigation_sub_item_2"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="My redemptions"/>
         <item
             android:id="@+id/navigation_sub_item_3"
             android:title="@string/logout"/>

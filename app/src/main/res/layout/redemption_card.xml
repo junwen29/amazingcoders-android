@@ -24,13 +24,13 @@
         android:layout_toRightOf="@id/avatar">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/deal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Title"/>
 
         <TextView
-            android:id="@+id/type"
+            android:id="@+id/venue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Subtitle"/>

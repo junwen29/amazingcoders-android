@@ -26,9 +26,8 @@ public class DealDetailsCard extends CardView{
     TextView mEndDate;
     @InjectView(R.id.terms)
     TextView mTerms;
-
-    @InjectView(R.id.desc_layout)
-    RelativeLayout mDescContainer;
+    @InjectView(R.id.multiple_use)
+    TextView mMultipleUse;
 
     Deal mDeal;
 
@@ -66,5 +65,8 @@ public class DealDetailsCard extends CardView{
         mEndDate.setText(end);
         mTerms.setText(mDeal.getTerms());
         mDesc.setText(mDeal.getDescription());
+        String multipleUse = mDeal.isMultipleUse() ? "You can redeem this deal more than once"
+                : "You can only redeem this deal once";
+        mMultipleUse.setText(multipleUse);
     }
 }

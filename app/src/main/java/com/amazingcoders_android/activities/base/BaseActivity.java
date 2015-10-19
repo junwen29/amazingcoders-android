@@ -1,5 +1,6 @@
 package com.amazingcoders_android.activities.base;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -133,5 +134,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (mApi == null)
             mApi = BurppleApi.getInstance(this);
         return mApi;
+    }
+
+
+    /**
+     * call this method to disable screenshot in QR redemption activity
+     */
+    protected void disableScreenShot(){
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
     }
 }

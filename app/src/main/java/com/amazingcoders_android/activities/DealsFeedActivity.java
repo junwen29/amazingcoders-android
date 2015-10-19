@@ -2,6 +2,7 @@ package com.amazingcoders_android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +24,7 @@ import com.amazingcoders_android.fragments.FreebiesDealsFragment;
 import com.amazingcoders_android.fragments.PopularDealsFragment;
 import com.amazingcoders_android.fragments.base.DealFragment;
 import com.amazingcoders_android.models.Deal;
+import com.google.android.gms.common.api.CommonStatusCodes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,8 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     public TabLayout tabLayout;
     @InjectView(R.id.viewpager)
     public ViewPager viewPager;
+    @InjectView(R.id.fab)
+    FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.white));
+
+        setupFab();
 
         // setup menu and search view
         toolbar.inflateMenu(R.menu.deals_feed);
@@ -80,6 +87,16 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         adapter.addFragment(new PopularDealsFragment(), "Popular");
         adapter.addFragment(new BookmarkDealsFragment(), "Bookmarks");
         viewPager.setAdapter(adapter);
+    }
+
+    private void setupFab(){
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DealsFeedActivity.this, BarcodeCaptureActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

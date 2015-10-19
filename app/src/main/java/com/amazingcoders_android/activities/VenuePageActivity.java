@@ -21,11 +21,13 @@ import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
+import com.amazingcoders_android.views.DealRedeemCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
 
 import java.util.Collection;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -51,7 +53,6 @@ public class VenuePageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_venue_page);
         setContentView(R.layout.activity_venue_page);
         ButterKnife.inject(this);
 
@@ -65,7 +66,6 @@ public class VenuePageActivity extends BaseActivity {
         mVenueId = getIntent().getLongExtra("id", (long) 0);
         //Log.w("", "This.id = " + this.id.toString());
         loadVenue();
-        loadVenueDeals();
     }
 
     @Override
@@ -94,27 +94,14 @@ public class VenuePageActivity extends BaseActivity {
                 mWishButton.setVisibility(View.VISIBLE);
                 mVenueCard.update(mVenue);
                 mCollapsingToolbarLayout.setTitle(mVenue.getName());
-
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-            }
-        };
-        BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
-    }
-
-    public void loadVenueDeals() {
-        CollectionListener<Deal> listener = new CollectionListener<Deal>() {
-            @Override
-            public void onResponse(Collection<Deal> deals) {
-                if (deals.isEmpty())
+                List<Deal> deals = venue.getDeals();
+                if (deals == null || deals.isEmpty() )
                     mContainer.setVisibility(View.GONE);
                 else {
                     mContainer.setVisibility(View.VISIBLE);
                     int index = 0;
                     for (final Deal deal: deals){
-                        DealCard dealCard = new DealCard(VenuePageActivity.this);
+                        DealRedeemCard dealCard = new DealRedeemCard(VenuePageActivity.this);
                         dealCard.update(deal);
                         dealCard.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -142,9 +129,8 @@ public class VenuePageActivity extends BaseActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
             }
         };
-        BurppleApi.getInstance(this).enqueue(VenueRequest.loadDeals(mVenueId, listener));
+        BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
     }
 }
