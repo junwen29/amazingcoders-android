@@ -56,13 +56,21 @@ public class BarcodeResultActivity extends BaseActivity {
     TextView mRedeemMessage;
     @InjectView(R.id.container)
     LinearLayout mCardContainer;
+    @InjectView(R.id.redeem_progress)
+    View mProgressBar;
+    @InjectView(R.id.card_redeem)
+    CardView mRedeeemCard;
+    @InjectView(R.id.redeem_animation)
+    View mProgressAnimation;
 
     private String mUserId, mDealId, mVenueId;
+
+    private Barcode mBarcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        disableScreenShot();
+        disableScreenShot(); //disable screenshot
         setContentView(R.layout.activity_barcode_result);
 
         ButterKnife.inject(this);
@@ -74,43 +82,57 @@ public class BarcodeResultActivity extends BaseActivity {
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
-        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
-        startActivityForResult(intent, RC_BARCODE_CAPTURE);
-    }
+        mBarcode = getIntent().getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RC_BARCODE_CAPTURE) {
-            if (resultCode == CommonStatusCodes.SUCCESS) {
-                if (data != null) {
-                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-
-                    Snackbar.make(mContainer, R.string.barcode_success,
-                            Snackbar.LENGTH_LONG)
-                            .show();
-
-//                    mValue.setText(barcode.displayValue);
-
-                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-                    constructParms(barcode.displayValue);
-                    loadRedemption();
-
-                } else {
-//                    mValue.setText(R.string.barcode_failure);
-                    Snackbar.make(mContainer, R.string.barcode_failure,
-                            Snackbar.LENGTH_LONG)
-                            .show();
-                    Log.d(TAG, "No barcode captured, intent data is null");
-                }
-            } else {
-                Snackbar.make(mContainer, R.string.barcode_error,
-                        Snackbar.LENGTH_LONG)
-                        .show();
-            }
+        if (mBarcode == null){
+            Snackbar.make(mContainer, R.string.barcode_error,
+                    Snackbar.LENGTH_LONG)
+                    .show();
         } else {
-            super.onActivityResult(requestCode, resultCode, data);
+            Snackbar.make(mContainer, R.string.barcode_success,
+                    Snackbar.LENGTH_LONG)
+                    .show();
+            constructParms(mBarcode.displayValue);
+            loadRedemption();
         }
+
+//        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
+//        startActivityForResult(intent, RC_BARCODE_CAPTURE);
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == RC_BARCODE_CAPTURE) {
+//            if (resultCode == CommonStatusCodes.SUCCESS) {
+//                if (data != null) {
+//                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
+//
+//                    Snackbar.make(mContainer, R.string.barcode_success,
+//                            Snackbar.LENGTH_LONG)
+//                            .show();
+//
+////                    mValue.setText(barcode.displayValue);
+//
+//                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
+//                    constructParms(barcode.displayValue);
+//                    loadRedemption();
+//
+//                } else {
+////                    mValue.setText(R.string.barcode_failure);
+//                    Snackbar.make(mContainer, R.string.barcode_failure,
+//                            Snackbar.LENGTH_LONG)
+//                            .show();
+//                    Log.d(TAG, "No barcode captured, intent data is null");
+//                }
+//            } else {
+//                Snackbar.make(mContainer, R.string.barcode_error,
+//                        Snackbar.LENGTH_LONG)
+//                        .show();
+//            }
+//        } else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
+//    }
 
     private void loadRedemption(){
         if (TextUtils.isEmpty(mDealId) ||TextUtils.isEmpty(mVenueId)){
@@ -155,6 +177,7 @@ public class BarcodeResultActivity extends BaseActivity {
         };
 
         getBurppleApi().enqueue(RedemptionRequest.load(mUserId, mDealId, mVenueId, listener), TAG);
+        showLoading(true);
     }
 
     private void constructParms(String barcode){
@@ -165,11 +188,14 @@ public class BarcodeResultActivity extends BaseActivity {
     }
 
     private void showResult(boolean success, String message){
+        showLoading(false);
+
         if (success){
             mCardContainer.setVisibility(View.VISIBLE);
             mRedeemTime.setVisibility(View.VISIBLE);
             mRedeemTitle.setText("You have successfully redeemed the deal! ^^");
             mRedeemMessage.setVisibility(View.GONE);
+            mProgressAnimation.setVisibility(View.VISIBLE);
         }
         else {
             mCardContainer.setVisibility(View.GONE);
@@ -177,7 +203,19 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemTitle.setText("Sorry, you failed to redeem the deal.");
             mRedeemMessage.setVisibility(View.VISIBLE);
             mRedeemMessage.setText(message);
+            mProgressAnimation.setVisibility(View.GONE);
         }
+    }
 
+    private void showLoading(boolean loading){
+        if (loading) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mRedeeemCard.setVisibility(View.GONE);
+            mCardContainer.setVisibility(View.GONE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mRedeeemCard.setVisibility(View.VISIBLE);
+            mCardContainer.setVisibility(View.VISIBLE);
+        }
     }
 }

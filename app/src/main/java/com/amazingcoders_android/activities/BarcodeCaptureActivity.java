@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -35,10 +36,16 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by junwen29 on 10/16/2015.
  */
 public class BarcodeCaptureActivity extends AppCompatActivity {
+
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
 
     private static final String TAG = "Barcode-reader";
 
@@ -67,6 +74,8 @@ public class BarcodeCaptureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_barcode_capture);
+        ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
 
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
@@ -315,10 +324,11 @@ public class BarcodeCaptureActivity extends AppCompatActivity {
         if (graphic != null) {
             barcode = graphic.getBarcode();
             if (barcode != null) {
-                Intent data = new Intent();
+                Intent data = new Intent(this, BarcodeResultActivity.class);
                 data.putExtra(BarcodeObject, barcode);
-                setResult(CommonStatusCodes.SUCCESS, data);
-                finish();
+                startActivity(data);
+//                setResult(CommonStatusCodes.SUCCESS, data);
+//                finish();
             }
             else {
                 Log.d(TAG, "barcode data is null");

@@ -92,7 +92,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DealsFeedActivity.this, BarcodeResultActivity.class);
+                Intent intent = new Intent(DealsFeedActivity.this, BarcodeCaptureActivity.class);
                 startActivity(intent);
             }
         });
