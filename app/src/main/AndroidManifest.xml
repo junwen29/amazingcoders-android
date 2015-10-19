@@ -97,8 +97,11 @@
         </activity>
         <activity
             android:name=".activities.BarcodeCaptureActivity"
-            android:label="Read Barcode" />
-        <activity android:name=".activities.BarcodeResultActivity" >
+            android:label="Read Barcode"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.BarcodeResultActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
