@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:padding="4dp">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_deal_white_placeholder"
+        android:background="@color/light_gray"
+        style="@style/Image.Avatar"
+        android:contentDescription="@string/deal_avatar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/avatar">
+
+        <TextView
+            android:id="@+id/deal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Text.Card.Title"/>
+
+        <TextView
+            android:id="@+id/venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Text.Card.Subtitle"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

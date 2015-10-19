@@ -54,4 +54,5 @@ public class Endpoint {
 
     // Deal Redemptions
     public static final String REDEEM = P1_SERVER_URL + "redemption?auth_token=%s&deal_id=%s&user_id=%s&venue_id=%s";
+    public static final String ALL_REDEMPTIONS = P1_SERVER_URL + "redemption/index?auth_token=%s&user_id=%s";
 }
