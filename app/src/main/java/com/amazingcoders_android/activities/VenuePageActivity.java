@@ -14,19 +14,16 @@ import android.widget.LinearLayout;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.BurppleApi;
-import com.amazingcoders_android.api.CollectionListener;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
-import com.amazingcoders_android.views.DealRedeemCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
 
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -101,7 +98,7 @@ public class VenuePageActivity extends BaseActivity {
                     mContainer.setVisibility(View.VISIBLE);
                     int index = 0;
                     for (final Deal deal: deals){
-                        DealRedeemCard dealCard = new DealRedeemCard(VenuePageActivity.this);
+                        DealCard dealCard = new DealCard(VenuePageActivity.this);
                         dealCard.update(deal);
                         dealCard.setOnClickListener(new View.OnClickListener() {
                             @Override
