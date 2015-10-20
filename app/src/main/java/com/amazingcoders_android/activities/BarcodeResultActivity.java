@@ -1,13 +1,11 @@
 package com.amazingcoders_android.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,12 +15,12 @@ import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.VolleyErrorHelper;
 import com.amazingcoders_android.api.requests.RedemptionRequest;
+import com.amazingcoders_android.async_tasks.RegisterRedemptionTask;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
 import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.android.volley.VolleyError;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.gson.JsonParser;
 
@@ -92,8 +90,8 @@ public class BarcodeResultActivity extends BaseActivity {
             Snackbar.make(mContainer, R.string.barcode_success,
                     Snackbar.LENGTH_LONG)
                     .show();
-            constructParms(mBarcode.displayValue);
-            loadRedemption();
+            constructParams(mBarcode.displayValue);
+            redeem();
         }
 
 //        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
@@ -114,8 +112,8 @@ public class BarcodeResultActivity extends BaseActivity {
 ////                    mValue.setText(barcode.displayValue);
 //
 //                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-//                    constructParms(barcode.displayValue);
-//                    loadRedemption();
+//                    constructParams(barcode.displayValue);
+//                    redeem();
 //
 //                } else {
 ////                    mValue.setText(R.string.barcode_failure);
@@ -134,7 +132,14 @@ public class BarcodeResultActivity extends BaseActivity {
 //        }
 //    }
 
-    private void loadRedemption(){
+
+    @Override
+    public void onBackPressed() {
+        //override to resolve memory issue: release the activity instead
+        finish();
+    }
+
+    private void redeem(){
         if (TextUtils.isEmpty(mDealId) ||TextUtils.isEmpty(mVenueId)){
             return;
         }
@@ -150,6 +155,9 @@ public class BarcodeResultActivity extends BaseActivity {
                 mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
+
+                RegisterRedemptionTask registerRedemptionTask = new RegisterRedemptionTask(BarcodeResultActivity.this, mDealId);
+                registerRedemptionTask.execute(null, null, null);
             }
 
             @Override
@@ -180,7 +188,7 @@ public class BarcodeResultActivity extends BaseActivity {
         showLoading(true);
     }
 
-    private void constructParms(String barcode){
+    private void constructParams(String barcode){
         List<String> values = new ArrayList<>();
         Collections.addAll(values, barcode.split("_"));
         mDealId = values.get(0);

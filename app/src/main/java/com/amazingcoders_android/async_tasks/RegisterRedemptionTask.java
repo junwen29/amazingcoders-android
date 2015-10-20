@@ -10,32 +10,30 @@ import com.amazingcoders_android.api.requests.EmptyListener;
 import com.android.volley.VolleyError;
 
 /**
- * Created by junwen29 on 10/9/2015.
+ * Created by junwen29 on 10/20/2015.
  */
-public class RegisterDealViewCountTask extends AsyncTask <Void,Void,Void> {
-    private static final String TAG = "RegisterDealViewCount";
+public class RegisterRedemptionTask extends AsyncTask<Void,Void,Void> {
+    private static final String TAG = "RegisterRedemptionTask";
     BurppleApi mApi;
-    Long mDealId;
-    String mEntryPoint;
+    String mDealId;
 
-    public RegisterDealViewCountTask(Context context,String entry, Long dealId) {
+    public RegisterRedemptionTask(Context context,String mDealId) {
+        this.mDealId = mDealId;
         mApi = BurppleApi.getInstance(context);
-        mDealId = dealId;
-        mEntryPoint = entry;
     }
 
     @Override
     protected Void doInBackground(Void... params) {
-        registerDealViewCount();
-        Log.d(TAG, mEntryPoint + ": Registering deal view count");
+        registerRedemption();
+        Log.d(TAG, "Registering redemption view count");
         return null;
     }
 
-    private void registerDealViewCount(){
+    private void registerRedemption() {
         EmptyListener emptyListener = new EmptyListener() {
             @Override
             public void onResponse() {
-                Log.d(TAG, "Registered deal view count");
+                Log.d(TAG, "Registered redemption");
             }
 
             @Override
@@ -45,6 +43,6 @@ public class RegisterDealViewCountTask extends AsyncTask <Void,Void,Void> {
             }
         };
 
-        mApi.enqueue(AnalyticsRequest.registerDealViewCount(mEntryPoint, mDealId, emptyListener));
+        mApi.enqueue(AnalyticsRequest.registerRedemption(mDealId, emptyListener));
     }
 }

@@ -51,6 +51,7 @@ public class Endpoint {
     // Analytics
     public static final String DEAL_VIEWCOUNT = P1_SERVER_URL + "analytics/deal/?auth_token=%s&deal_id=%s&entry=%s";
     public static final String DEAL_QUERY = P1_SERVER_URL + "analytics/query/?auth_token=%s&query=%s&type=%s";
+    public static final String DEAL_REDEMPTION = P1_SERVER_URL + "analytics/redemption?auth_token=%s&deal_id=%s";
 
     // Deal Redemptions
     public static final String REDEEM = P1_SERVER_URL + "redemption?auth_token=%s&deal_id=%s&user_id=%s&venue_id=%s";
