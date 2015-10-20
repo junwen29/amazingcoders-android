@@ -5,8 +5,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.amazingcoders_android.api.BurppleApi;
+import com.amazingcoders_android.api.requests.AnalyticsRequest;
 import com.amazingcoders_android.api.requests.EmptyListener;
-import com.amazingcoders_android.api.requests.UserQueryRequest;
 import com.android.volley.VolleyError;
 
 /**
@@ -44,6 +44,6 @@ public class RegisterUserQueryTask extends AsyncTask<Void,Void,Void> {
                 Log.d(TAG, "Failed to register user query", volleyError);
             }
         };
-        mApi.enqueue(UserQueryRequest.register(mQuery, mType, emptyListener));
+        mApi.enqueue(AnalyticsRequest.registerUserQuery(mQuery, mType, emptyListener));
     }
 }

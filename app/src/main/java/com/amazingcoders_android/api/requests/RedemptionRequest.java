@@ -6,7 +6,6 @@ import com.amazingcoders_android.api.Endpoint;
 import com.amazingcoders_android.api.GsonCollectionRequest;
 import com.amazingcoders_android.api.GsonRequest;
 import com.amazingcoders_android.api.Listener;
-import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Redemption;
 import com.android.volley.Request;
 import com.google.gson.reflect.TypeToken;
