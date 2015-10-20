@@ -90,8 +90,8 @@ public class BarcodeResultActivity extends BaseActivity {
             Snackbar.make(mContainer, R.string.barcode_success,
                     Snackbar.LENGTH_LONG)
                     .show();
-            constructParms(mBarcode.displayValue);
-            loadRedemption();
+            constructParams(mBarcode.displayValue);
+            redeem();
         }
 
 //        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
@@ -112,8 +112,8 @@ public class BarcodeResultActivity extends BaseActivity {
 ////                    mValue.setText(barcode.displayValue);
 //
 //                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-//                    constructParms(barcode.displayValue);
-//                    loadRedemption();
+//                    constructParams(barcode.displayValue);
+//                    redeem();
 //
 //                } else {
 ////                    mValue.setText(R.string.barcode_failure);
@@ -139,7 +139,7 @@ public class BarcodeResultActivity extends BaseActivity {
         finish();
     }
 
-    private void loadRedemption(){
+    private void redeem(){
         if (TextUtils.isEmpty(mDealId) ||TextUtils.isEmpty(mVenueId)){
             return;
         }
@@ -188,7 +188,7 @@ public class BarcodeResultActivity extends BaseActivity {
         showLoading(true);
     }
 
-    private void constructParms(String barcode){
+    private void constructParams(String barcode){
         List<String> values = new ArrayList<>();
         Collections.addAll(values, barcode.split("_"));
         mDealId = values.get(0);
