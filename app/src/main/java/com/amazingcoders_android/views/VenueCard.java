@@ -4,10 +4,16 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amazingcoders_android.BurppleApplication;
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.helpers.images.PicassoCompat;
+import com.amazingcoders_android.helpers.images.PicassoRequest;
 import com.amazingcoders_android.models.Venue;
+import com.cloudinary.Cloudinary;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -20,25 +26,29 @@ public class VenueCard extends CardView {
     TextView mName;
     @InjectView(R.id.neighbourhood)
     TextView mNeighbourhood;
+    @InjectView(R.id.avatar)
+    ImageView mAvatar;
 
     Venue mVenue;
+    Context mContext;
 
     public VenueCard(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public VenueCard(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public VenueCard(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
-    private void init(){
+    private void init(Context context){
+        mContext = context;
         LayoutInflater.from(getContext()).inflate(R.layout.venue_card, this, true);
         ButterKnife.inject(this);
     }
@@ -53,6 +63,9 @@ public class VenueCard extends CardView {
 
         mName.setText(mVenue.getName());
         mNeighbourhood.setText(mVenue.getNeighbourhood());
+        Cloudinary cloudinary = BurppleApplication.getInstance(mContext).getCloudinary();
+        String url = cloudinary.url().generate(mVenue.getPhotoUrl());
+        PicassoRequest.get(mContext,url, R.drawable.ic_place_white_placeholder).into(mAvatar);
     }
 
     public Long getVenueID() {
