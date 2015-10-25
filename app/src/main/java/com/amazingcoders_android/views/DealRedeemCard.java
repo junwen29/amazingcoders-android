@@ -30,7 +30,7 @@ public class DealRedeemCard extends DealCard {
     }
 
     @Override
-    public void init() {
+    public void init(Context context) {
         LayoutInflater.from(getContext()).inflate(R.layout.deal_redeem_card, this, true);
         ButterKnife.inject(this);
     }
