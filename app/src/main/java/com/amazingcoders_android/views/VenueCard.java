@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import com.amazingcoders_android.BurppleApplication;
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.helpers.Helper;
 import com.amazingcoders_android.helpers.images.PicassoCompat;
 import com.amazingcoders_android.helpers.images.PicassoRequest;
 import com.amazingcoders_android.models.Venue;
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -64,7 +66,8 @@ public class VenueCard extends CardView {
         mName.setText(mVenue.getName());
         mNeighbourhood.setText(mVenue.getNeighbourhood());
         Cloudinary cloudinary = BurppleApplication.getInstance(mContext).getCloudinary();
-        String url = cloudinary.url().generate(mVenue.getPhotoUrl());
+        int size = Helper.convertDipToPx(56,getResources());
+        String url = cloudinary.url().transformation(new Transformation().height(size)).generate(mVenue.getPhotoUrl());
         PicassoRequest.get(mContext,url, R.drawable.ic_place_white_placeholder).into(mAvatar);
     }
 
