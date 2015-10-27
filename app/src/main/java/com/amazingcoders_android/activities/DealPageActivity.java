@@ -9,20 +9,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.amazingcoders_android.BurppleApplication;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.DealRequest;
 import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
+import com.amazingcoders_android.helpers.images.PicassoRequest;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.BookmarkButton;
 import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueCard;
 import com.android.volley.VolleyError;
+import com.cloudinary.Cloudinary;
 
 import java.util.List;
 
@@ -42,6 +46,8 @@ public class DealPageActivity extends BaseActivity {
     DealDetailsCard mDealCard;
     @InjectView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @InjectView(R.id.image)
+    ImageView mCoverImage;
 
     private Deal mDeal;
     private Long mDealId;
@@ -100,10 +106,12 @@ public class DealPageActivity extends BaseActivity {
             @Override
             public void onResponse(Deal deal) {
                 mDeal = deal;
+
                 mBookmarkButton.setDeal(mDeal);
                 mBookmarkButton.setVisibility(View.VISIBLE);
                 mDealCard.update(mDeal);
                 mCollapsingToolbarLayout.setTitle(mDeal.getTitle());
+                updateCoverImage();
 
                 // display deal's venues
                 List<Venue> venues = mDeal.getVenues();
@@ -136,6 +144,12 @@ public class DealPageActivity extends BaseActivity {
             }
         };
         BurppleApi.getInstance(this).enqueue(DealRequest.load(id, listener));
+    }
+
+    private void updateCoverImage(){
+        Cloudinary cloudinary = BurppleApplication.getInstance(this).getCloudinary();
+        String url = cloudinary.url().generate(mDeal.getImageUrl());
+        PicassoRequest.get(this, url, R.drawable.img_deal_placeholder).into(mCoverImage);
     }
 }
 

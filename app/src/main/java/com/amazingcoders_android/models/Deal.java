@@ -40,6 +40,8 @@ public class Deal implements Parcelable, Synchronizable {
     private boolean redeemable;
     @SerializedName("venues")
     private List<Venue> venues;
+    @SerializedName("image")
+    private String imageUrl;
 
     public Deal(long id) {
         this.id = id;
@@ -107,6 +109,10 @@ public class Deal implements Parcelable, Synchronizable {
 
     public String getTerms() {
         return terms;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public int getNum_of_redeems() {

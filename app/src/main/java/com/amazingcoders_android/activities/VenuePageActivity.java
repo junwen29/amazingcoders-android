@@ -9,20 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.amazingcoders_android.BurppleApplication;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.BurppleApi;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.requests.VenueRequest;
 import com.amazingcoders_android.async_tasks.RegisterDealViewCountTask;
+import com.amazingcoders_android.helpers.Helper;
+import com.amazingcoders_android.helpers.images.PicassoRequest;
 import com.amazingcoders_android.models.Deal;
 import com.amazingcoders_android.models.Venue;
 import com.amazingcoders_android.views.DealCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.amazingcoders_android.views.WishButton;
 import com.android.volley.VolleyError;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 
 import java.util.List;
 
@@ -41,6 +47,8 @@ public class VenuePageActivity extends BaseActivity {
     VenueDetailsCard mVenueCard;
     @InjectView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @InjectView(R.id.image)
+    ImageView mCoverImage;
 
     private Venue mVenue;
     private Long mVenueId;
@@ -87,10 +95,13 @@ public class VenuePageActivity extends BaseActivity {
             @Override
             public void onResponse(Venue venue) {
                 mVenue = venue;
+
                 mWishButton.setVenue(mVenue);
                 mWishButton.setVisibility(View.VISIBLE);
                 mVenueCard.update(mVenue);
                 mCollapsingToolbarLayout.setTitle(mVenue.getName());
+                updateCoverImage();
+
                 List<Deal> deals = venue.getDeals();
                 if (deals == null || deals.isEmpty() )
                     mContainer.setVisibility(View.GONE);
@@ -129,5 +140,11 @@ public class VenuePageActivity extends BaseActivity {
             }
         };
         BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
+    }
+
+    private void updateCoverImage(){
+        Cloudinary cloudinary = BurppleApplication.getInstance(this).getCloudinary();
+        String url = cloudinary.url().generate(mVenue.getPhotoUrl());
+        PicassoRequest.get(this, url, R.drawable.img_venue_placeholder).into(mCoverImage);
     }
 }
