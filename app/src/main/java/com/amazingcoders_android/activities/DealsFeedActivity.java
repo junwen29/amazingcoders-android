@@ -24,7 +24,6 @@ import com.amazingcoders_android.fragments.FreebiesDealsFragment;
 import com.amazingcoders_android.fragments.PopularDealsFragment;
 import com.amazingcoders_android.fragments.base.DealFragment;
 import com.amazingcoders_android.models.Deal;
-import com.google.android.gms.common.api.CommonStatusCodes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +75,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     public void setActiveDrawerItem() {
         //set selected menu
         mNavigationView.getMenu().getItem(1).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_5;
+        mSelectedDrawerItemId = R.id.navigation_item_2;
     }
 
     private void setupViewPager(ViewPager viewPager) {

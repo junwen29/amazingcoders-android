@@ -64,7 +64,7 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
     @Override
     public void setActiveDrawerItem() {
         mNavigationView.getMenu().getItem(2).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_sub_item_2;
+        mSelectedDrawerItemId = R.id.navigation_sub_item_1;
     }
 
     private void loadRedemptions(final boolean refresh){

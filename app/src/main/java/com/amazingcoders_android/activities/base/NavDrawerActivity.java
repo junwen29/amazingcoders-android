@@ -81,7 +81,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
             switch (id) {
 //                case R.id.navigation_item_1:
 //                    break;
-                case R.id.navigation_item_2: // Venues Feed
+                case R.id.navigation_item_1: // Venues Feed
                     startActivity(new Intent(this, VenuesFeedActivity.class));
                     break;
 //                case R.id.navigation_item_3:
@@ -91,13 +91,13 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 //                case R.id.navigation_sub_item_2:
 //                    mDrawerLayout.closeDrawers();
 //                    break;
-                case R.id.navigation_sub_item_2:
+                case R.id.navigation_sub_item_1:
                     startActivity(new Intent(this, MyRedemptionsActivity.class));
                     break;
                 case R.id.navigation_sub_item_3: // Logout
                     showLogoutPrompt();
                     break;
-                case R.id.navigation_item_5:
+                case R.id.navigation_item_2:
                     startActivity(new Intent(this, DealsFeedActivity.class));
                     break;
                 default:

@@ -2,38 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single"
         android:id="@+id/header">
-        <!--<item-->
-            <!--android:id="@+id/navigation_item_1"-->
-            <!--android:icon="@drawable/ic_drawer_explore"-->
-            <!--android:title="@string/drawer_title_explore"/>-->
+
         <item
-            android:id="@+id/navigation_item_2"
+            android:id="@+id/navigation_item_1"
             android:icon="@drawable/ic_drawer_feed"
             android:title="@string/drawer_title_feed"/>
-        <!--<item-->
-            <!--android:id="@+id/navigation_item_3"-->
-            <!--android:icon="@drawable/ic_drawer_guides"-->
-            <!--android:title="@string/drawer_title_guides"/>-->
-        <!--<item-->
-            <!--android:id="@+id/navigation_item_4"-->
-            <!--android:icon="@drawable/ic_drawer_profile"-->
-            <!--android:title="@string/drawer_title_profile"/>-->
+
         <item
-            android:id="@+id/navigation_item_5"
+            android:id="@+id/navigation_item_2"
             android:icon="@drawable/ic_action_map"
             android:title="@string/drawer_title_deals"/>
     </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/subheader">
-        <!--<item-->
-            <!--android:id="@+id/navigation_sub_item_1"-->
-            <!--android:icon="@drawable/ic_drawer_settings"-->
-            <!--android:title="@string/drawer_title_settings"/>-->
+
         <item
-            android:id="@+id/navigation_sub_item_2"
+            android:id="@+id/navigation_sub_item_1"
             android:icon="@android:drawable/ic_menu_myplaces"
             android:title="My redemptions"/>
+
+        <item
+            android:id="@+id/navigation_sub_item_2"
+            android:title="Create a Feedback"/>
+
         <item
             android:id="@+id/navigation_sub_item_3"
             android:title="@string/logout"/>
