@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.amazingcoders_android.R;
-import com.amazingcoders_android.activities.CreateFeedbackActivity;
+import com.amazingcoders_android.activities.FeedbackActivity;
 import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.DealsFeedActivity;
 import com.amazingcoders_android.activities.MyRedemptionsActivity;
@@ -95,7 +95,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                     break;
 
                 case R.id.navigation_sub_item_2: // create feedback
-                    startActivity(new Intent(this, CreateFeedbackActivity.class));
+                    startActivity(new Intent(this, FeedbackActivity.class));
                     break;
 
                 case R.id.navigation_sub_item_3: // Logout

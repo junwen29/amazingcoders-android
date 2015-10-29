@@ -13,7 +13,7 @@ import butterknife.InjectView;
 /**
  * Created by junwen29 on 10/28/2015.
  */
-public class CreateFeedbackActivity extends BaseActivity{
+public class FeedbackActivity extends BaseActivity{
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;

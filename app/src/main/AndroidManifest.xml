@@ -110,7 +110,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".activities.CreateFeedbackActivity"
+            android:name=".activities.FeedbackActivity"
             android:label="@string/title_activity_create_feedback"
             android:screenOrientation="portrait">
         </activity>
