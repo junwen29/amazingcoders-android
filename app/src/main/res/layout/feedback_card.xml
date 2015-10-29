@@ -11,11 +11,13 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="16dp"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:inputType="textAutoCorrect"
+            android:imeOptions="actionNext"
             android:hint="Title"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -28,24 +30,19 @@
         app:ms_hint="Category"
         android:minHeight="@dimen/activity_vertical_margin"/>
 
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="@dimen/activity_horizontal_margin"-->
-        <!--android:minHeight="16dp"-->
-        <!--android:hint="Category"/>-->
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:minHeight="72dp"
-            android:inputType="textMultiLine|textAutoCorrect"
-            android:hint="Write about your feedback here..."/>
+            android:inputType="textAutoCorrect"
+            android:imeOptions="actionDone"
+            android:hint="Write about your feedback here"/>
 
     </android.support.design.widget.TextInputLayout>
 

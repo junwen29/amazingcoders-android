@@ -1,6 +1,5 @@
 package com.amazingcoders_android.activities.base;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -13,11 +12,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.VolleyError;
-
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.api.BurppleApi;
+import com.android.volley.NoConnectionError;
+import com.android.volley.VolleyError;
 
 /**
  * Created by junwen29 on 9/17/2015.
