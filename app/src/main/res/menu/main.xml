@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <group android:checkableBehavior="single"
         android:id="@+id/header">
         <!--<item-->
@@ -26,14 +27,14 @@
 
     <group android:checkableBehavior="single"
         android:id="@+id/subheader">
-        <!--<item-->
-            <!--android:id="@+id/navigation_sub_item_1"-->
-            <!--android:icon="@drawable/ic_drawer_settings"-->
-            <!--android:title="@string/drawer_title_settings"/>-->
+        <item
+            android:id="@+id/navigation_sub_item_1"
+            android:icon="@drawable/ic_drawer_profile"
+            android:title="My Profile"/>
         <item
             android:id="@+id/navigation_sub_item_2"
             android:icon="@android:drawable/ic_menu_myplaces"
-            android:title="My redemptions"/>
+            android:title="My Redemptions"/>
         <item
             android:id="@+id/navigation_sub_item_3"
             android:title="@string/logout"/>

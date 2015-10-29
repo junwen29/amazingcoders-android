@@ -24,6 +24,15 @@ public class User implements Parcelable{
     @SerializedName("username")
     protected String username;
 
+    @SerializedName("total_points")
+    protected int burps;
+
+    @SerializedName("num_wishes")
+    protected int num_wishes;
+
+    @SerializedName("num_bookmarks")
+    protected int num_bookmarks;
+
     private String fullName;
 
     public User() {
@@ -63,6 +72,30 @@ public class User implements Parcelable{
         this.username = username;
     }
 
+    public void setBurps(int burps) {
+        this.burps = burps;
+    }
+
+    public int getBurps() {
+        return burps;
+    }
+
+    public void setNum_wishes(int num_wishes) {
+        this.num_wishes = num_wishes;
+    }
+
+    public int getNum_wishes() {
+        return this.num_wishes;
+    }
+
+    public void setNum_bookmarks(int num_bookmarks) {
+        this.num_bookmarks = num_bookmarks;
+    }
+
+    public int getNum_bookmarks() {
+        return this.num_bookmarks;
+    }
+
     public String getFullName() {
         if (fullName == null) {
             fullName = firstName;
@@ -78,6 +111,9 @@ public class User implements Parcelable{
         firstName = in.readString();
         lastName = in.readString();
         username = in.readString();
+        burps = in.readInt();
+        num_wishes = in.readInt();
+        num_bookmarks = in.readInt();
     }
 
     @Override

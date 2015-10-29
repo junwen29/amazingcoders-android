@@ -47,6 +47,9 @@ public class Owner extends User {
         phone = source.phone;
         birthday = source.birthday;
         authToken = source.authToken;
+        burps = source.burps;
+        num_wishes = source.num_wishes;
+        num_bookmarks = source.num_bookmarks;
     }
 
     public String getEmail() {

@@ -74,7 +74,6 @@
     <string name="push_summary">Show all notifications</string>
     <string name="menu_action_search">Search</string>
     <string name="title_activity_search_deal">SearchDealActivity</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="wish_add">Add to Wishlist</string>
     <string name="wish_remove">Remove from Wishlist</string>
@@ -96,8 +95,7 @@
     <string name="barcode_failure">No barcode captured</string>
     <string name="barcode_error">Error reading barcode</string>
     <string name="title_activity_my_redemptions">MyRedemptionsActivity</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
+    <string name="large_text">        "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
         "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
@@ -183,7 +181,7 @@
         "user picks up a card, or it can move if a snackbar appears.\n"
         "On the layout level, design your app layout to minimize opportunities for interference. "
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
+        "when a user tries to pick up one of cards.\n\n"</string>
+    <string name="title_activity_profile_page">ProfilePageActivity</string>
 
 </resources>
