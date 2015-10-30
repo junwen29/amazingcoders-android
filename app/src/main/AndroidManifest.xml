@@ -109,6 +109,11 @@
             android:label="@string/title_activity_my_redemptions"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:label="@string/title_activity_send_feedback"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

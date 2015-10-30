@@ -1,5 +1,6 @@
 package com.amazingcoders_android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -136,11 +137,17 @@ public class BarcodeResultActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         //override to resolve memory issue: release the activity instead
-        finish();
+        startActivity(new Intent(this,DealsFeedActivity.class));
+        finishAffinity();
     }
 
     private void redeem(){
+        //Check QR code
         if (TextUtils.isEmpty(mDealId) ||TextUtils.isEmpty(mVenueId)){
+            showResult(false, "Invalid QR code");
+            return;
+        } else if (!mDealId.matches("\\d+") || !mVenueId.matches("\\d+")){
+            showResult(false, "Invalid QR code");
             return;
         }
 
@@ -189,10 +196,18 @@ public class BarcodeResultActivity extends BaseActivity {
     }
 
     private void constructParams(String barcode){
+//        String regex = "13_2_2015-10-14 23:00:47 +0800";
+//
+//        boolean validQR = barcode.matches("^[\\d+]_\\d+_");
+
         List<String> values = new ArrayList<>();
         Collections.addAll(values, barcode.split("_"));
-        mDealId = values.get(0);
-        mVenueId =values.get(1);
+        if (values.size()<2){
+            return;
+        } else {
+            mDealId = values.get(0);
+            mVenueId =values.get(1);
+        }
     }
 
     private void showResult(boolean success, String message){
