@@ -65,6 +65,10 @@ public class Global {
         return mOwnerId;
     }
 
+    public int getOwnerBurps() {
+        return mOwner.getBurps();
+    }
+
     public boolean isOwner(long id) {
         return getOwnerId() == id;
     }

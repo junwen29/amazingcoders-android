@@ -107,7 +107,11 @@
         <activity
             android:name=".activities.MyRedemptionsActivity"
             android:label="@string/title_activity_my_redemptions"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activities.ProfilePageActivity"
+            android:label="@string/title_activity_profile_page" >
         </activity>
         <activity
             android:name=".activities.FeedbackActivity"

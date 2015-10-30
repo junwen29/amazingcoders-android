@@ -11,12 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.FeedbackActivity;
 import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.DealsFeedActivity;
+import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.MyRedemptionsActivity;
+import com.amazingcoders_android.activities.ProfilePageActivity;
 import com.amazingcoders_android.activities.VenuesFeedActivity;
 import com.amazingcoders_android.dialogs.AlertDialogFactory;
 import com.amazingcoders_android.helpers.Global;
@@ -44,7 +47,6 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         mContainer = (FrameLayout) findViewById(R.id.container);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
-
         setup();
     }
 
@@ -69,7 +71,12 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow_rev, GravityCompat.END);
 
         mNavigationView.setNavigationItemSelectedListener(this);
-        // TODO add profile header view
+        
+        TextView displayUsername = (TextView) findViewById(R.id.display_header_username);
+        displayUsername.setText(Global.with(this).getOwner().getUsername());
+
+        TextView displayEmail = (TextView) findViewById(R.id.display_header_email);
+        displayEmail.setText(Global.with(this).getOwner().getEmail());
     }
 
     @Override
@@ -91,6 +98,13 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 
 
                 case R.id.navigation_sub_item_1:
+                case R.id.navigation_sub_item_1:
+                    startActivity(new Intent(this, ProfilePageActivity.class));
+                    break;
+//                case R.id.navigation_sub_item_2:
+//                    mDrawerLayout.closeDrawers();
+//                    break;
+                case R.id.navigation_sub_item_2:
                     startActivity(new Intent(this, MyRedemptionsActivity.class));
                     break;
 
@@ -98,9 +112,9 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                     startActivity(new Intent(this, FeedbackActivity.class));
                     break;
 
-                case R.id.navigation_sub_item_3: // Logout
-                    showLogoutPrompt();
-                    break;
+//                case R.id.navigation_sub_item_3: // Logout
+//                    showLogoutPrompt();
+//                    break;
 
                 default:
                     return false;

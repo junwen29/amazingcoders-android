@@ -19,15 +19,19 @@
 
         <item
             android:id="@+id/navigation_sub_item_1"
+            android:icon="@drawable/ic_drawer_profile"
+            android:title="My Profile"/>
+        <item
+            android:id="@+id/navigation_sub_item_2"
             android:icon="@android:drawable/ic_menu_myplaces"
             android:title="My Redemptions"/>
 
         <item
-            android:id="@+id/navigation_sub_item_2"
+            android:id="@+id/navigation_sub_item_3"
             android:title="Send a Feedback"/>
 
         <item
-            android:id="@+id/navigation_sub_item_3"
+            android:id="@+id/navigation_sub_item_4"
             android:title="@string/logout"/>
     </group>
 </menu>
