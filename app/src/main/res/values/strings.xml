@@ -98,6 +98,7 @@
     <string name="title_activity_my_redemptions">MyRedemptionsActivity</string>
 
     <string name="title_activity_send_feedback">Send Feedback</string>
+    <string name="title_activity_profile_page">Profile</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_field_select_category">Please select a category</string>
     <string name="feedback_success">Thank you! We have received your feedback.</string>
