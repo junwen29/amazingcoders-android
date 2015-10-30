@@ -22,7 +22,7 @@ public class Endpoint {
     public static final String SIGNUP = P1_SERVER_URL + "accounts/sign_up";
     public static final String LOGIN = P1_SERVER_URL + "accounts/sign_in";
     public static final String LOGOUT = P1_SERVER_URL + "accounts/sign_out";
-    public static final String PROFILE = P1_SERVER_URL + "accounts/profile?auth_token=%s";
+    public static final String PROFILE = P1_SERVER_URL + "accounts/profile/auth_token=%s";
 
     //TODO forget password page request
 //    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
