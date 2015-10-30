@@ -17,7 +17,6 @@ import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.FeedbackActivity;
 import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.DealsFeedActivity;
-import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.MyRedemptionsActivity;
 import com.amazingcoders_android.activities.ProfilePageActivity;
 import com.amazingcoders_android.activities.VenuesFeedActivity;
@@ -95,26 +94,21 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                     startActivity(new Intent(this, DealsFeedActivity.class));
                     break;
 
-
-
-                case R.id.navigation_sub_item_1:
-                case R.id.navigation_sub_item_1:
+                case R.id.navigation_sub_item_1: //profile
                     startActivity(new Intent(this, ProfilePageActivity.class));
                     break;
-//                case R.id.navigation_sub_item_2:
-//                    mDrawerLayout.closeDrawers();
-//                    break;
-                case R.id.navigation_sub_item_2:
+
+                case R.id.navigation_sub_item_2: //redemption history
                     startActivity(new Intent(this, MyRedemptionsActivity.class));
                     break;
 
-                case R.id.navigation_sub_item_2: // create feedback
+                case R.id.navigation_sub_item_3: // create feedback
                     startActivity(new Intent(this, FeedbackActivity.class));
                     break;
 
-//                case R.id.navigation_sub_item_3: // Logout
-//                    showLogoutPrompt();
-//                    break;
+                case R.id.navigation_sub_item_4: // Logout
+                    showLogoutPrompt();
+                    break;
 
                 default:
                     return false;
