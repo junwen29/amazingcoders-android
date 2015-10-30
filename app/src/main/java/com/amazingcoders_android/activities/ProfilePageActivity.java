@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
+import com.amazingcoders_android.api.BurppleApi;
+import com.amazingcoders_android.api.Listener;
+import com.amazingcoders_android.api.requests.LoginRequest;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Owner;
+import com.android.volley.VolleyError;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -71,25 +75,36 @@ public class ProfilePageActivity extends BaseActivity {
     }
 
     private void loadProfile() {
+
         mOwnerUsername = (TextView) findViewById(R.id.display_username);
         mOwnerEmail = (TextView) findViewById(R.id.display_email);
         mOwnerName = (TextView) findViewById(R.id.display_name);
         mOwnerBurps = (TextView) findViewById(R.id.display_burps);
         mOwnerWishes = (TextView) findViewById(R.id.display_wishlisted_venues);
         mOwnerBookmarks = (TextView) findViewById(R.id.display_bookmarked_deals);
-
-        mOwner = Global.with(this).getOwner();
-        Global.with(this).updateOwner(mOwner);
         mOwner = Global.with(this).getOwner();
 
-        mCollapsingToolbarLayout.setTitle(mOwner.getUsername());
-        mOwnerUsername.setText(mOwner.getUsername());
-        //Log.w("", "Owner email is " + mOwner.getEmail());
-        mOwnerEmail.setText(mOwner.getEmail());
-        mOwnerName.setText(mOwner.getFullName());
-        //Log.w("", "Owner burps is " + mOwner.getBurps());
-        mOwnerBurps.setText(String.valueOf(mOwner.getBurps()));
-        mOwnerWishes.setText(String.valueOf(mOwner.getNum_wishes()));
-        mOwnerBookmarks.setText(String.valueOf(mOwner.getNum_bookmarks()));
+        Listener<Owner> listener = new Listener<Owner>() {
+            @Override
+            public void onResponse(Owner owner) {
+                Global.with(ProfilePageActivity.this).updateOwner(owner);
+                mOwner = owner;
+                mCollapsingToolbarLayout.setTitle(mOwner.getUsername());
+                mOwnerUsername.setText(mOwner.getUsername());
+                //Log.w("", "Owner email is " + mOwner.getEmail());
+                mOwnerEmail.setText(mOwner.getEmail());
+                mOwnerName.setText(mOwner.getFullName());
+                //Log.w("", "Owner burps is " + mOwner.getBurps());
+                mOwnerBurps.setText(String.valueOf(mOwner.getBurps()));
+                mOwnerWishes.setText(String.valueOf(mOwner.getNum_wishes()));
+                mOwnerBookmarks.setText(String.valueOf(mOwner.getNum_bookmarks()));
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+//                Log.d("Load Owner Error", volleyError.getMessage());
+            }
+        };
+        BurppleApi.getInstance(this).enqueue(LoginRequest.getOwner( mOwner.getUsername(), listener));
     }
 }
