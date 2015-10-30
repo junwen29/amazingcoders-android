@@ -30,7 +30,7 @@ public class LoginRequest {
 
     public static GsonRequest<Owner> getOwner(String username, Listener<Owner> listener) {
         String url = String.format(Endpoint.PROFILE, BurppleApi.getAuthToken());
-        return new GsonRequest<Owner>(Request.Method.POST, url, Owner.class, listener);
+        return new GsonRequest<Owner>(Request.Method.GET, url, Owner.class, listener);
     }
 
 //    public static GsonRequest<Owner> facebook(String token, Listener<Owner> listener) {
