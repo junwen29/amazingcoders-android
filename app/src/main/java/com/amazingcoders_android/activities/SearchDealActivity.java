@@ -78,7 +78,8 @@ public class SearchDealActivity extends NavDrawerActivity implements ArrayAutoLo
                 final List<Deal> filteredDealList = new ArrayList<>();
                 for (Deal deal : deals) {
                     final String name = deal.getTitle().toLowerCase();
-                    if (name.contains(query)) {
+                    final String desc = deal.getDescription().toLowerCase();
+                    if (name.contains(query) || desc.contains(query)) {
                         filteredDealList.add(deal);
                     }
                 }
