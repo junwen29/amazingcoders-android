@@ -19,6 +19,7 @@ import com.amazingcoders_android.api.requests.RedemptionRequest;
 import com.amazingcoders_android.async_tasks.RegisterRedemptionTask;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
+import com.amazingcoders_android.models.UserPoint;
 import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.android.volley.VolleyError;
@@ -39,8 +40,6 @@ public class BarcodeResultActivity extends BaseActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-//    @InjectView(R.id.value)
-//    TextView mValue;
     @InjectView(R.id.barcode_container)
     LinearLayout mContainer;
     @InjectView(R.id.card_deal)
@@ -61,6 +60,8 @@ public class BarcodeResultActivity extends BaseActivity {
     CardView mRedeeemCard;
     @InjectView(R.id.redeem_animation)
     View mProgressAnimation;
+    @InjectView(R.id.points)
+    TextView mPoints;
 
     private String mUserId, mDealId, mVenueId;
 
@@ -76,14 +77,14 @@ public class BarcodeResultActivity extends BaseActivity {
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
         mBarcode = getIntent().getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
 
-        if (mBarcode == null){
+        if (mBarcode == null) {
             Snackbar.make(mContainer, R.string.barcode_error,
                     Snackbar.LENGTH_LONG)
                     .show();
@@ -94,50 +95,12 @@ public class BarcodeResultActivity extends BaseActivity {
             constructParams(mBarcode.displayValue);
             redeem();
         }
-
-//        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
-//        startActivityForResult(intent, RC_BARCODE_CAPTURE);
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == RC_BARCODE_CAPTURE) {
-//            if (resultCode == CommonStatusCodes.SUCCESS) {
-//                if (data != null) {
-//                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-//
-//                    Snackbar.make(mContainer, R.string.barcode_success,
-//                            Snackbar.LENGTH_LONG)
-//                            .show();
-//
-////                    mValue.setText(barcode.displayValue);
-//
-//                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-//                    constructParams(barcode.displayValue);
-//                    redeem();
-//
-//                } else {
-////                    mValue.setText(R.string.barcode_failure);
-//                    Snackbar.make(mContainer, R.string.barcode_failure,
-//                            Snackbar.LENGTH_LONG)
-//                            .show();
-//                    Log.d(TAG, "No barcode captured, intent data is null");
-//                }
-//            } else {
-//                Snackbar.make(mContainer, R.string.barcode_error,
-//                        Snackbar.LENGTH_LONG)
-//                        .show();
-//            }
-//        } else {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
-
 
     @Override
     public void onBackPressed() {
         //override to resolve memory issue: release the activity instead
-        startActivity(new Intent(this,DealsFeedActivity.class));
+        startActivity(new Intent(this, DealsFeedActivity.class));
         finishAffinity();
     }
 
@@ -162,6 +125,16 @@ public class BarcodeResultActivity extends BaseActivity {
                 mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
+                UserPoint userPoint = redemption.getPoint();
+                if (userPoint != null){
+                    String point = Integer.toString(userPoint.getPoints());
+                    mPoints.setText(point);
+                    mPoints.setTextColor(getResources().getColor(R.color.green));
+                } else {
+                    String message = "Already awarded before";
+                    mPoints.setText(message);
+                    mPoints.setTextColor(getResources().getColor(R.color.color_primary));
+                }
 
                 RegisterRedemptionTask registerRedemptionTask = new RegisterRedemptionTask(BarcodeResultActivity.this, mDealId);
                 registerRedemptionTask.execute(null, null, null);

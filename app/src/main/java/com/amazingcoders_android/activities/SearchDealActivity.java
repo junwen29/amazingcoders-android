@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,7 +79,8 @@ public class SearchDealActivity extends NavDrawerActivity implements ArrayAutoLo
                 final List<Deal> filteredDealList = new ArrayList<>();
                 for (Deal deal : deals) {
                     final String name = deal.getTitle().toLowerCase();
-                    if (name.contains(query)) {
+                    final String desc = deal.getDescription().toLowerCase();
+                    if (name.contains(query) || desc.contains(query)) {
                         filteredDealList.add(deal);
                     }
                 }
@@ -103,6 +105,16 @@ public class SearchDealActivity extends NavDrawerActivity implements ArrayAutoLo
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light);
+
+        int offset = 256;
+        //calculate the action bar size and determine the end
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            offset = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+            offset = offset * 3 / 2;
+        }
+        mSwipeLayout.setProgressViewOffset(true, 0, offset);
+
 
         // use global layout listener to adjust trigger distance
         ViewTreeObserver vto = mSwipeLayout.getViewTreeObserver();
