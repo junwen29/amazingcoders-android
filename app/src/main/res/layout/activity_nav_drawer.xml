@@ -39,4 +39,19 @@
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/main"/>
 
+    <!--Notification Drawer on the right-->
+    <FrameLayout
+        android:id="@+id/notification_drawer_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/cardview_light_background">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/notification_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
 </android.support.v4.widget.DrawerLayout>

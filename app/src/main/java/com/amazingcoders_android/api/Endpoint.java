@@ -27,8 +27,7 @@ public class Endpoint {
     //TODO forget password page request
 //    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
     
-    // TODO notifications
-//    public static final String NOTIFICATION = P1_SERVER_URL + "notifications?auth_token=%s&offset=%s&limit=%s";
+    public static final String NOTIFICATIONS = P1_SERVER_URL + "notifications?auth_token=%s&user_id=%s";
 //    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
 
     // Venues
