@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,7 +79,11 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.notifications) {
+            if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+            mDrawerLayout.openDrawer(Gravity.RIGHT);
             return true;
         }
 

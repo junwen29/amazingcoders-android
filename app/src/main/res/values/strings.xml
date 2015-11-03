@@ -103,6 +103,7 @@
     <string name="error_field_select_category">Please select a category</string>
     <string name="feedback_success">Thank you! We have received your feedback.</string>
     <string name="ago_now">just now</string>
+    <string name="notifications">Notifications</string>
 
     <plurals name="seconds_ago">
         <item quantity="one">%d second ago</item>
