@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.Constants;
@@ -47,7 +48,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
     protected Toolbar mToolbar;
     protected RecyclerView mNotificationDrawer;
     protected NotificationAdapter mNotificationAdapter;
-    protected FrameLayout mNotificationDrawerLayout;
+    protected LinearLayout mNotificationDrawerLayout;
 
     protected ActionBarDrawerToggle mDrawerToggle;
     protected int mSelectedDrawerItemId = -1;
@@ -63,7 +64,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         mNotificationDrawer = (RecyclerView) findViewById(R.id.notification_drawer);
-        mNotificationDrawerLayout = (FrameLayout) findViewById(R.id.notification_drawer_layout);
+        mNotificationDrawerLayout = (LinearLayout) findViewById(R.id.notification_drawer_layout);
 
         setup();
         loadNotifications();

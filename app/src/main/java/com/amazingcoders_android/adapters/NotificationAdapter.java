@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
@@ -27,7 +28,7 @@ import butterknife.InjectView;
 public class NotificationAdapter extends ArrayAutoLoadAdapter<Notification> {
 
     private static final String DEAL = "deal";
-    private static final String BURPS = "burps";
+    private static final String BURPS = "user_point";
 
     public NotificationAdapter(Context context, ArrayList<Notification> items) {
         super(context, items);
@@ -71,6 +72,8 @@ public class NotificationAdapter extends ArrayAutoLoadAdapter<Notification> {
                         mContext.startActivity(intent);
                     }
                 });
+                ((ViewHolder)holder).mAvatar.setImageResource(R.drawable.ic_launcher);
+                ((ViewHolder)holder).mAvatar.setBackground(null);
                 break;
             default:
                 break;
@@ -84,6 +87,8 @@ public class NotificationAdapter extends ArrayAutoLoadAdapter<Notification> {
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.avatar)
+        ImageView mAvatar;
         @InjectView(R.id.title)
         TextView mTitle;
         @InjectView(R.id.time)
