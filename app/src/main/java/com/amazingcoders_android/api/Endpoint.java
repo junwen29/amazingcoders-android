@@ -1,6 +1,8 @@
 package com.amazingcoders_android.api;
 
 
+import com.amazingcoders_android.BuildConfig;
+
 /**
  * Created by junwen29 on 9/15/2015.
  */
