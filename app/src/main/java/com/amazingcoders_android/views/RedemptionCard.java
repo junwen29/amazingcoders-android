@@ -21,6 +21,8 @@ public class RedemptionCard extends CardView {
     TextView mDeal;
     @InjectView(R.id.venue)
     TextView mVenue;
+    @InjectView(R.id.time)
+    TextView mTime;
 
     private Redemption mRedemption;
 
@@ -55,5 +57,6 @@ public class RedemptionCard extends CardView {
 
         mDeal.setText(mRedemption.getDeal().getTitle());
         mVenue.setText(mRedemption.getVenue().getName());
+        mTime.setText(mRedemption.getCreatedAt());
     }
 }

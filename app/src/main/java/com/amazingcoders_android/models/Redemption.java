@@ -18,6 +18,8 @@ public class Redemption {
     private Deal deal;
     @SerializedName("venue")
     private Venue venue;
+    @SerializedName("user_point")
+    private UserPoint point;
 
     public Redemption() {
         this.id = 0;
@@ -33,5 +35,9 @@ public class Redemption {
 
     public Venue getVenue() {
         return venue;
+    }
+
+    public UserPoint getPoint() {
+        return point;
     }
 }
