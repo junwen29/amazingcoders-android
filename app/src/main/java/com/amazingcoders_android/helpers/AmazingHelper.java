@@ -79,4 +79,33 @@ public class AmazingHelper {
 
         return new Date();
     }
+
+    public static String getTimeAgo(Context context, long time, long now) {
+        if (time > now || time <= 0) {
+            return context.getString(R.string.ago_now);
+        }
+
+        Resources r = context.getResources();
+        final long diff = now - time;
+        if (diff < MINUTE_MILLIS) {
+            int count = (int) (diff / SECOND_MILLIS);
+            return r.getQuantityString(R.plurals.seconds_ago, count, count);
+        } else if(diff < HOUR_MILLIS){
+            int count = (int) (diff / MINUTE_MILLIS);
+            return r.getQuantityString(R.plurals.minutes_ago, count, count);
+        }else if (diff < DAY_MILLIS) {
+            int count = (int) (diff / HOUR_MILLIS);
+            return r.getQuantityString(R.plurals.hours_ago, count, count);
+        }else if (diff < WEEK_MILLIS) {
+            int count = (int) (diff / DAY_MILLIS);
+            return r.getQuantityString(R.plurals.days_ago, count, count);
+        } else if (diff < 8 * DAY_MILLIS) {
+            int count = (int) (diff / WEEK_MILLIS);
+            return r.getQuantityString(R.plurals.weeks_ago, count, count);
+        } else if (diff < YEAR_MILLIS){
+            return printDate(new Date(time),"MMM d 'at' h:mmaa");
+        }else {
+            return printDate(new Date(time),"MMM d ',' yyyy");
+        }
+    }
 }

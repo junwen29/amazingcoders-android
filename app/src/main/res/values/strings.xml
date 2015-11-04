@@ -74,6 +74,7 @@
     <string name="push_summary">Show all notifications</string>
     <string name="menu_action_search">Search</string>
     <string name="title_activity_search_deal">SearchDealActivity</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="wish_add">Add to Wishlist</string>
     <string name="wish_remove">Remove from Wishlist</string>
@@ -95,6 +96,7 @@
     <string name="barcode_failure">No barcode captured</string>
     <string name="barcode_error">Error reading barcode</string>
     <string name="title_activity_my_redemptions">MyRedemptionsActivity</string>
+
     <string name="title_activity_send_feedback">Send Feedback</string>
     <string name="title_activity_profile_page">Profile</string>
     <string name="error_field_required">This field is required</string>
@@ -102,5 +104,32 @@
     <string name="feedback_success">Thank you! We have received your feedback.</string>
     <string name="title_activity_gift">GiftActivity</string>
     <string name="title_activity_my_gift_redemptions">MyGiftRedemptionsActivity</string>
+    <string name="ago_now">just now</string>
+    <string name="notifications">Notifications</string>
+
+    <plurals name="seconds_ago">
+        <item quantity="one">%d second ago</item>
+        <item quantity="other">%d seconds ago</item>
+    </plurals>
+    <plurals name="minutes_ago">
+        <item quantity="one">%d minute ago</item>
+        <item quantity="other">%d minutes ago</item>
+    </plurals>
+    <plurals name="hours_ago">
+        <item quantity="one">%d hour ago</item>
+        <item quantity="other">%d hours ago</item>
+    </plurals>
+    <plurals name="days_ago">
+        <item quantity="one">%d day ago</item>
+        <item quantity="other">%d days ago</item>
+    </plurals>
+    <plurals name="weeks_ago">
+        <item quantity="one">%d week ago</item>
+        <item quantity="other">%d weeks ago</item>
+    </plurals>
+    <plurals name="years_ago">
+        <item quantity="one">%d year ago</item>
+        <item quantity="other">%d years ago</item>
+    </plurals>
 
 </resources>

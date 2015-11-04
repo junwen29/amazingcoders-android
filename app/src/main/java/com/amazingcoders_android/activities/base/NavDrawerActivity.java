@@ -7,12 +7,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.FeedbackActivity;
 import com.amazingcoders_android.activities.FrontPageActivity;
@@ -20,9 +24,19 @@ import com.amazingcoders_android.activities.DealsFeedActivity;
 import com.amazingcoders_android.activities.MyRedemptionsActivity;
 import com.amazingcoders_android.activities.ProfilePageActivity;
 import com.amazingcoders_android.activities.VenuesFeedActivity;
+import com.amazingcoders_android.adapters.NotificationAdapter;
+import com.amazingcoders_android.api.CollectionListener;
+import com.amazingcoders_android.api.requests.NotificationRequest;
 import com.amazingcoders_android.dialogs.AlertDialogFactory;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.helpers.PreferencesStore;
+import com.amazingcoders_android.models.Notification;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by junwen29 on 9/17/2015.
@@ -32,6 +46,9 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
     protected NavigationView mNavigationView;
     protected FrameLayout mContainer;
     protected Toolbar mToolbar;
+    protected RecyclerView mNotificationDrawer;
+    protected NotificationAdapter mNotificationAdapter;
+    protected LinearLayout mNotificationDrawerLayout;
 
     protected ActionBarDrawerToggle mDrawerToggle;
     protected int mSelectedDrawerItemId = -1;
@@ -46,7 +63,11 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         mContainer = (FrameLayout) findViewById(R.id.container);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mNotificationDrawer = (RecyclerView) findViewById(R.id.notification_drawer);
+        mNotificationDrawerLayout = (LinearLayout) findViewById(R.id.notification_drawer_layout);
+
         setup();
+        loadNotifications();
     }
 
     @Override
@@ -63,6 +84,10 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         setupSupportActionBar();
         if (mShouldInitDrawerToggle)
             initDrawerToggle(mToolbar);
+
+        mNotificationAdapter = new NotificationAdapter(this, new ArrayList<Notification>());
+        mNotificationDrawer.setLayoutManager(new LinearLayoutManager(this));
+        mNotificationDrawer.setAdapter(mNotificationAdapter);
     }
 
     private void initDrawer() {
@@ -76,6 +101,25 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
 
         TextView displayEmail = (TextView) findViewById(R.id.display_header_email);
         displayEmail.setText(Global.with(this).getOwner().getEmail());
+    }
+
+    private void loadNotifications(){
+        CollectionListener<Notification> listener = new CollectionListener<Notification>() {
+            @Override
+            public void onResponse(Collection<Notification> notifications) {
+                mNotificationAdapter.clear();
+                mNotificationAdapter.addAll(notifications);
+                mNotificationAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                showErrorMessage();
+            }
+        };
+
+        String userId = Long.toString(Global.with(NavDrawerActivity.this).getOwnerId());
+        getBurppleApi().enqueue(NotificationRequest.loadAll(userId, listener));
     }
 
     @Override
@@ -146,6 +190,16 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
             public void onDrawerClosed(View v) {
                 super.onDrawerClosed(v);
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                if (drawerView == mNavigationView)
+                    mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, mNotificationDrawerLayout);
+                else {
+                    loadNotifications();
+                    mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, mNavigationView);
+                }
             }
 
         };
