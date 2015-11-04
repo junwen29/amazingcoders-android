@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
@@ -62,6 +63,8 @@ public class BarcodeResultActivity extends BaseActivity {
     View mProgressAnimation;
     @InjectView(R.id.points)
     TextView mPoints;
+    @InjectView(R.id.burps_layout)
+    RelativeLayout mPointsLayout;
 
     private String mUserId, mDealId, mVenueId;
 
@@ -125,6 +128,7 @@ public class BarcodeResultActivity extends BaseActivity {
                 mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
+                mPointsLayout.setVisibility(View.VISIBLE);
                 UserPoint userPoint = redemption.getPoint();
                 if (userPoint != null){
                     String point = Integer.toString(userPoint.getPoints());
@@ -145,6 +149,7 @@ public class BarcodeResultActivity extends BaseActivity {
 //                Log.d(TAG, volleyError.networkResponse.);
                 String response = VolleyErrorHelper.getResponse(volleyError);
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
+                mPointsLayout.setVisibility(View.GONE);
 
                 switch (statusCode){
                     case VolleyErrorHelper.NOT_ACCEPTABLE:
