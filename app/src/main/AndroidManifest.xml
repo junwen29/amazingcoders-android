@@ -126,6 +126,10 @@
             android:name=".activities.MyGiftRedemptionsActivity"
             android:label="@string/title_activity_my_gift_redemptions" >
         </activity>
+        <activity
+            android:name=".activities.ViewFeedbackActivity"
+            android:label="@string/title_activity_view_feedback" >
+        </activity>
     </application>
 
 </manifest>

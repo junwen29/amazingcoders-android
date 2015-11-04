@@ -60,6 +60,7 @@ public class Endpoint {
 
     //Feedback
     public static final String SEND_FEEDBACK = P1_SERVER_URL + "feedback?auth_token=%s&user_id=%s&title=%s&category=%s&desc=%s";
+    public static final String VIEW_FEEDBACKS = P1_SERVER_URL + "feedback/view?id=%s&auth_token=%s";
 
     //Gifts
     public static final String GIFTS = P1_SERVER_URL + "gifts?auth_token=%s";
