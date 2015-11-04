@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
 import com.amazingcoders_android.adapters.GiftAdapter;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
@@ -25,7 +26,7 @@ import java.util.Collection;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GiftActivity extends NavDrawerActivity implements ArrayAutoLoadAdapter.AutoLoadListener {
+public class GiftActivity extends BaseActivity implements ArrayAutoLoadAdapter.AutoLoadListener {
 
     @InjectView(R.id.recyclerview)
     RecyclerView mRecyclerView;
@@ -38,34 +39,14 @@ public class GiftActivity extends NavDrawerActivity implements ArrayAutoLoadAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View v = getLayoutInflater().inflate(R.layout.activity_gift, mContainer, true);
-        ButterKnife.inject(this, v);
+        setContentView(R.layout.activity_gift);
+        ButterKnife.inject(this);
 
         mOwner = Global.with(this).getOwner();
         mOwnerBurps = (TextView) findViewById(R.id.display_burps);
         setup();
         loadGifts();
     }
-
-    @Override
-    public void setupSupportActionBar() {
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle("Burpple Gifts");
-        }
-    }
-
-    @Override
-    public void setActiveDrawerItem() {
-        //set selected menu
-        mNavigationView.getMenu().getItem(0).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_1;
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

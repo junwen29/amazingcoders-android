@@ -27,13 +27,10 @@
             android:title="My Redemptions"/>
         <item
             android:id="@+id/navigation_sub_item_3"
-            android:title="My Gift Redemptions"/>
+            android:title="Send a Feedback"/>
         <item
             android:id="@+id/navigation_sub_item_4"
-            android:title="Send a Feedback"/>
-
-        <item
-            android:id="@+id/navigation_sub_item_5"
             android:title="@string/logout"/>
+
     </group>
 </menu>
