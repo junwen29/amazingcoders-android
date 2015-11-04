@@ -40,7 +40,7 @@
         android:text="Redeem Gift"
         android:padding="5dp"
         android:id="@+id/redeem_btn"
-        />
+        android:textAllCaps="false" />
 
 
 </RelativeLayout>
