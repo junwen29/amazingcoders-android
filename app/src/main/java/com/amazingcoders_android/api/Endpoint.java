@@ -1,8 +1,6 @@
 package com.amazingcoders_android.api;
 
 
-import com.amazingcoders_android.BuildConfig;
-
 /**
  * Created by junwen29 on 9/15/2015.
  */
@@ -60,4 +58,9 @@ public class Endpoint {
 
     //Feedback
     public static final String SEND_FEEDBACK = P1_SERVER_URL + "feedback?auth_token=%s&user_id=%s&title=%s&category=%s&desc=%s";
+
+    //Gifts
+    public static final String GIFTS = P1_SERVER_URL + "gifts?auth_token=%s";
+    public static final String REDEEM_GIFT = P1_SERVER_URL + "gifts/redeem?auth_token=%s&id=%s";
+    public static final String GIFT_REDEMPTIONS = P1_SERVER_URL + "gifts/records?id=%s&auth_token=%s";
 }

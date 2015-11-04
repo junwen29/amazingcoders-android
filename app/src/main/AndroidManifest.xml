@@ -116,7 +116,15 @@
         <activity
             android:name=".activities.FeedbackActivity"
             android:label="@string/title_activity_send_feedback"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activities.GiftActivity"
+            android:label="@string/title_activity_gift" >
+        </activity>
+        <activity
+            android:name=".activities.MyGiftRedemptionsActivity"
+            android:label="@string/title_activity_my_gift_redemptions" >
         </activity>
     </application>
 

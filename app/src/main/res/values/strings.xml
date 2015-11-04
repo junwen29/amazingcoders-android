@@ -102,6 +102,8 @@
     <string name="error_field_required">This field is required</string>
     <string name="error_field_select_category">Please select a category</string>
     <string name="feedback_success">Thank you! We have received your feedback.</string>
+    <string name="title_activity_gift">GiftActivity</string>
+    <string name="title_activity_my_gift_redemptions">MyGiftRedemptionsActivity</string>
     <string name="ago_now">just now</string>
     <string name="notifications">Notifications</string>
 

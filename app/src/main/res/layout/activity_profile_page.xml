@@ -1,249 +1,213 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<!--&lt;!&ndash;<android.support.design.widget.CoordinatorLayout&ndash;&gt;-->
+
+<!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
+
+<!--<RelativeLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+<!--<android.support.design.widget.AppBarLayout-->
+<!--android:layout_height="200dp"-->
+<!--android:layout_width="match_parent"-->
+<!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+<!--android:id="@+id/appBar">-->
+
+<!--<android.support.design.widget.CollapsingToolbarLayout-->
+<!--android:id="@+id/collapsing_toolbar_layout"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+<!--app:contentScrim="?attr/colorPrimary">-->
+
+<!--<FrameLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent">-->
+
+<!--<ImageView-->
+<!--android:id="@+id/image2"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:scaleType="fitXY"-->
+<!--android:src="@drawable/img_background_final"/>-->
+
+<!--<View-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_alignTop="@id/image2"-->
+<!--android:background="@drawable/gradient_view" />-->
+
+<!--</FrameLayout>-->
+
+<!--<android.support.v7.widget.Toolbar-->
+<!--android:layout_height="?attr/actionBarSize"-->
+<!--android:layout_width="match_parent"-->
+<!--android:id="@+id/toolbar"-->
+<!--app:layout_collapseMode="pin"/>-->
+
+<!--</android.support.design.widget.CollapsingToolbarLayout>-->
+<!--</android.support.design.widget.AppBarLayout>-->
+
+<!--<RelativeLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent">-->
+
+<!--<ImageView-->
+<!--android:id="@+id/image3"-->
+<!--android:layout_width="144dp"-->
+<!--android:layout_height="144dp"-->
+<!--android:layout_marginTop="100dp"-->
+<!--android:layout_alignParentRight="true"-->
+<!--android:src="@drawable/ic_user_placeholder"/>-->
+
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_margin="5dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="?android:attr/actionBarSize"
+    android:paddingBottom="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_height="200dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/appBar">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?attr/colorPrimary">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/image2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_background_final"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignTop="@id/image2"
-                    android:background="@drawable/gradient_view" />
-
-                </FrameLayout>
-
-            <android.support.v7.widget.Toolbar
-                android:layout_height="?attr/actionBarSize"
-                android:layout_width="match_parent"
-                android:id="@+id/toolbar"
-                app:layout_collapseMode="pin"/>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
-            android:layout_marginTop="100dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_user_placeholder"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_below="@+id/image3"
-            android:background="@color/white"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Username"
+            android:textSize="15sp"
+            android:textColor="@color/burpple_red"
             android:layout_margin="5dp"
-            >
+            />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="15sp"
+            android:id="@+id/display_username"
+            android:layout_margin="5dp"
+            />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Username"
-                        android:textSize="15sp"
-                        android:textColor="@color/burpple_red"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        />
+    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="15sp"
-                        android:id="@+id/display_username"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"
-                        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white">
 
-                </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Email"
+            android:textSize="15sp"
+            android:textColor="@color/burpple_red"
+            android:id="@+id/email"
+            android:layout_margin="5dp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/white">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="15sp"
+            android:id="@+id/display_email"
+            android:layout_margin="5dp"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Email"
-                        android:textSize="15sp"
-                        android:textColor="@color/burpple_red"
-                        android:id="@+id/email"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"/>
+    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="15sp"
-                        android:id="@+id/display_email"
-                        android:padding="5dp"
-                        android:layout_margin="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
 
-                </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Name"
+            android:textSize="15sp"
+            android:textColor="@color/burpple_red"
+            android:layout_margin="5dp"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="15sp"
+            android:id="@+id/display_name"
+            android:layout_margin="5dp"
+            />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Name"
-                    android:textSize="15sp"
-                    android:textColor="@color/burpple_red"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
+    </LinearLayout>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:textSize="15sp"
-                    android:id="@+id/display_name"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
 
-            </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Burps"
+            android:textSize="15sp"
+            android:textColor="@color/burpple_red"
+            android:layout_margin="5dp"
+            />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:id="@+id/display_burps"
+            android:layout_margin="5dp"
+            />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Burps"
-                    android:textSize="15sp"
-                    android:textColor="@color/burpple_red"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="15sp"
+            android:text="Redeem a Gift"
+            android:layout_margin="5dp"
+            android:onClick="viewGifts"
+            android:textColor="@color/white"
+            android:background="@color/burpple_red"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:textSize="15sp"
-                    android:id="@+id/display_burps"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
+    </LinearLayout>
 
-            </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Past Gift Redemptions"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:textSize="15sp"
+        android:textColor="@color/burpple_red"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="@color/light_gray"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_user_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Wishlisted Venues"
-                    android:textSize="15sp"
-                    android:textColor="@color/burpple_red"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:textSize="15sp"
-                    android:id="@+id/display_wishlisted_venues"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Bookmarked Deals"
-                    android:textSize="15sp"
-                    android:textColor="@color/burpple_red"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:textSize="15sp"
-                    android:id="@+id/display_bookmarked_deals"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
+<!--</RelativeLayout>-->
+    <!--</android.support.design.widget.CoordinatorLayout>-->

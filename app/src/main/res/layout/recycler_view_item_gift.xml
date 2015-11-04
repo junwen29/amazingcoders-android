@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.amazingcoders_android.views.GiftCard
+    android:id="@+id/card_gift"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    style="@style/CardView"
+    xmlns:android="http://schemas.android.com/apk/res/android" />
