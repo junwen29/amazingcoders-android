@@ -95,7 +95,7 @@ public class ProfilePageActivity extends NavDrawerActivity implements ArrayAutoL
     @Override
     public void setActiveDrawerItem() {
         mNavigationView.getMenu().getItem(2).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_2;
+        mSelectedDrawerItemId = R.id.navigation_sub_item_1;
     }
 
     private void loadProfile() {

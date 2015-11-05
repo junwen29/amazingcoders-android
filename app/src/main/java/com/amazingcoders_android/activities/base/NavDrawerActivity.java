@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
-import com.amazingcoders_android.activities.FeedbackActivity;
+import com.amazingcoders_android.activities.ViewFeedbackActivity;
 import com.amazingcoders_android.activities.FrontPageActivity;
 import com.amazingcoders_android.activities.DealsFeedActivity;
 import com.amazingcoders_android.activities.MyRedemptionsActivity;
@@ -146,8 +146,8 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
                     startActivity(new Intent(this, MyRedemptionsActivity.class));
                     break;
 
-                case R.id.navigation_sub_item_3: // create feedback
-                    startActivity(new Intent(this, FeedbackActivity.class));
+                case R.id.navigation_sub_item_3: // view feedback
+                    startActivity(new Intent(this, ViewFeedbackActivity.class));
                     break;
 
                 case R.id.navigation_sub_item_4: // Logout
