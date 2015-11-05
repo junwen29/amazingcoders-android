@@ -46,13 +46,14 @@ public class ViewFeedbackActivity extends NavDrawerActivity implements ArrayAuto
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setTitle("My Feedbacks");
         }
     }
 
     @Override
     public void setActiveDrawerItem() {
-        mNavigationView.getMenu().getItem(2).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_sub_item_2;
+        mNavigationView.getMenu().getItem(4).setChecked(true);
+        mSelectedDrawerItemId = R.id.navigation_sub_item_3;
     }
 
 
