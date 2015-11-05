@@ -19,6 +19,7 @@ public class FeedbackRequest {
 
     public static EmptyRequest send(String title, String userId, String category, String desc, EmptyListener listener) {
         String url = String.format(Endpoint.SEND_FEEDBACK, BurppleApi.getAuthToken(), userId, title, category, desc);
+        url = url.replaceAll(" ", "%20");
         return new EmptyRequest(Request.Method.POST, url, listener);
     }
 
