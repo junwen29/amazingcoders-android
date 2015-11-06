@@ -1,5 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.amazingcoders_android.activities.ProfilePageActivity">
+    tools:context="com.amazingcoders_android.activities.ViewFeedbackActivity">
+
 </menu>

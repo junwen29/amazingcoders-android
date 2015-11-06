@@ -74,7 +74,6 @@
     <string name="push_summary">Show all notifications</string>
     <string name="menu_action_search">Search</string>
     <string name="title_activity_search_deal">SearchDealActivity</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="wish_add">Add to Wishlist</string>
     <string name="wish_remove">Remove from Wishlist</string>
@@ -131,5 +130,7 @@
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>
     </plurals>
+
+    <string name="title_activity_view_feedback">ViewFeedbackActivity</string>
 
 </resources>
