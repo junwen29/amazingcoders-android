@@ -27,7 +27,7 @@
             android:title="My Redemptions"/>
         <item
             android:id="@+id/navigation_sub_item_3"
-            android:title="Send a Feedback"/>
+            android:title="My Feedbacks"/>
         <item
             android:id="@+id/navigation_sub_item_4"
             android:title="@string/logout"/>

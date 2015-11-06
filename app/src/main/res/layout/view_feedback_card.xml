@@ -9,38 +9,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/content"
         >
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Title"/>
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/category"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Subtitle"/>
 
         <TextView
-            android:id="@+id/points"
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Subtitle"/>
 
+        <TextView
+            android:id="@+id/status"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Text.Card.Subtitle"/>
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_alignParentRight="true"
-        android:text="Redeem Gift"
-        android:padding="5dp"
-        android:id="@+id/redeem_btn"
-        android:textAllCaps="false" />
-
 
 </RelativeLayout>
