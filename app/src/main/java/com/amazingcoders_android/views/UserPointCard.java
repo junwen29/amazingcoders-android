@@ -57,6 +57,6 @@ public class UserPointCard extends CardView {
 
         mReason.setText(mUserPoint.getReason());
         mCreatedAt.setText(mUserPoint.getCreatedAt());
-        mPointsOperation.setText(String.valueOf(mUserPoint.getPoints())+ " were "+ mUserPoint.getOperation()+"ed");
+        mPointsOperation.setText(String.valueOf(mUserPoint.getPoints())+ " Burps were "+ mUserPoint.getOperation()+"ed");
     }
 }
