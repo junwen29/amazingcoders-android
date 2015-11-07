@@ -15,7 +15,7 @@ public class Feedback {
     @SerializedName("content")
     private String content;
     @SerializedName("resolved")
-    private String resolved;
+    private boolean isResolved;
 
 
     public Feedback() {
@@ -26,7 +26,7 @@ public class Feedback {
         this.title = in.readString();
         this.category = in.readString();
         this.content = in.readString();
-        this.resolved = in.readString();
+        this.isResolved = in.readByte() != 0x00;
     }
 
     public String getTitle() {
@@ -41,7 +41,7 @@ public class Feedback {
         return this.content;
     }
 
-    public String getResolved() {
-        return this.resolved;
+    public boolean isResolved() {
+        return isResolved;
     }
 }
