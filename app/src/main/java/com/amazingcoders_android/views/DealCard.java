@@ -66,7 +66,7 @@ public class DealCard extends CardView {
         Cloudinary cloudinary = BurppleApplication.getInstance(mContext).getCloudinary();
         int size = Helper.convertDipToPx(56, getResources());
         String url = cloudinary.url().transformation(new Transformation().height(size)).generate(mDeal.getImageUrl());
-        PicassoRequest.get(mContext, url, R.drawable.ic_deal_white_placeholder).into(mAvatar);
+        PicassoRequest.get(mContext, url, R.drawable.ic_deal_white_placeholder).fit().into(mAvatar);
     }
 
     public Long getDealId (){

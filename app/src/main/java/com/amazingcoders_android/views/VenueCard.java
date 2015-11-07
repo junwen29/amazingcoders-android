@@ -68,7 +68,7 @@ public class VenueCard extends CardView {
         Cloudinary cloudinary = BurppleApplication.getInstance(mContext).getCloudinary();
         int size = Helper.convertDipToPx(56,getResources());
         String url = cloudinary.url().transformation(new Transformation().height(size)).generate(mVenue.getPhotoUrl());
-        PicassoRequest.get(mContext,url, R.drawable.ic_place_white_placeholder).into(mAvatar);
+        PicassoRequest.get(mContext,url, R.drawable.ic_place_white_placeholder).fit().into(mAvatar);
     }
 
     public Long getVenueID() {
