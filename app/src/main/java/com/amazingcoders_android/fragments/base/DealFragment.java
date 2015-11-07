@@ -57,44 +57,12 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
         return  v;
     }
 
-
-
     private void initSwipeRefreshLayout(){
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light);
-
-        // use global layout listener to adjust trigger distance
-//        ViewTreeObserver vto = mSwipeLayout.getViewTreeObserver();
-//        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                // Calculate the trigger distance.
-//                final DisplayMetrics metrics = getResources().getDisplayMetrics();
-//                Float mDistanceToTriggerSync = Math.min(
-//                        ((View) mSwipeLayout.getParent()).getHeight() * 0.8f,
-//                        200 * metrics.density);
-//
-//                try {
-//                    // Set the internal trigger distance using reflection.
-//                    Field field = SwipeRefreshLayout.class.getDeclaredField("mTotalDragDistance");
-//                    field.setAccessible(true);
-//                    field.setFloat(mSwipeLayout, mDistanceToTriggerSync);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//                // Only needs to be done once so remove listener.
-//                ViewTreeObserver obs = mSwipeLayout.getViewTreeObserver();
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    obs.removeOnGlobalLayoutListener(this);
-//                } else {
-//                    obs.removeGlobalOnLayoutListener(this);
-//                }
-//            }
-//        });
     }
 
     @Override
