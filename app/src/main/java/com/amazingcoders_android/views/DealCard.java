@@ -72,4 +72,8 @@ public class DealCard extends CardView {
     public Long getDealId (){
         return this.mDeal.id;
     }
+
+    public TextView getmTitle() {
+        return mTitle;
+    }
 }

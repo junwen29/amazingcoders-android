@@ -82,11 +82,6 @@ public class VenuePageActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -111,7 +106,7 @@ public class VenuePageActivity extends BaseActivity {
                     for (final Deal deal: deals){
                         DealCard dealCard = new DealCard(VenuePageActivity.this);
                         dealCard.update(deal);
-                        dealCard.setOnClickListener(new View.OnClickListener() {
+                        dealCard.getmTitle().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
