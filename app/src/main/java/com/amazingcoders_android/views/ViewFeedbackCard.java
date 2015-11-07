@@ -22,7 +22,8 @@ public class ViewFeedbackCard extends CardView {
     TextView mCategory;
     @InjectView(R.id.content)
     TextView mContent;
-
+    @InjectView(R.id.status)
+    TextView mStatus;
 
     Feedback mFeedback;
     Context mContext;
@@ -59,5 +60,8 @@ public class ViewFeedbackCard extends CardView {
         mTitle.setText(mFeedback.getTitle());
         mCategory.setText(mFeedback.getCategory());
         mContent.setText(String.valueOf(mFeedback.getContent()));
+
+        String resolve = mFeedback.isResolved() ? "Resolved" : "Unresolved";
+        mStatus.setText(resolve);
     }
 }

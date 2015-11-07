@@ -1,7 +1,11 @@
 package com.amazingcoders_android.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -49,6 +53,12 @@ public class VenuePageActivity extends BaseActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     @InjectView(R.id.image)
     ImageView mCoverImage;
+    @InjectView(R.id.progress)
+    View mProgressView;
+    @InjectView(R.id.venue_layout)
+    LinearLayout mVenueLayout;
+    @InjectView(R.id.app_bar_layout)
+    AppBarLayout mAppBarLayout;
 
     private Venue mVenue;
     private Long mVenueId;
@@ -82,11 +92,6 @@ public class VenuePageActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -95,6 +100,7 @@ public class VenuePageActivity extends BaseActivity {
             @Override
             public void onResponse(Venue venue) {
                 mVenue = venue;
+                showRefreshing(false);
 
                 mWishButton.setVenue(mVenue);
                 mWishButton.setVisibility(View.VISIBLE);
@@ -111,7 +117,7 @@ public class VenuePageActivity extends BaseActivity {
                     for (final Deal deal: deals){
                         DealCard dealCard = new DealCard(VenuePageActivity.this);
                         dealCard.update(deal);
-                        dealCard.setOnClickListener(new View.OnClickListener() {
+                        dealCard.getmTitle().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(VenuePageActivity.this, DealPageActivity.class);
@@ -137,14 +143,56 @@ public class VenuePageActivity extends BaseActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                showRefreshing(false);
             }
         };
         BurppleApi.getInstance(this).enqueue(VenueRequest.load(mVenueId, listener));
+        showRefreshing(true);
     }
 
     private void updateCoverImage(){
         Cloudinary cloudinary = BurppleApplication.getInstance(this).getCloudinary();
         String url = cloudinary.url().generate(mVenue.getPhotoUrl());
         PicassoRequest.get(this, url, R.drawable.img_venue_placeholder).into(mCoverImage);
+    }
+
+    private void showRefreshing(final boolean show){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mVenueLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+            mVenueLayout.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mVenueLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mAppBarLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+            mAppBarLayout.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mAppBarLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mVenueLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+            mAppBarLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 }

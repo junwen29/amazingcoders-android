@@ -33,7 +33,6 @@ public class Notification {
     @SerializedName("created_at")
     private Date createdAt;
 
-
     public String getItemType() {
         return itemType;
     }

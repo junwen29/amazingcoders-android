@@ -11,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.amazingcoders_android.R;
@@ -45,8 +48,8 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     @InjectView(R.id.fab)
     FloatingActionButton mFab;
 
-    private List<Deal> mOriginalDeals;
-    private boolean hasFiltered = false;
+//    private List<Deal> mOriginalDeals;
+//    private boolean hasFiltered = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,18 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         toolbar.inflateMenu(R.menu.deals_feed);
         final SearchView searchView = (SearchView) toolbar.getMenu().findItem(R.id.search).getActionView();
         searchView.setOnQueryTextListener(this);
+        toolbar.getMenu().findItem(R.id.notifications).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+                return true;
+            }
+        });
     }
+
 
     @Override
     public void setupSupportActionBar() {
@@ -122,21 +136,17 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
             DealFragment fragment = (DealFragment) page;
             DealAdapter adapter = fragment.getAdapter();
 
-            List<Deal> deals;
-            if (hasFiltered){
+            List<Deal> deals = fragment.getOriginalDeals();
+            if (fragment.hasFiltered()){
                 adapter.clear();
-                adapter.addAll(mOriginalDeals);
-                deals = mOriginalDeals;
-            } else {
-                deals = adapter.getAllItems();
-                mOriginalDeals = new ArrayList<>(deals); //remember unfiltered deals
+                adapter.addAll(deals);
             }
 
             final List<Deal> filteredDealList = filter(deals,newText);
             adapter.animateTo(filteredDealList);
             adapter.notifyDataSetChanged();
             fragment.getRecyclerView().scrollToPosition(0);
-            hasFiltered = true;
+            fragment.setHasFiltered(true);
         }
 
         return true;

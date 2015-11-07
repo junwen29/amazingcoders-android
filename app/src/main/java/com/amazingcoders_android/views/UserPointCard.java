@@ -6,7 +6,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.helpers.AmazingHelper;
 import com.amazingcoders_android.models.UserPoint;
 
 import butterknife.ButterKnife;
@@ -56,7 +58,8 @@ public class UserPointCard extends CardView {
         if (mUserPoint == null) return;
 
         mReason.setText(mUserPoint.getReason());
-        mCreatedAt.setText(mUserPoint.getCreatedAt());
-        mPointsOperation.setText(String.valueOf(mUserPoint.getPoints())+ " Burps were "+ mUserPoint.getOperation()+"ed");
+        String date = AmazingHelper.printDate(mUserPoint.getCreatedAt(), Constants.REDEMPTION_DATE_FORMAT);
+        mCreatedAt.setText(date);
+        mPointsOperation.setText(String.valueOf(mUserPoint.getPoints())+ "Burps were "+ mUserPoint.getOperation()+"ed");
     }
 }

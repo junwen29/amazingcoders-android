@@ -6,7 +6,9 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
+import com.amazingcoders_android.helpers.AmazingHelper;
 import com.amazingcoders_android.models.Redemption;
 
 import butterknife.ButterKnife;
@@ -57,6 +59,7 @@ public class RedemptionCard extends CardView {
 
         mDeal.setText(mRedemption.getDeal().getTitle());
         mVenue.setText(mRedemption.getVenue().getName());
-        mTime.setText(mRedemption.getCreatedAt());
+        String date = AmazingHelper.printDate(mRedemption.getDate(), Constants.REDEMPTION_DATE_FORMAT);
+        mTime.setText(date);
     }
 }
