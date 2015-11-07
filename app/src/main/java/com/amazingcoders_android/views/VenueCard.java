@@ -75,4 +75,7 @@ public class VenueCard extends CardView {
         return this.mVenue.getId();
     }
 
+    public TextView getmName() {
+        return mName;
+    }
 }

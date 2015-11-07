@@ -119,7 +119,7 @@ public class DealPageActivity extends BaseActivity {
                     int index = 0;
                     VenueCard venueCard = new VenueCard(DealPageActivity.this);
                     venueCard.update(venue);
-                    venueCard.setOnClickListener(new View.OnClickListener() {
+                    venueCard.getmName().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(DealPageActivity.this, VenuePageActivity.class);
