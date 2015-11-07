@@ -14,8 +14,10 @@ import android.view.ViewTreeObserver;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.adapters.DealAdapter;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
+import com.amazingcoders_android.models.Deal;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,6 +36,8 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
     protected RecyclerView.LayoutManager mLayoutManager;
     protected DealAdapter mAdapter;
 
+    protected List<Deal> mOriginalDeals;
+    protected boolean hasFiltered = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,5 +87,17 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
 
     public RecyclerView getRecyclerView() {
         return mRecyclerView;
+    }
+
+    public List<Deal> getOriginalDeals() {
+        return mOriginalDeals;
+    }
+
+    public boolean hasFiltered() {
+        return hasFiltered;
+    }
+
+    public void setHasFiltered(boolean hasFiltered) {
+        this.hasFiltered = hasFiltered;
     }
 }

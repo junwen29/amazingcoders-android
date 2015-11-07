@@ -6,6 +6,7 @@ import com.amazingcoders_android.fragments.base.DealFragment;
 import com.amazingcoders_android.models.Deal;
 import com.android.volley.VolleyError;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -27,6 +28,7 @@ public class DiscountsDealsFragment extends DealFragment {
                 mAdapter.clear();
                 mAdapter.addAll(deals);
                 mAdapter.notifyDataSetChanged();
+                mOriginalDeals = new ArrayList<>(deals);
             }
 
             @Override

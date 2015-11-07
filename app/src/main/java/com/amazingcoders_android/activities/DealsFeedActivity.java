@@ -45,8 +45,8 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     @InjectView(R.id.fab)
     FloatingActionButton mFab;
 
-    private List<Deal> mOriginalDeals;
-    private boolean hasFiltered = false;
+//    private List<Deal> mOriginalDeals;
+//    private boolean hasFiltered = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,21 +122,17 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
             DealFragment fragment = (DealFragment) page;
             DealAdapter adapter = fragment.getAdapter();
 
-            List<Deal> deals;
-            if (hasFiltered){
+            List<Deal> deals = fragment.getOriginalDeals();
+            if (fragment.hasFiltered()){
                 adapter.clear();
-                adapter.addAll(mOriginalDeals);
-                deals = mOriginalDeals;
-            } else {
-                deals = adapter.getAllItems();
-                mOriginalDeals = new ArrayList<>(deals); //remember unfiltered deals
+                adapter.addAll(deals);
             }
 
             final List<Deal> filteredDealList = filter(deals,newText);
             adapter.animateTo(filteredDealList);
             adapter.notifyDataSetChanged();
             fragment.getRecyclerView().scrollToPosition(0);
-            hasFiltered = true;
+            fragment.setHasFiltered(true);
         }
 
         return true;
