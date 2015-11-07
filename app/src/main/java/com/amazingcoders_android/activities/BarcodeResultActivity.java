@@ -12,12 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.VolleyErrorHelper;
 import com.amazingcoders_android.api.requests.RedemptionRequest;
 import com.amazingcoders_android.async_tasks.RegisterRedemptionTask;
+import com.amazingcoders_android.helpers.AmazingHelper;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
 import com.amazingcoders_android.models.UserPoint;
@@ -123,7 +125,7 @@ public class BarcodeResultActivity extends BaseActivity {
             @Override
             public void onResponse(Redemption redemption) {
                 //TODO convert date time to user friendly text
-                String redeemTime = "You redeemed the deal at: "+ redemption.getCreatedAt();
+                String redeemTime = "Time: "+ AmazingHelper.printDate(redemption.getDate(), Constants.REDEMPTION_DATE_FORMAT);
                 showResult(true, "");
                 mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
@@ -135,7 +137,7 @@ public class BarcodeResultActivity extends BaseActivity {
                     mPoints.setText(point);
                     mPoints.setTextColor(getResources().getColor(R.color.green));
                 } else {
-                    String message = "Already awarded before";
+                    String message = "Only for 1st redeem";
                     mPoints.setText(message);
                     mPoints.setTextColor(getResources().getColor(R.color.color_primary));
                 }
