@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.amazingcoders_android.R;
@@ -39,6 +42,28 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
 //        initDrawerToggle(toolbar);
         init();
         loadRedemptions(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_my_redemptions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.notifications) {
+            if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+            mDrawerLayout.openDrawer(Gravity.RIGHT);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void init(){

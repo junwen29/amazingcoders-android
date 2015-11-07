@@ -10,8 +10,6 @@ import java.util.Date;
 public class Redemption {
     @SerializedName("id")
     public final long id;
-    @SerializedName("created_at")
-    private String createdAt;
     @SerializedName("user")
     private User user;
     @SerializedName("deal")
@@ -20,12 +18,14 @@ public class Redemption {
     private Venue venue;
     @SerializedName("user_point")
     private UserPoint point;
+    @SerializedName("created_at")
+    private Date createdAt;
 
     public Redemption() {
         this.id = 0;
     }
 
-    public String getCreatedAt() {
+    public Date getDate() {
         return createdAt;
     }
 

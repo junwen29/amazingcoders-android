@@ -60,10 +60,8 @@ public class ViewFeedbackCard extends CardView {
         mTitle.setText(mFeedback.getTitle());
         mCategory.setText(mFeedback.getCategory());
         mContent.setText(String.valueOf(mFeedback.getContent()));
-        if (mFeedback.getResolved().equals("TRUE")) {
-            mStatus.setText("Resolved");
-        } else {
-            mStatus.setText("Unresolved");
-        }
+
+        String resolve = mFeedback.isResolved() ? "Resolved" : "Unresolved";
+        mStatus.setText(resolve);
     }
 }

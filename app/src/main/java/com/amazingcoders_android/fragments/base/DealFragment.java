@@ -14,8 +14,10 @@ import android.view.ViewTreeObserver;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.adapters.DealAdapter;
 import com.amazingcoders_android.adapters.base.ArrayAutoLoadAdapter;
+import com.amazingcoders_android.models.Deal;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,6 +36,8 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
     protected RecyclerView.LayoutManager mLayoutManager;
     protected DealAdapter mAdapter;
 
+    protected List<Deal> mOriginalDeals;
+    protected boolean hasFiltered = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,44 +61,12 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
         return  v;
     }
 
-
-
     private void initSwipeRefreshLayout(){
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light);
-
-        // use global layout listener to adjust trigger distance
-//        ViewTreeObserver vto = mSwipeLayout.getViewTreeObserver();
-//        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                // Calculate the trigger distance.
-//                final DisplayMetrics metrics = getResources().getDisplayMetrics();
-//                Float mDistanceToTriggerSync = Math.min(
-//                        ((View) mSwipeLayout.getParent()).getHeight() * 0.8f,
-//                        200 * metrics.density);
-//
-//                try {
-//                    // Set the internal trigger distance using reflection.
-//                    Field field = SwipeRefreshLayout.class.getDeclaredField("mTotalDragDistance");
-//                    field.setAccessible(true);
-//                    field.setFloat(mSwipeLayout, mDistanceToTriggerSync);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//                // Only needs to be done once so remove listener.
-//                ViewTreeObserver obs = mSwipeLayout.getViewTreeObserver();
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    obs.removeOnGlobalLayoutListener(this);
-//                } else {
-//                    obs.removeGlobalOnLayoutListener(this);
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -115,5 +87,17 @@ public abstract class DealFragment extends BaseFragment implements ArrayAutoLoad
 
     public RecyclerView getRecyclerView() {
         return mRecyclerView;
+    }
+
+    public List<Deal> getOriginalDeals() {
+        return mOriginalDeals;
+    }
+
+    public boolean hasFiltered() {
+        return hasFiltered;
+    }
+
+    public void setHasFiltered(boolean hasFiltered) {
+        this.hasFiltered = hasFiltered;
     }
 }

@@ -4,6 +4,8 @@ import android.os.Parcel;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * Created by Yesha on 11/3/2015.
  */
@@ -12,7 +14,7 @@ public class UserPoint {
     @SerializedName("id")
     public final long id;
     @SerializedName("created_at")
-    private String createdAt;
+    private Date createdAt;
     @SerializedName("user_id")
     private long user_id;
     @SerializedName("points")
@@ -26,19 +28,11 @@ public class UserPoint {
         this.id = 0;
     }
 
-    public UserPoint(Parcel in) {
-        this.id = in.readLong();
-        this.createdAt = in.readString();
-        this.points = in.readInt();
-        this.reason = in.readString();
-        this.operation = in.readString();
-    }
-
     public int getPoints() {
         return this.points;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return this.createdAt;
     }
 

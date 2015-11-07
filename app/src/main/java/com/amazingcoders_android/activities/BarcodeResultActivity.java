@@ -9,14 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.VolleyErrorHelper;
 import com.amazingcoders_android.api.requests.RedemptionRequest;
 import com.amazingcoders_android.async_tasks.RegisterRedemptionTask;
+import com.amazingcoders_android.helpers.AmazingHelper;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
 import com.amazingcoders_android.models.UserPoint;
@@ -62,6 +65,8 @@ public class BarcodeResultActivity extends BaseActivity {
     View mProgressAnimation;
     @InjectView(R.id.points)
     TextView mPoints;
+    @InjectView(R.id.burps_layout)
+    RelativeLayout mPointsLayout;
 
     private String mUserId, mDealId, mVenueId;
 
@@ -120,18 +125,19 @@ public class BarcodeResultActivity extends BaseActivity {
             @Override
             public void onResponse(Redemption redemption) {
                 //TODO convert date time to user friendly text
-                String redeemTime = "You redeemed the deal at: "+ redemption.getCreatedAt();
+                String redeemTime = "Time: "+ AmazingHelper.printDate(redemption.getDate(), Constants.REDEMPTION_DATE_FORMAT);
                 showResult(true, "");
                 mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
+                mPointsLayout.setVisibility(View.VISIBLE);
                 UserPoint userPoint = redemption.getPoint();
                 if (userPoint != null){
                     String point = Integer.toString(userPoint.getPoints());
                     mPoints.setText(point);
                     mPoints.setTextColor(getResources().getColor(R.color.green));
                 } else {
-                    String message = "Already awarded before";
+                    String message = "Only for 1st redeem";
                     mPoints.setText(message);
                     mPoints.setTextColor(getResources().getColor(R.color.color_primary));
                 }
@@ -145,6 +151,7 @@ public class BarcodeResultActivity extends BaseActivity {
 //                Log.d(TAG, volleyError.networkResponse.);
                 String response = VolleyErrorHelper.getResponse(volleyError);
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
+                mPointsLayout.setVisibility(View.GONE);
 
                 switch (statusCode){
                     case VolleyErrorHelper.NOT_ACCEPTABLE:

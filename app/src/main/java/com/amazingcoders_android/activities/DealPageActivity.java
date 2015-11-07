@@ -1,7 +1,11 @@
 package com.amazingcoders_android.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -48,6 +52,12 @@ public class DealPageActivity extends BaseActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     @InjectView(R.id.image)
     ImageView mCoverImage;
+    @InjectView(R.id.progress)
+    View mProgressView;
+    @InjectView(R.id.deal_layout)
+    LinearLayout mDealLayout;
+    @InjectView(R.id.app_bar_layout)
+    AppBarLayout mAppBarLayout;
 
     private Deal mDeal;
     private Long mDealId;
@@ -106,6 +116,7 @@ public class DealPageActivity extends BaseActivity {
             @Override
             public void onResponse(Deal deal) {
                 mDeal = deal;
+                showRefreshing(false);
 
                 mBookmarkButton.setDeal(mDeal);
                 mBookmarkButton.setVisibility(View.VISIBLE);
@@ -119,7 +130,7 @@ public class DealPageActivity extends BaseActivity {
                     int index = 0;
                     VenueCard venueCard = new VenueCard(DealPageActivity.this);
                     venueCard.update(venue);
-                    venueCard.setOnClickListener(new View.OnClickListener() {
+                    venueCard.getmName().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(DealPageActivity.this, VenuePageActivity.class);
@@ -141,15 +152,57 @@ public class DealPageActivity extends BaseActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 //                Log.d("Load Deal Error", volleyError.getMessage());
+                showRefreshing(false);
             }
         };
         BurppleApi.getInstance(this).enqueue(DealRequest.load(id, listener));
+        showRefreshing(true);
     }
 
     private void updateCoverImage(){
         Cloudinary cloudinary = BurppleApplication.getInstance(this).getCloudinary();
         String url = cloudinary.url().generate(mDeal.getImageUrl());
         PicassoRequest.get(this, url, R.drawable.img_deal_placeholder).into(mCoverImage);
+    }
+
+    private void showRefreshing(final boolean show){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mDealLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+            mDealLayout.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mDealLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mAppBarLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+            mAppBarLayout.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mAppBarLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mDealLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+            mAppBarLayout.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 }
 

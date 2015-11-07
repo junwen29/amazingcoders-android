@@ -10,6 +10,8 @@ public class Constants {
     public static final String MEAL_DATE_FORMAT = "EEE, MMM d, yyyy";
     public static final String BIRTHDAY_DATE_FORMAT = "yyyy-MM-dd";
     public static final String BIRTHDAY_PRETTY_DATE_FORMAT = "dd MMMM yyyy";
+    public static final String REDEMPTION_DATE_FORMAT = "HH:mm:ss, EEE, MMM d, yyyy";
+
     public static final int LOAD_LIMIT = 10;
     public static final int BIO_LIMIT = 100;
 
