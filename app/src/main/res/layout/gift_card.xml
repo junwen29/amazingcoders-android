@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
+    android:orientation="horizontal"
     android:padding="4dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/content"
@@ -16,12 +17,14 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
             style="@style/Text.Card.Title"/>
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
             style="@style/Text.Card.Subtitle"/>
 
         <TextView
@@ -33,14 +36,13 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_alignParentRight="true"
         android:text="Redeem Gift"
         android:padding="5dp"
         android:id="@+id/redeem_btn"
         android:textAllCaps="false" />
 
-
-</RelativeLayout>
+</LinearLayout>

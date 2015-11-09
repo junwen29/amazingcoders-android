@@ -2,6 +2,6 @@
 <com.amazingcoders_android.views.GiftCard
     android:id="@+id/card_gift"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
+    android:layout_height="wrap_content"
     style="@style/CardView"
     xmlns:android="http://schemas.android.com/apk/res/android" />

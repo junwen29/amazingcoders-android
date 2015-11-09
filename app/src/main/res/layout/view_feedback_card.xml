@@ -14,6 +14,7 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
+            android:inputType="textMultiLine"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Title"/>
 
@@ -26,16 +27,11 @@
 
         <TextView
             android:id="@+id/content"
+            android:inputType="textMultiLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Text.Card.Subtitle"/>
 
-        <TextView
-            android:id="@+id/status"
-            android:textStyle="italic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Text.Card.Subtitle"/>
     </LinearLayout>
 
 </RelativeLayout>
