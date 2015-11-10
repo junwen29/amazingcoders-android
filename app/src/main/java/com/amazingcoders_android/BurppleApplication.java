@@ -44,9 +44,9 @@ public class BurppleApplication extends Application {
             config.put("api_secret", "_Kpia2LPcbNyxtoZLN3H31Z3Lj0");
         }
         else {
-            config.put("cloud_name", "hiy2fjohv");
-            config.put("api_key", "214212125991438");
-            config.put("api_secret", "v594Nrqw7YlwF54dSknMzOlSud0");
+            config.put("cloud_name", "hekoyk5et");
+            config.put("api_key", "163572249597638");
+            config.put("api_secret", "8rMlsTSD0fGF0889ODqC5dYOL9A");
         }
 
         mCloudinary = new Cloudinary(config);
