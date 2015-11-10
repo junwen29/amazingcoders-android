@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
@@ -30,6 +32,8 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
     RecyclerView mRecyclerView;
     @InjectView(R.id.swipe_container)
     SwipeRefreshLayout mSwipeLayout;
+    @InjectView(R.id.empty_view)
+    TextView mEmptyView;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RedemptionAdapter mAdapter;
@@ -69,7 +73,7 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
     private void init(){
         getSupportActionBar().setTitle("My Redemptions");
         mAdapter = new RedemptionAdapter(this, 0);
-        mAdapter.setAutoLoadListener(this);
+//        mAdapter.setAutoLoadListener(this);
 
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light,
@@ -103,7 +107,13 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
 
                 mAdapter.addAll(redemptions);
                 mAdapter.notifyDataSetChanged();
-
+                if (redemptions.isEmpty()){
+                    mRecyclerView.setVisibility(View.GONE);
+                    mEmptyView.setVisibility(View.VISIBLE);
+                } else{
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    mEmptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -113,7 +123,12 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
             }
         };
 
-        mSwipeLayout.setRefreshing(true);
+        mSwipeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeLayout.setRefreshing(true);
+            }
+        });
         String userId = Long.toString(Global.with(this).getOwnerId());
         getBurppleApi().enqueue(RedemptionRequest.loadAll(userId,listener));
     }
