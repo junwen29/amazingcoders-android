@@ -1,5 +1,6 @@
 package com.amazingcoders_android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -8,16 +9,21 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amazingcoders_android.Constants;
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.BaseActivity;
 import com.amazingcoders_android.api.Listener;
 import com.amazingcoders_android.api.VolleyErrorHelper;
 import com.amazingcoders_android.api.requests.RedemptionRequest;
 import com.amazingcoders_android.async_tasks.RegisterRedemptionTask;
+import com.amazingcoders_android.helpers.AmazingHelper;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
+import com.amazingcoders_android.models.UserPoint;
+import com.amazingcoders_android.views.DealCard;
 import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.android.volley.VolleyError;
@@ -38,12 +44,12 @@ public class BarcodeResultActivity extends BaseActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
-//    @InjectView(R.id.value)
-//    TextView mValue;
     @InjectView(R.id.barcode_container)
     LinearLayout mContainer;
     @InjectView(R.id.card_deal)
-    DealDetailsCard mDealCard;
+    DealCard mDealCard;
+    @InjectView(R.id.card_deal_details)
+    DealDetailsCard mDealDetailsCard;
     @InjectView(R.id.card_venue)
     VenueDetailsCard mVenueCard;
     @InjectView(R.id.redeem_time)
@@ -60,6 +66,10 @@ public class BarcodeResultActivity extends BaseActivity {
     CardView mRedeeemCard;
     @InjectView(R.id.redeem_animation)
     View mProgressAnimation;
+    @InjectView(R.id.points)
+    TextView mPoints;
+    @InjectView(R.id.burps_layout)
+    RelativeLayout mPointsLayout;
 
     private String mUserId, mDealId, mVenueId;
 
@@ -75,14 +85,14 @@ public class BarcodeResultActivity extends BaseActivity {
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
 
         mBarcode = getIntent().getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
 
-        if (mBarcode == null){
+        if (mBarcode == null) {
             Snackbar.make(mContainer, R.string.barcode_error,
                     Snackbar.LENGTH_LONG)
                     .show();
@@ -93,54 +103,22 @@ public class BarcodeResultActivity extends BaseActivity {
             constructParams(mBarcode.displayValue);
             redeem();
         }
-
-//        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
-//        startActivityForResult(intent, RC_BARCODE_CAPTURE);
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (requestCode == RC_BARCODE_CAPTURE) {
-//            if (resultCode == CommonStatusCodes.SUCCESS) {
-//                if (data != null) {
-//                    Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-//
-//                    Snackbar.make(mContainer, R.string.barcode_success,
-//                            Snackbar.LENGTH_LONG)
-//                            .show();
-//
-////                    mValue.setText(barcode.displayValue);
-//
-//                    Log.d(TAG, "Barcode read: " + barcode.displayValue);
-//                    constructParams(barcode.displayValue);
-//                    redeem();
-//
-//                } else {
-////                    mValue.setText(R.string.barcode_failure);
-//                    Snackbar.make(mContainer, R.string.barcode_failure,
-//                            Snackbar.LENGTH_LONG)
-//                            .show();
-//                    Log.d(TAG, "No barcode captured, intent data is null");
-//                }
-//            } else {
-//                Snackbar.make(mContainer, R.string.barcode_error,
-//                        Snackbar.LENGTH_LONG)
-//                        .show();
-//            }
-//        } else {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//    }
-
 
     @Override
     public void onBackPressed() {
         //override to resolve memory issue: release the activity instead
-        finish();
+        startActivity(new Intent(this, DealsFeedActivity.class));
+        finishAffinity();
     }
 
     private void redeem(){
+        //Check QR code
         if (TextUtils.isEmpty(mDealId) ||TextUtils.isEmpty(mVenueId)){
+            showResult(false, "Invalid QR code");
+            return;
+        } else if (!mDealId.matches("\\d+") || !mVenueId.matches("\\d+")){
+            showResult(false, "Invalid QR code");
             return;
         }
 
@@ -150,11 +128,23 @@ public class BarcodeResultActivity extends BaseActivity {
             @Override
             public void onResponse(Redemption redemption) {
                 //TODO convert date time to user friendly text
-                String redeemTime = "You redeemed the deal at: "+ redemption.getCreatedAt();
+                String redeemTime = "Time: "+ AmazingHelper.printDate(redemption.getDate(), Constants.REDEMPTION_DATE_FORMAT);
                 showResult(true, "");
-                mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
+                mRedeemTime.setText(redeemTime);
+                mDealDetailsCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
+                mPointsLayout.setVisibility(View.VISIBLE);
+                UserPoint userPoint = redemption.getPoint();
+                if (userPoint != null){
+                    String point = Integer.toString(userPoint.getPoints());
+                    mPoints.setText(point);
+                    mPoints.setTextColor(getResources().getColor(R.color.green));
+                } else {
+                    String message = "Only for 1st redeem";
+                    mPoints.setText(message);
+                    mPoints.setTextColor(getResources().getColor(R.color.color_primary));
+                }
 
                 RegisterRedemptionTask registerRedemptionTask = new RegisterRedemptionTask(BarcodeResultActivity.this, mDealId);
                 registerRedemptionTask.execute(null, null, null);
@@ -165,10 +155,32 @@ public class BarcodeResultActivity extends BaseActivity {
 //                Log.d(TAG, volleyError.networkResponse.);
                 String response = VolleyErrorHelper.getResponse(volleyError);
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
-
+                mPointsLayout.setVisibility(View.GONE);
+                String message = "";
                 switch (statusCode){
                     case VolleyErrorHelper.NOT_ACCEPTABLE:
-                        String message = new JsonParser().parse(response)
+                        message = new JsonParser().parse(response)
+                                .getAsJsonObject()
+                                .get("error")
+                                .getAsJsonObject()
+                                .get("message")
+                                .getAsString();
+
+                        showResult(false, message);
+                        break;
+                    case VolleyErrorHelper.NOT_FOUND: // not active deal
+//                        message = new JsonParser().parse(response)
+//                                .getAsJsonObject()
+//                                .get("error")
+//                                .getAsJsonObject()
+//                                .get("message")
+//                                .getAsString();
+                        message = "The deal is not available for redemption yet";
+
+                        showResult(false, message);
+                        break;
+                    case VolleyErrorHelper.FORBIDDEN:
+                        message = new JsonParser().parse(response)
                                 .getAsJsonObject()
                                 .get("error")
                                 .getAsJsonObject()
@@ -189,10 +201,18 @@ public class BarcodeResultActivity extends BaseActivity {
     }
 
     private void constructParams(String barcode){
+//        String regex = "13_2_2015-10-14 23:00:47 +0800";
+//
+//        boolean validQR = barcode.matches("^[\\d+]_\\d+_");
+
         List<String> values = new ArrayList<>();
         Collections.addAll(values, barcode.split("_"));
-        mDealId = values.get(0);
-        mVenueId =values.get(1);
+        if (values.size()<2){
+            return;
+        } else {
+            mDealId = values.get(0);
+            mVenueId =values.get(1);
+        }
     }
 
     private void showResult(boolean success, String message){

@@ -23,12 +23,6 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <!--<TextView-->
-        <!--android:id="@+id/value"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--style="@style/Text"/>-->
-
         <ProgressBar
             android:id="@+id/redeem_progress"
             style="?android:attr/progressBarStyleLarge"
@@ -71,18 +65,49 @@
                         <TextView
                             android:id="@+id/redeem_message"
                             android:text="default"
-                            android:padding="@dimen/activity_horizontal_margin"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
                             style="@style/Text"/>
 
                         <TextView
                             android:id="@+id/redeem_time"
                             android:text="default"
-                            android:padding="@dimen/activity_horizontal_margin"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
                             style="@style/Text"/>
+
+                        <RelativeLayout
+                            android:id="@+id/burps_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/burps"
+                                android:text="Burps Awarded: "
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="@dimen/activity_horizontal_margin"
+                                style="@style/Text"/>
+
+                            <TextView
+                                android:id="@+id/points"
+                                android:text="default"
+                                android:layout_toRightOf="@id/burps"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:paddingLeft="@dimen/activity_horizontal_margin"
+                                android:textColor="@color/green"
+                                android:textStyle="bold"
+                                style="@style/Text"/>
+
+                        </RelativeLayout>
+
 
                     </LinearLayout>
 
@@ -113,8 +138,13 @@
                 android:layout_margin="4dp"
                 style="@style/Text.Ash.Bold"/>
 
-            <com.amazingcoders_android.views.DealDetailsCard
+            <com.amazingcoders_android.views.DealCard
                 android:id="@+id/card_deal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.amazingcoders_android.views.DealDetailsCard
+                android:id="@+id/card_deal_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

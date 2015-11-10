@@ -17,6 +17,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".BurppleApplication"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:hardwareAccelerated="true"
@@ -106,7 +107,28 @@
         <activity
             android:name=".activities.MyRedemptionsActivity"
             android:label="@string/title_activity_my_redemptions"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activities.ProfilePageActivity"
+            android:label="@string/title_activity_profile_page" >
+        </activity>
+        <activity
+            android:name=".activities.FeedbackActivity"
+            android:label="@string/title_activity_send_feedback"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activities.GiftActivity"
+            android:label="@string/title_activity_gift" >
+        </activity>
+        <activity
+            android:name=".activities.MyGiftRedemptionsActivity"
+            android:label="@string/title_activity_my_gift_redemptions" >
+        </activity>
+        <activity
+            android:name=".activities.ViewFeedbackActivity"
+            android:label="@string/title_activity_view_feedback" >
         </activity>
     </application>
 

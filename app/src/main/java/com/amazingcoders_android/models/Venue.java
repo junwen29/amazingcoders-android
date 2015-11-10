@@ -40,7 +40,8 @@ public class Venue implements Parcelable, Synchronizable {
     private boolean isWishlisted;
     @SerializedName("deals")
     private List<Deal> deals;
-
+    @SerializedName("photo")
+    private String photoUrl;
 
     public Venue() {
         this.id = (long) 0;
@@ -132,6 +133,11 @@ public class Venue implements Parcelable, Synchronizable {
             return this.state;
         }
     */
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
     public String getBio() {
         return this.bio;
     }

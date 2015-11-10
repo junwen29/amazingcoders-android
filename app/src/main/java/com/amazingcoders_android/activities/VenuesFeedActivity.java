@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +60,7 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
     public void setActiveDrawerItem() {
         //set selected menu
         mNavigationView.getMenu().getItem(0).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_2;
+        mSelectedDrawerItemId = R.id.navigation_item_1;
     }
 
 
@@ -72,13 +73,13 @@ public class VenuesFeedActivity extends NavDrawerActivity implements ArrayAutoLo
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.notifications) {
+            if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+            mDrawerLayout.openDrawer(Gravity.RIGHT);
             return true;
         }
 

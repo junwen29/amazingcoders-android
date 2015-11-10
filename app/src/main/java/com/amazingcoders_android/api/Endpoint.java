@@ -18,15 +18,16 @@ public class Endpoint {
     public static final String REGISTER_DEVICE = P1_SERVER_URL + "devices";
     public static final String UNREGISTER_DEVICE = P1_SERVER_URL + "devices?auth_token=%s&device_token=%s&device_type=android";
 
+    //User
     public static final String SIGNUP = P1_SERVER_URL + "accounts/sign_up";
     public static final String LOGIN = P1_SERVER_URL + "accounts/sign_in";
     public static final String LOGOUT = P1_SERVER_URL + "accounts/sign_out";
+    public static final String PROFILE = P1_SERVER_URL + "accounts/profile?auth_token=%s";
 
     //TODO forget password page request
 //    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
     
-    // TODO notifications
-//    public static final String NOTIFICATION = P1_SERVER_URL + "notifications?auth_token=%s&offset=%s&limit=%s";
+    public static final String NOTIFICATIONS = P1_SERVER_URL + "notifications?auth_token=%s&user_id=%s";
 //    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
 
     // Venues
@@ -56,4 +57,13 @@ public class Endpoint {
     // Deal Redemptions
     public static final String REDEEM = P1_SERVER_URL + "redemption?auth_token=%s&deal_id=%s&user_id=%s&venue_id=%s";
     public static final String ALL_REDEMPTIONS = P1_SERVER_URL + "redemption/index?auth_token=%s&user_id=%s";
+
+    //Feedback
+    public static final String SEND_FEEDBACK = P1_SERVER_URL + "feedback?auth_token=%s&user_id=%s&title=%s&category=%s&desc=%s";
+    public static final String VIEW_FEEDBACKS = P1_SERVER_URL + "feedback/view?id=%s&auth_token=%s";
+
+    //Gifts
+    public static final String GIFTS = P1_SERVER_URL + "gifts?auth_token=%s";
+    public static final String REDEEM_GIFT = P1_SERVER_URL + "gifts/redeem?auth_token=%s&id=%s";
+    public static final String GIFT_REDEMPTIONS = P1_SERVER_URL + "gifts/records?id=%s&auth_token=%s";
 }

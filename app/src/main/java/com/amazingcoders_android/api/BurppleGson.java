@@ -1,5 +1,7 @@
 package com.amazingcoders_android.api;
 
+import com.amazingcoders_android.Constants;
+import com.amazingcoders_android.models.Notification;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,8 +15,8 @@ public class BurppleGson {
     public static Gson getInstance() {
         if (sInstance == null) {
             sInstance = new GsonBuilder()
-//                    .setDateFormat(Constant.DATE_FORMAT)
-//                    .registerTypeAdapter(ActivityStream.class, new ActivityStream.Deserializer())
+                    .setDateFormat(Constants.DATE_FORMAT)
+                    .registerTypeAdapter(Notification.class, new Notification.Deserializer())
 //                    .registerTypeAdapter(Promotion.class, new Promotion.Deserializer())
 //                    .registerTypeAdapter(Image.class, new Image.ImageUrlDeserializer())
 //                    .registerTypeAdapter(Integer.class, new NotificationCountDeserializer())

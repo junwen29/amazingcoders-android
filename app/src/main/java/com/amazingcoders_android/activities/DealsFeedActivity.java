@@ -11,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.amazingcoders_android.R;
@@ -24,7 +27,6 @@ import com.amazingcoders_android.fragments.FreebiesDealsFragment;
 import com.amazingcoders_android.fragments.PopularDealsFragment;
 import com.amazingcoders_android.fragments.base.DealFragment;
 import com.amazingcoders_android.models.Deal;
-import com.google.android.gms.common.api.CommonStatusCodes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,9 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     @InjectView(R.id.fab)
     FloatingActionButton mFab;
 
+//    private List<Deal> mOriginalDeals;
+//    private boolean hasFiltered = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +69,18 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         toolbar.inflateMenu(R.menu.deals_feed);
         final SearchView searchView = (SearchView) toolbar.getMenu().findItem(R.id.search).getActionView();
         searchView.setOnQueryTextListener(this);
+        toolbar.getMenu().findItem(R.id.notifications).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (mDrawerLayout.isDrawerOpen(Gravity.LEFT))
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+                mDrawerLayout.openDrawer(Gravity.RIGHT);
+                return true;
+            }
+        });
     }
+
 
     @Override
     public void setupSupportActionBar() {
@@ -76,7 +92,7 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     public void setActiveDrawerItem() {
         //set selected menu
         mNavigationView.getMenu().getItem(1).setChecked(true);
-        mSelectedDrawerItemId = R.id.navigation_item_5;
+        mSelectedDrawerItemId = R.id.navigation_item_2;
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -119,11 +135,18 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         if (page instanceof DealFragment){
             DealFragment fragment = (DealFragment) page;
             DealAdapter adapter = fragment.getAdapter();
-            List<Deal> deals = adapter.getAllItems();
+
+            List<Deal> deals = fragment.getOriginalDeals();
+            if (fragment.hasFiltered()){
+                adapter.clear();
+                adapter.addAll(deals);
+            }
+
             final List<Deal> filteredDealList = filter(deals,newText);
             adapter.animateTo(filteredDealList);
             adapter.notifyDataSetChanged();
             fragment.getRecyclerView().scrollToPosition(0);
+            fragment.setHasFiltered(true);
         }
 
         return true;
@@ -135,7 +158,9 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
         final List<Deal> filteredDealList = new ArrayList<>();
         for (Deal deal : deals) {
             final String name = deal.getTitle().toLowerCase();
-            if (name.contains(query)) {
+            final String desc = deal.getDescription().toLowerCase();
+
+            if (name.contains(query) || desc.contains(query)) {
                 filteredDealList.add(deal);
             }
         }

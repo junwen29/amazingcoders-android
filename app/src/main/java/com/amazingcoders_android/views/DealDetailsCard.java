@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amazingcoders_android.R;
@@ -65,8 +64,8 @@ public class DealDetailsCard extends CardView{
         mEndDate.setText(end);
         mTerms.setText(mDeal.getTerms());
         mDesc.setText(mDeal.getDescription());
-        String multipleUse = mDeal.isMultipleUse() ? "You can redeem this deal more than once"
-                : "You can only redeem this deal once";
+        String multipleUse = mDeal.isMultipleUse() ? "Multiple"
+                : "Only once";
         mMultipleUse.setText(multipleUse);
     }
 }
