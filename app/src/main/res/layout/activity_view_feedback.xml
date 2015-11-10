@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/button_feedback"
-        android:text="You do not have any redemptions yet."
+        android:text="You do not have any feedbacks yet."
         style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
         android:textAlignment="center"
         android:gravity="center"
