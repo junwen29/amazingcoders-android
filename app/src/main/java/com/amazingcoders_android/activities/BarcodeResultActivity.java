@@ -156,10 +156,31 @@ public class BarcodeResultActivity extends BaseActivity {
                 String response = VolleyErrorHelper.getResponse(volleyError);
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
                 mPointsLayout.setVisibility(View.GONE);
-
+                String message = "";
                 switch (statusCode){
                     case VolleyErrorHelper.NOT_ACCEPTABLE:
-                        String message = new JsonParser().parse(response)
+                        message = new JsonParser().parse(response)
+                                .getAsJsonObject()
+                                .get("error")
+                                .getAsJsonObject()
+                                .get("message")
+                                .getAsString();
+
+                        showResult(false, message);
+                        break;
+                    case VolleyErrorHelper.NOT_FOUND: // not active deal
+//                        message = new JsonParser().parse(response)
+//                                .getAsJsonObject()
+//                                .get("error")
+//                                .getAsJsonObject()
+//                                .get("message")
+//                                .getAsString();
+                        message = "The deal is not available for redemption yet";
+
+                        showResult(false, message);
+                        break;
+                    case VolleyErrorHelper.FORBIDDEN:
+                        message = new JsonParser().parse(response)
                                 .getAsJsonObject()
                                 .get("error")
                                 .getAsJsonObject()
