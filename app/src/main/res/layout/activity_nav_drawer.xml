@@ -42,7 +42,7 @@
     <!--Notification Drawer on the right-->
     <LinearLayout
         android:id="@+id/notification_drawer_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:orientation="vertical"
@@ -58,8 +58,35 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/notification_drawer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="You do not have any notifications yet."
+            style="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <!-- Load notification progress -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

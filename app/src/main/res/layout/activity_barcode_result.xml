@@ -138,8 +138,13 @@
                 android:layout_margin="4dp"
                 style="@style/Text.Ash.Bold"/>
 
-            <com.amazingcoders_android.views.DealDetailsCard
+            <com.amazingcoders_android.views.DealCard
                 android:id="@+id/card_deal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.amazingcoders_android.views.DealDetailsCard
+                android:id="@+id/card_deal_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

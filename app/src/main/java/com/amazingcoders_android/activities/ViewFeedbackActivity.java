@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.amazingcoders_android.R;
 import com.amazingcoders_android.activities.base.NavDrawerActivity;
@@ -32,6 +33,8 @@ public class ViewFeedbackActivity extends NavDrawerActivity implements ArrayAuto
     RecyclerView mRecyclerView;
     @InjectView(R.id.swipe_container)
     SwipeRefreshLayout mSwipeLayout;
+    @InjectView(R.id.empty_view)
+    TextView mEmptyView;
 
     RecyclerView.LayoutManager mLayoutManager;
     FeedbackAdapter mAdapter;
@@ -111,6 +114,13 @@ public class ViewFeedbackActivity extends NavDrawerActivity implements ArrayAuto
                 mAdapter.clear();
                 mAdapter.addAll(feedbacks);
                 mAdapter.notifyDataSetChanged();
+                if (feedbacks.isEmpty()){
+                    mRecyclerView.setVisibility(View.GONE);
+                    mEmptyView.setVisibility(View.VISIBLE);
+                } else{
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    mEmptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override

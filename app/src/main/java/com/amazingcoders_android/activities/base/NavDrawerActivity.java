@@ -1,7 +1,10 @@
 package com.amazingcoders_android.activities.base;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -38,6 +41,8 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import butterknife.InjectView;
+
 /**
  * Created by junwen29 on 9/17/2015.
  */
@@ -49,6 +54,8 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
     protected RecyclerView mNotificationDrawer;
     protected NotificationAdapter mNotificationAdapter;
     protected LinearLayout mNotificationDrawerLayout;
+    protected View mProgressView;
+    protected TextView mEmptyView;
 
     protected ActionBarDrawerToggle mDrawerToggle;
     protected int mSelectedDrawerItemId = -1;
@@ -65,6 +72,8 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         mNotificationDrawer = (RecyclerView) findViewById(R.id.notification_drawer);
         mNotificationDrawerLayout = (LinearLayout) findViewById(R.id.notification_drawer_layout);
+        mProgressView = findViewById(R.id.progress);
+        mEmptyView = (TextView) findViewById(R.id.empty_view);
 
         setup();
         loadNotifications();
@@ -95,7 +104,7 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow_rev, GravityCompat.END);
 
         mNavigationView.setNavigationItemSelectedListener(this);
-        
+
         TextView displayUsername = (TextView) findViewById(R.id.display_header_username);
         displayUsername.setText(Global.with(this).getOwner().getUsername());
 
@@ -107,19 +116,31 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         CollectionListener<Notification> listener = new CollectionListener<Notification>() {
             @Override
             public void onResponse(Collection<Notification> notifications) {
+                showRefreshing(false);
                 mNotificationAdapter.clear();
                 mNotificationAdapter.addAll(notifications);
                 mNotificationAdapter.notifyDataSetChanged();
+
+                //show empty view if no notifications
+                if (notifications.isEmpty()){
+                    mNotificationDrawer.setVisibility(View.GONE);
+                    mEmptyView.setVisibility(View.VISIBLE);
+                } else {
+                    mNotificationDrawer.setVisibility(View.VISIBLE);
+                    mEmptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                showRefreshing(false);
                 showErrorMessage();
             }
         };
 
         String userId = Long.toString(Global.with(NavDrawerActivity.this).getOwnerId());
         getBurppleApi().enqueue(NotificationRequest.loadAll(userId, listener));
+        showRefreshing(true);
     }
 
     @Override
@@ -243,5 +264,35 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finishAffinity();
+    }
+
+    private void showRefreshing(final boolean show){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mNotificationDrawer.setVisibility(show ? View.GONE : View.VISIBLE);
+            mNotificationDrawer.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mNotificationDrawer.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mNotificationDrawer.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 }

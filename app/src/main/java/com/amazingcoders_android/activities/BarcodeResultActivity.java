@@ -23,6 +23,7 @@ import com.amazingcoders_android.helpers.AmazingHelper;
 import com.amazingcoders_android.helpers.Global;
 import com.amazingcoders_android.models.Redemption;
 import com.amazingcoders_android.models.UserPoint;
+import com.amazingcoders_android.views.DealCard;
 import com.amazingcoders_android.views.DealDetailsCard;
 import com.amazingcoders_android.views.VenueDetailsCard;
 import com.android.volley.VolleyError;
@@ -46,7 +47,9 @@ public class BarcodeResultActivity extends BaseActivity {
     @InjectView(R.id.barcode_container)
     LinearLayout mContainer;
     @InjectView(R.id.card_deal)
-    DealDetailsCard mDealCard;
+    DealCard mDealCard;
+    @InjectView(R.id.card_deal_details)
+    DealDetailsCard mDealDetailsCard;
     @InjectView(R.id.card_venue)
     VenueDetailsCard mVenueCard;
     @InjectView(R.id.redeem_time)
@@ -127,8 +130,9 @@ public class BarcodeResultActivity extends BaseActivity {
                 //TODO convert date time to user friendly text
                 String redeemTime = "Time: "+ AmazingHelper.printDate(redemption.getDate(), Constants.REDEMPTION_DATE_FORMAT);
                 showResult(true, "");
-                mRedeemTime.setText(redeemTime);
                 mDealCard.update(redemption.getDeal());
+                mRedeemTime.setText(redeemTime);
+                mDealDetailsCard.update(redemption.getDeal());
                 mVenueCard.update(redemption.getVenue());
                 mPointsLayout.setVisibility(View.VISIBLE);
                 UserPoint userPoint = redemption.getPoint();
@@ -152,10 +156,31 @@ public class BarcodeResultActivity extends BaseActivity {
                 String response = VolleyErrorHelper.getResponse(volleyError);
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
                 mPointsLayout.setVisibility(View.GONE);
-
+                String message = "";
                 switch (statusCode){
                     case VolleyErrorHelper.NOT_ACCEPTABLE:
-                        String message = new JsonParser().parse(response)
+                        message = new JsonParser().parse(response)
+                                .getAsJsonObject()
+                                .get("error")
+                                .getAsJsonObject()
+                                .get("message")
+                                .getAsString();
+
+                        showResult(false, message);
+                        break;
+                    case VolleyErrorHelper.NOT_FOUND: // not active deal
+//                        message = new JsonParser().parse(response)
+//                                .getAsJsonObject()
+//                                .get("error")
+//                                .getAsJsonObject()
+//                                .get("message")
+//                                .getAsString();
+                        message = "The deal is not available for redemption yet";
+
+                        showResult(false, message);
+                        break;
+                    case VolleyErrorHelper.FORBIDDEN:
+                        message = new JsonParser().parse(response)
                                 .getAsJsonObject()
                                 .get("error")
                                 .getAsJsonObject()
