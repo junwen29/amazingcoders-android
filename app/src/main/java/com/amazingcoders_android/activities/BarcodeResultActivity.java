@@ -34,6 +34,7 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,7 +43,7 @@ public class BarcodeResultActivity extends BaseActivity {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeResultActivity";
-    private static final int COUNT_DOWN_INTERVAL = 2000;
+    private static final int COUNT_DOWN_INTERVAL = 120000;
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
@@ -231,6 +232,7 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemTitle.setText("You have successfully redeemed the deal! ^^");
             mRedeemMessage.setVisibility(View.GONE);
             mProgressAnimation.setVisibility(View.VISIBLE);
+            mCountdownTimer.setVisibility(View.VISIBLE);
         }
         else {
             mCardContainer.setVisibility(View.GONE);
@@ -239,6 +241,7 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemMessage.setVisibility(View.VISIBLE);
             mRedeemMessage.setText(message);
             mProgressAnimation.setVisibility(View.GONE);
+            mCountdownTimer.setVisibility(View.GONE);
         }
     }
 
@@ -264,7 +267,14 @@ public class BarcodeResultActivity extends BaseActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            mTimer.setText("" + millisUntilFinished / 1000);
+//            String time = //"" + millisUntilFinished / 1000 + "s";
+            String time = String.format("%01d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+            );
+
+            mTimer.setText(time);
         }
 
         @Override
