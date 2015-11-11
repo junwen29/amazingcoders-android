@@ -60,6 +60,6 @@ public class UserPointCard extends CardView {
         mReason.setText(mUserPoint.getReason());
         String date = AmazingHelper.printDate(mUserPoint.getCreatedAt(), Constants.REDEMPTION_DATE_FORMAT);
         mCreatedAt.setText(date);
-        mPointsOperation.setText(String.valueOf(mUserPoint.getPoints())+ "Burps were "+ mUserPoint.getOperation()+"ed");
+        mPointsOperation.setText(String.valueOf(mUserPoint.getPoints())+ " burps were "+ mUserPoint.getOperation().toLowerCase()+"ed");
     }
 }
