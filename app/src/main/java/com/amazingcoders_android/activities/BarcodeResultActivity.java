@@ -2,6 +2,7 @@ package com.amazingcoders_android.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
@@ -33,6 +34,7 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,6 +43,7 @@ public class BarcodeResultActivity extends BaseActivity {
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeResultActivity";
+    private static final int COUNT_DOWN_INTERVAL = 120000;
 
     @InjectView(R.id.toolbar)
     Toolbar mToolbar;
@@ -70,6 +73,8 @@ public class BarcodeResultActivity extends BaseActivity {
     TextView mPoints;
     @InjectView(R.id.burps_layout)
     RelativeLayout mPointsLayout;
+    @InjectView(R.id.timer)
+    TextView mCountdownTimer;
 
     private String mUserId, mDealId, mVenueId;
 
@@ -145,6 +150,9 @@ public class BarcodeResultActivity extends BaseActivity {
                     mPoints.setText(message);
                     mPoints.setTextColor(getResources().getColor(R.color.color_primary));
                 }
+                // set count down timer and destroy activity upon two minutes
+                RedemptionCountDownTimer countDownTimer = new RedemptionCountDownTimer(COUNT_DOWN_INTERVAL, 1000, mCountdownTimer);
+                countDownTimer.start();
 
                 RegisterRedemptionTask registerRedemptionTask = new RegisterRedemptionTask(BarcodeResultActivity.this, mDealId);
                 registerRedemptionTask.execute(null, null, null);
@@ -224,6 +232,7 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemTitle.setText("You have successfully redeemed the deal! ^^");
             mRedeemMessage.setVisibility(View.GONE);
             mProgressAnimation.setVisibility(View.VISIBLE);
+            mCountdownTimer.setVisibility(View.VISIBLE);
         }
         else {
             mCardContainer.setVisibility(View.GONE);
@@ -232,6 +241,7 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemMessage.setVisibility(View.VISIBLE);
             mRedeemMessage.setText(message);
             mProgressAnimation.setVisibility(View.GONE);
+            mCountdownTimer.setVisibility(View.GONE);
         }
     }
 
@@ -244,6 +254,32 @@ public class BarcodeResultActivity extends BaseActivity {
             mProgressBar.setVisibility(View.GONE);
             mRedeeemCard.setVisibility(View.VISIBLE);
             mCardContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    class RedemptionCountDownTimer extends CountDownTimer {
+        TextView mTimer;
+
+        public RedemptionCountDownTimer(long millisInFuture, long countDownInterval, TextView mTimer) {
+            super(millisInFuture, countDownInterval);
+            this.mTimer = mTimer;
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+//            String time = //"" + millisUntilFinished / 1000 + "s";
+            String time = String.format("%01d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+            );
+
+            mTimer.setText(time);
+        }
+
+        @Override
+        public void onFinish() {
+            finish();
         }
     }
 }
