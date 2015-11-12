@@ -75,6 +75,8 @@ public class BarcodeResultActivity extends BaseActivity {
     RelativeLayout mPointsLayout;
     @InjectView(R.id.timer)
     TextView mCountdownTimer;
+    @InjectView(R.id.timer_layout)
+    View mTimerLayout;
 
     private String mUserId, mDealId, mVenueId;
 
@@ -150,7 +152,7 @@ public class BarcodeResultActivity extends BaseActivity {
                     mPoints.setText(message);
                     mPoints.setTextColor(getResources().getColor(R.color.color_primary));
                 }
-                // set count down timer and destroy activity upon two minutes
+//                 set count down timer and destroy activity upon two minutes
                 RedemptionCountDownTimer countDownTimer = new RedemptionCountDownTimer(COUNT_DOWN_INTERVAL, 1000, mCountdownTimer);
                 countDownTimer.start();
 
@@ -183,7 +185,7 @@ public class BarcodeResultActivity extends BaseActivity {
 //                                .getAsJsonObject()
 //                                .get("message")
 //                                .getAsString();
-                        message = "The deal is not available for redemption yet";
+                        message = "The deal is not available for redemption.";
 
                         showResult(false, message);
                         break;
@@ -232,7 +234,8 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemTitle.setText("You have successfully redeemed the deal! ^^");
             mRedeemMessage.setVisibility(View.GONE);
             mProgressAnimation.setVisibility(View.VISIBLE);
-            mCountdownTimer.setVisibility(View.VISIBLE);
+//            mCountdownTimer.setVisibility(View.VISIBLE);
+            mTimerLayout.setVisibility(View.VISIBLE);
         }
         else {
             mCardContainer.setVisibility(View.GONE);
@@ -241,7 +244,8 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemMessage.setVisibility(View.VISIBLE);
             mRedeemMessage.setText(message);
             mProgressAnimation.setVisibility(View.GONE);
-            mCountdownTimer.setVisibility(View.GONE);
+//            mCountdownTimer.setVisibility(View.GONE);
+            mTimerLayout.setVisibility(View.GONE);
         }
     }
 
