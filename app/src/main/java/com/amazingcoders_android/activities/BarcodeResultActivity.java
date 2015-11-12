@@ -234,7 +234,7 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemTitle.setText("You have successfully redeemed the deal! ^^");
             mRedeemMessage.setVisibility(View.GONE);
             mProgressAnimation.setVisibility(View.VISIBLE);
-//            mCountdownTimer.setVisibility(View.VISIBLE);
+            mCountdownTimer.setVisibility(View.VISIBLE);
             mTimerLayout.setVisibility(View.VISIBLE);
         }
         else {
@@ -244,7 +244,7 @@ public class BarcodeResultActivity extends BaseActivity {
             mRedeemMessage.setVisibility(View.VISIBLE);
             mRedeemMessage.setText(message);
             mProgressAnimation.setVisibility(View.GONE);
-//            mCountdownTimer.setVisibility(View.GONE);
+            mCountdownTimer.setVisibility(View.GONE);
             mTimerLayout.setVisibility(View.GONE);
         }
     }
@@ -283,7 +283,8 @@ public class BarcodeResultActivity extends BaseActivity {
 
         @Override
         public void onFinish() {
-            finish();
+            startActivity(new Intent(BarcodeResultActivity.this, DealsFeedActivity.class));
+            finishAffinity();
         }
     }
 }
