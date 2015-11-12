@@ -33,17 +33,4 @@ public class LoginRequest {
         return new GsonRequest<Owner>(Request.Method.GET, url, Owner.class, listener);
     }
 
-//    public static GsonRequest<Owner> facebook(String token, Listener<Owner> listener) {
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("fb_token", token);
-//
-//        return login(params, listener);
-//    }
-//
-//    public static GsonRequest<Owner> google(String token, Listener<Owner> listener) {
-//        Map<String, String> params = new HashMap<String, String>();
-//        params.put("google_token", token);
-//
-//        return login(params, listener);
-//    }
 }

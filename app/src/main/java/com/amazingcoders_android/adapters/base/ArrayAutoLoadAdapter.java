@@ -128,14 +128,6 @@ public abstract class ArrayAutoLoadAdapter<T> extends RecyclerView.Adapter<Recyc
         notifyItemMoved(fromPosition, toPosition);
     }
 
-//    public void removeAll(Collection<? extends T> items) {
-//        mItems.removeAll(items);
-//    }
-
-//    public boolean isAutoLoadEnabled() {
-//        return mAutoLoadEnabled;
-//    }
-
     public void setAutoLoadEnabled(boolean enabled) {
         mAutoLoadEnabled = enabled;
     }

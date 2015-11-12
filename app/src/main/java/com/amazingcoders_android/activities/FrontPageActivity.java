@@ -37,18 +37,12 @@ public class FrontPageActivity extends BaseActivity {
 
     private static final int REQ_SIGNUP = 4001;
     private static final int REQ_VERIFY_ACCOUNT = 4002;
-//    private static final int REQ_FACEBOOK = 4003;
-//    private static final int REQ_GOOGLE = 4004;
     private static final int REQ_LOGIN = 4005;
 
     public enum SessionState {
         LOGGED_OUT,
         LOGGED_IN,
-//        LOGGED_IN_USER_LOCATION_NEEDED
     }
-
-    private static final int REQ_RESOLVE_GOOGLE = 3001;
-    private static final String GOOGLE_SCOPE = "oauth2:https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email";
 
     // GCM
     private GoogleCloudMessaging mGCM;

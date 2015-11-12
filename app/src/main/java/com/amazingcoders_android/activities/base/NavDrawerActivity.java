@@ -255,7 +255,6 @@ public abstract class NavDrawerActivity extends BaseActivity implements Navigati
         store.clearAuthToken();
         store.clear();
         Global.with(this).reset();
-//        startService(UpdateServerService.deviceToken(getActivity(), false, store.getGCMRegistrationId()));
 
         // NOTE reset user data in MainActivity only since auth token still needed here
         store.setNotNewbie();

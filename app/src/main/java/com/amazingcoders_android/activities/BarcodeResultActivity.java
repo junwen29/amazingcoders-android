@@ -41,7 +41,6 @@ import butterknife.InjectView;
 
 public class BarcodeResultActivity extends BaseActivity {
 
-    private static final int RC_BARCODE_CAPTURE = 9001;
     private static final String TAG = "BarcodeResultActivity";
     private static final int COUNT_DOWN_INTERVAL = 120000;
 
@@ -152,7 +151,7 @@ public class BarcodeResultActivity extends BaseActivity {
                     mPoints.setText(message);
                     mPoints.setTextColor(getResources().getColor(R.color.color_primary));
                 }
-//                 set count down timer and destroy activity upon two minutes
+//              set count down timer and destroy activity upon two minutes
                 RedemptionCountDownTimer countDownTimer = new RedemptionCountDownTimer(COUNT_DOWN_INTERVAL, 1000, mCountdownTimer);
                 countDownTimer.start();
 
@@ -162,7 +161,6 @@ public class BarcodeResultActivity extends BaseActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-//                Log.d(TAG, volleyError.networkResponse.);
                 String response = VolleyErrorHelper.getResponse(volleyError);
                 int statusCode = VolleyErrorHelper.getHttpStatusCode(volleyError);
                 mPointsLayout.setVisibility(View.GONE);
@@ -179,12 +177,6 @@ public class BarcodeResultActivity extends BaseActivity {
                         showResult(false, message);
                         break;
                     case VolleyErrorHelper.NOT_FOUND: // not active deal
-//                        message = new JsonParser().parse(response)
-//                                .getAsJsonObject()
-//                                .get("error")
-//                                .getAsJsonObject()
-//                                .get("message")
-//                                .getAsString();
                         message = "The deal is not available for redemption.";
 
                         showResult(false, message);
@@ -211,9 +203,6 @@ public class BarcodeResultActivity extends BaseActivity {
     }
 
     private void constructParams(String barcode){
-//        String regex = "13_2_2015-10-14 23:00:47 +0800";
-//
-//        boolean validQR = barcode.matches("^[\\d+]_\\d+_");
 
         List<String> values = new ArrayList<>();
         Collections.addAll(values, barcode.split("_"));
@@ -271,7 +260,6 @@ public class BarcodeResultActivity extends BaseActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-//            String time = //"" + millisUntilFinished / 1000 + "s";
             String time = String.format("%01d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
                     TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -

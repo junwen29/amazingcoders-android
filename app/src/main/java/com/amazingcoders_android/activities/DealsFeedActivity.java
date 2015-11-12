@@ -48,9 +48,6 @@ public class DealsFeedActivity extends NavDrawerActivity implements SearchView.O
     @InjectView(R.id.fab)
     FloatingActionButton mFab;
 
-//    private List<Deal> mOriginalDeals;
-//    private boolean hasFiltered = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

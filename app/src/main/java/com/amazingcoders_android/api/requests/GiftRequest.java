@@ -29,11 +29,6 @@ public class GiftRequest {
         return new EmptyRequest(Request.Method.POST, url, listener);
     }
 
-//    public static EmptyRequest redeem(String reason, Long user_id, int points, EmptyListener listener) {
-//        String url = String.format(Endpoint.REDEEM_GIFT_1, reason, user_id, points);
-//        return new EmptyRequest(Request.Method.POST, url, listener);
-//    }
-
     public static GsonCollectionRequest<UserPoint> loadAll(String id, CollectionListener<UserPoint> listener) {
         String url = String.format(Endpoint.GIFT_REDEMPTIONS, id, BurppleApi.getAuthToken());
         Type type = new TypeToken<Collection<UserPoint>>(){}.getType();

@@ -7,11 +7,7 @@ import com.amazingcoders_android.BuildConfig;
  * Created by junwen29 on 9/15/2015.
  */
 public class Endpoint {
-    //    public static final String SERVER_URL = "http://10.0.0.2:3000/";
     public static final String SERVER_URL = BuildConfig.BUILD_TYPE.equals("debug") ? "http://192.168.0.105:3000/" : "https://amazingcodersrails.herokuapp.com/";
-//    public static final String SERVER_URL = "http://127.0.0.1:3000/";
-//    public static final String SERVER_URL = "https://amazingcodersrails.herokuapp.com/";
-    //public static final String SERVER_URL = "http://192.168.0.101:3000/";
     public static final String P1_SERVER_URL = SERVER_URL + "api/p1/";
 
     // Device
@@ -24,11 +20,7 @@ public class Endpoint {
     public static final String LOGOUT = P1_SERVER_URL + "accounts/sign_out";
     public static final String PROFILE = P1_SERVER_URL + "accounts/profile?auth_token=%s";
 
-    //TODO forget password page request
-//    public static final String FORGOT_PASSWORD = WEB_URL + "reset_password";
-    
     public static final String NOTIFICATIONS = P1_SERVER_URL + "notifications?auth_token=%s&user_id=%s";
-//    public static final String NOTIFICATION_COUNT = P1_SERVER_URL + "notifications/count?auth_token=%s";
 
     // Venues
     public static final String VENUES = P1_SERVER_URL + "venues?auth_token=%s";

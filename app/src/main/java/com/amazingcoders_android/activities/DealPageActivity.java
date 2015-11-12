@@ -151,7 +151,6 @@ public class DealPageActivity extends BaseActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-//                Log.d("Load Deal Error", volleyError.getMessage());
                 showRefreshing(false);
             }
         };

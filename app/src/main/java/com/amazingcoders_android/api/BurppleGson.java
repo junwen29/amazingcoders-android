@@ -17,9 +17,6 @@ public class BurppleGson {
             sInstance = new GsonBuilder()
                     .setDateFormat(Constants.DATE_FORMAT)
                     .registerTypeAdapter(Notification.class, new Notification.Deserializer())
-//                    .registerTypeAdapter(Promotion.class, new Promotion.Deserializer())
-//                    .registerTypeAdapter(Image.class, new Image.ImageUrlDeserializer())
-//                    .registerTypeAdapter(Integer.class, new NotificationCountDeserializer())
                     .create();
         }
         return sInstance;

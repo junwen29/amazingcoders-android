@@ -58,7 +58,6 @@ public class SignupActivity extends BaseActivity{
 
     private String mAction;
     private Owner mOwner;
-    private String mToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +74,6 @@ public class SignupActivity extends BaseActivity{
             case SIGNUP_EMAIL:
                 mOwner = new Owner();
                 break;
-            case SIGNUP_FACEBOOK:
-            case SIGNUP_GOOGLE:
-//                // Hide password field
-//                ((View) mPasswordField.getParent()).setVisibility(View.GONE);
-//                mOwner = getIntent().getParcelableExtra("user");
-//                mToken = getIntent().getStringExtra("token");
-//                updateFields();
-//                break;
             default:
                 showErrorMessage();
                 finish();
@@ -173,12 +164,6 @@ public class SignupActivity extends BaseActivity{
             case SIGNUP_EMAIL:
                 getBurppleApi().enqueue(SignupRequest.email(mOwner, listener), this);
                 break;
-//            case SIGNUP_FACEBOOK:
-//                getBurppleApi().enqueue(SignupRequest.facebook(mOwner, mToken, listener), this);
-//                break;
-//            case SIGNUP_GOOGLE:
-//                getBurppleApi().enqueue(SignupRequest.google(mOwner, mToken, listener), this);
-//                break;
         }
     }
 

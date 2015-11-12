@@ -160,9 +160,7 @@ public class PreferencesStore {
      * @param regId registration ID
      */
     public void storeRegistrationId(Context context, String regId) {
-//        int appVersion = Helper.getAppVersion(context);
         mEditor.putString(GCM_REG_ID, regId);
-//        mEditor.putInt(GCM_REG_APP_VERSION, appVersion);
         mEditor.commit();
     }
 }

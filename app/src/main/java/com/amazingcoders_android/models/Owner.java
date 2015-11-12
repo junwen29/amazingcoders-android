@@ -122,8 +122,6 @@ public class Owner extends User {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(email);
-//		dest.writeString(birthday);
-//		dest.writeString(phone);
     }
 
     public static final Parcelable.Creator<Owner> CREATOR = new Parcelable.Creator<Owner>() {

@@ -16,7 +16,6 @@ public class BarcodeTrackerFactory implements MultiProcessor.Factory<Barcode> {
         mGraphicOverlay = barcodeGraphicOverlay;
     }
 
-    // TODO update UI of graphic overlay
     @Override
     public Tracker<Barcode> create(Barcode barcode) {
         BarcodeGraphic graphic = new BarcodeGraphic(mGraphicOverlay);

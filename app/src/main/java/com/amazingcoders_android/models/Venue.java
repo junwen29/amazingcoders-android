@@ -16,18 +16,10 @@ public class Venue implements Parcelable, Synchronizable {
     public final Long id;
     @SerializedName("name")
     public String name;
-    //@SerializedName("merchant_id")
-    //public Integer merchant_id;
     @SerializedName("street")
     public String street;
-    //@SerializedName("address_2")
-    //public String address;
     @SerializedName("zipcode")
     public String zipcode;
-    //@SerializedName("city")
-    //public String city;
-    //@SerializedName("state")
-    //public String state;
     @SerializedName("bio")
     public String bio;
     @SerializedName("neighbourhood")
@@ -50,13 +42,8 @@ public class Venue implements Parcelable, Synchronizable {
     protected Venue(Parcel in) {
         this.id = in.readLong();
         this.name = in.readString();
-        //System.out.println("object name is" + this.NAME);
-        //merchant_id = in.readInt();
         street = in.readString();
-        //address = in.readString();
         zipcode = in.readString();
-        //city = in.readString();
-        //state = in.readString();
         bio = in.readString();
         neighbourhood = in.readString();
         phone = in.readString();
@@ -85,12 +72,8 @@ public class Venue implements Parcelable, Synchronizable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(name);
-        //dest.writeLong(merchant_id);
         dest.writeString(street);
-        //   dest.writeString(address);
         dest.writeString(zipcode);
-        //   dest.writeString(city);
-        //   dest.writeString(state);
         dest.writeString(bio);
         dest.writeString(neighbourhood);
         dest.writeString(phone);
@@ -106,33 +89,13 @@ public class Venue implements Parcelable, Synchronizable {
         return this.name;
     }
 
-    /*
-        public Integer getMerchant_ID() {
-            return this.merchant_id;
-        }
-    */
     public String getStreet() {
         return this.street;
     }
 
-    /*
-        public String getAddress() {
-            return this.address;
-        }
-    */
     public String getZipcode() {
         return this.zipcode;
     }
-
-    /*
-        public String getCity() {
-            return this.city;
-        }
-
-        public String getState() {
-            return this.state;
-        }
-    */
 
     public String getPhotoUrl() {
         return photoUrl;

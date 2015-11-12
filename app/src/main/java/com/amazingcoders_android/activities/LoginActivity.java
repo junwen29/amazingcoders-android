@@ -68,7 +68,6 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.text_forgot_password)
     public void forgotPassword() {
-//        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(Endpoint.FORGOT_PASSWORD)));
     }
 
     @OnClick(R.id.button_login)

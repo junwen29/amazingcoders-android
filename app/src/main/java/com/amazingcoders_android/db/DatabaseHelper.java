@@ -61,9 +61,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             switch (oldVersion) {
                 case 1:
                     TableUtils.createTableIfNotExists(connectionSource, Owner.class);
-//                case 2:
-                    //database.execSQL("ALTER TABLE owner ADD COLUMN tastemakers VARCHAR");
-                    // NOTE put new dao here
             }
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't upgrade database", e);

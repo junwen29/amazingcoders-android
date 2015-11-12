@@ -43,12 +43,9 @@ public class PushReceiver extends WakefulBroadcastReceiver {
 
         // Set inbox style
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-//        inboxStyle.setSummaryText(context.getString(R.string.push_summary));
         Set<String> stored = new LinkedHashSet<>();
 
-        // Only store 4 previous messages TODO weird implementation here as it only ignores the first message if unread messages is more than 4
         for (int i = unreadMessages.length > 4 ? 1 : 0; i < unreadMessages.length; i++) {
-//            inboxStyle.addLine(unreadMessages[i]); TODO remove as there is no other notification types yet
             stored.add(unreadMessages[i]);
         }
         String latest = intent.getStringExtra("message");
@@ -64,7 +61,6 @@ public class PushReceiver extends WakefulBroadcastReceiver {
         }
 
         String eventLabel = null;
-//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 
         if (itemType == null) {
             itemType = "";
@@ -73,8 +69,6 @@ public class PushReceiver extends WakefulBroadcastReceiver {
         else if (itemType.equals("deal")) {
             Long dealId = Long.parseLong(extras.getString("item_id", "0"));
             if (dealId != 0) {
-//                Deal deal = new Deal(dealId);
-//                deal.setTitle(extras.getString("item_title"));
                 notificationIntent = new Intent(context, DealPageActivity.class);
                 notificationIntent
                         .putExtra("deal_id", dealId)
@@ -100,17 +94,11 @@ public class PushReceiver extends WakefulBroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(extras != null ? extras.getString("item_name") : context.getResources().getString(R.string.app_name))
-//                .setNumber(unreadCount)
                 .setContentText(latest)
                 .setContentIntent(pendingIntent)
                 .setStyle(inboxStyle);
 
-        //long[] vibration = {0, 50, 100, 50};
-//        if (latest != null && latest.contains("comment")) {
         builder.setDefaults(Notification.DEFAULT_ALL);
-//        } else {
-//            builder.setVibrate(null);
-//        }
 
         // build the notification
         Notification notification = builder.build();

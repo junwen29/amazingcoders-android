@@ -64,7 +64,6 @@ public class GiftAdapter extends ArrayAutoLoadAdapter<Gift> {
         public void onClick(View v) {
                 Long gift_id = mGiftCard.getGiftID();
                 mGiftCard.redeemGift(gift_id);
-                //this.context.startActivity(new Intent(this.context, ProfilePageActivity.class));
         }
     }
 }

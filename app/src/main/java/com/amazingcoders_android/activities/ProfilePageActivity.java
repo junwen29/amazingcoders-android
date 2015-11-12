@@ -120,7 +120,6 @@ public class ProfilePageActivity extends NavDrawerActivity implements ArrayAutoL
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-//                Log.d("Load Owner Error", volleyError.getMessage());
             }
         };
         BurppleApi.getInstance(this).enqueue(LoginRequest.getOwner(mOwner.getUsername(), listener));
@@ -134,7 +133,6 @@ public class ProfilePageActivity extends NavDrawerActivity implements ArrayAutoL
         CollectionListener<UserPoint> listener = new CollectionListener<UserPoint>() {
             @Override
             public void onResponse(Collection<UserPoint> redemptions) {
-                //Log.d("", "GIFT REDEMPTIONS ARE LOADED!");
                 mAdapterGift.clear();
                 mAdapterGift.addAll(redemptions);
                 mAdapterGift.notifyDataSetChanged();

@@ -43,7 +43,6 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
         super.onCreate(savedInstanceState);
         View v = getLayoutInflater().inflate(R.layout.activity_my_redemptions, mContainer, true);
         ButterKnife.inject(this,v);
-//        initDrawerToggle(toolbar);
         init();
         loadRedemptions(true);
     }
@@ -73,7 +72,6 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
     private void init(){
         getSupportActionBar().setTitle("My Redemptions");
         mAdapter = new RedemptionAdapter(this, 0);
-//        mAdapter.setAutoLoadListener(this);
 
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_red_light,
@@ -135,7 +133,6 @@ public class MyRedemptionsActivity extends NavDrawerActivity implements ArrayAut
 
     @Override
     public void onLoad() {
-    // nil for now
     }
 
     @Override

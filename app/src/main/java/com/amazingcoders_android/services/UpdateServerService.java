@@ -81,7 +81,6 @@ public class UpdateServerService extends Service {
             public void onErrorResponse(VolleyError volleyError) {
                 debugLog("Failed to register device token");
                 volleyError.printStackTrace();
-                // TODO retry
                 stopSelf(stopId);
             }
         }));

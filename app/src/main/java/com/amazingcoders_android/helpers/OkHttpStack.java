@@ -32,7 +32,6 @@ public class OkHttpStack extends HurlStack {
 
     @Override
     protected HttpURLConnection createConnection(URL url) throws IOException {
-        //TODO: don't use okhttp-urlconnection? see https://github.com/square/okhttp/blob/master/CHANGELOG.md#version-200-rc1
         return new OkUrlFactory(client).open(url);
     }
 }

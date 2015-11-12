@@ -79,7 +79,6 @@ public class VenuePageActivity extends BaseActivity {
         }
 
         mVenueId = getIntent().getLongExtra("id", (long) 0);
-        //Log.w("", "This.id = " + this.id.toString());
         loadVenue();
     }
 

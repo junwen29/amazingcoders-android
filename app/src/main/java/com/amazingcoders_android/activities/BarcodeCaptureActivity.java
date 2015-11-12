@@ -176,7 +176,6 @@ public class BarcodeCaptureActivity extends AppCompatActivity {
         // Creates and starts the camera.  Note that this uses a higher resolution in comparison
         // to other detection examples to enable the barcode detector to detect small barcodes
         // at long distances.
-        // TODO update Preview Size
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedPreviewSize(1600, 1024)
@@ -327,8 +326,6 @@ public class BarcodeCaptureActivity extends AppCompatActivity {
                 Intent data = new Intent(this, BarcodeResultActivity.class);
                 data.putExtra(BarcodeObject, barcode);
                 startActivity(data);
-//                setResult(CommonStatusCodes.SUCCESS, data);
-//                finish();
             }
             else {
                 Log.d(TAG, "barcode data is null");

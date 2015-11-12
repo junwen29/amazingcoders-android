@@ -62,12 +62,8 @@ public class VenueAdapter extends ArrayAutoLoadAdapter<Venue> {
 
         @Override
         public void onClick(View v) {
-            //TextView id_TextView = (TextView) mVenueCard.findViewById(R.id.ID);
-            //String venue_id_str = (String) id_TextView.getText();
-            //Long venue_id = Long.valueOf(venue_id_str);
             Long venue_id = mVenueCard.getVenueID();
             Intent i = new Intent(this.context, VenuePageActivity.class);
-            //Log.w("", "ID SENT IS = "+ venue_id);
             i.putExtra("id", venue_id);
             this.context.startActivity(i);
         }

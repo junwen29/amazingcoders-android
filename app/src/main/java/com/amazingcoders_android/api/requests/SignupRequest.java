@@ -24,17 +24,4 @@ public class SignupRequest {
         return signup(params, listener);
     }
 
-//    public static GsonRequest<Owner> facebook(Owner owner, String token, Listener<Owner> listener) {
-//        Map<String, String> params = owner.constructSignupParams();
-//        params.put("fb_token", token);
-//
-//        return signup(params, listener);
-//    }
-//
-//    public static GsonRequest<Owner> google(Owner owner, String token, Listener<Owner> listener) {
-//        Map<String, String> params = owner.constructSignupParams();
-//        params.put("google_token", token);
-//
-//        return signup(params, listener);
-//    }
 }
